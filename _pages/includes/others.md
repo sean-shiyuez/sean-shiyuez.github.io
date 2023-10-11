@@ -4,8 +4,8 @@
 - *2017.08 - 2021.06*, Undergraduate, School of Mechanical Engineering, Xi'an Jiaotong University, Shaanxi, China.
 
 # 💻 Internships
-- *2021.03 - Present*, [Institute for AI Industry Research (AIR)](https://air.tsinghua.edu.cn/), Tsinghua University, Beijing, China. (**Advisor: [Prof.Xianyuan Zhan](http://zhanxianyuan.xyz/)**)
-- *2023.06 - Present*, [Intelligent and Interactive Autonomous Systems Group (ILIAD)](https://iliad.stanford.edu/), Stanford University, Stanford, USA. (**Advisor: [Dr. Yuchen Cui](https://web.stanford.edu/~yuchenc/) and [Prof. Dorsa Sadigh](https://dorsa.fyi/)**)
+- *2022.06 - 2023.05*, [Baidu], Beijing, China. Studing on the applications of offline RL algorithms on Traffic Signal Control (TSC).
+- *2023.07 - 2023.09*, [IDRIVERPLUS](https://www.idriverplus.com/en/index.html), Beijing, China. Studing on the applications of life long learning algorithms on 2D object detection for autonomous driving.
 
 # 🧑‍🎨 Services
-Reviewer for ITSC 2021, ICRA 2022, IROS 2022/2023, NeurIPS 2023, T-IV
+Reviewer for NeurIPS 2023, ICLR 2024
