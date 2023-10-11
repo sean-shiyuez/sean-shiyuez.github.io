@@ -1,5 +1,5 @@
 # 👨‍🎓 About Me
-Hi! I am currently a PhD student at [Institude for AI Industry Research (AIR)](https://air.tsinghua.edu.cn/en/) and [School of Vehicle and Mobility](http://www.svm.tsinghua.edu.cn/index.html), [Tsinghua University](https://www.tsinghua.edu.cn/en/), advised by [Prof. Xianyuan Zhan](http://zhanxianyuan.xyz/) and [Prof. Ya-Qin Zhang](https://air.tsinghua.edu.cn/en/info/1046/1188.htm). I got my bachelor's degree in June 2021 from the School of Mechanical Engineering, [Xi'an Jiaotong University](http://en.xjtu.edu.cn/).
+Hi! I am currently a third-year PhD student at [Institude for AI Industry Research (AIR)](https://air.tsinghua.edu.cn/en/) and [School of Vehicle and Mobility](http://www.svm.tsinghua.edu.cn/index.html), [Tsinghua University](https://www.tsinghua.edu.cn/en/), advised by [Prof. Xianyuan Zhan](http://zhanxianyuan.xyz/) and [Prof. Ya-Qin Zhang](https://air.tsinghua.edu.cn/en/info/1046/1188.htm). I got my bachelor's degree in June 2021 from the School of Mechanical Engineering, [Xi'an Jiaotong University](http://en.xjtu.edu.cn/).
 
 My research interest broadly lies in advanced data-driven learning theory and algorithms on decision making and optimization, such as **offline reinforcement learning (RL)**, as well as their promising applications on **autonomous driving** and **robotics**.
 
