@@ -1,8 +1,5 @@
 # 🔥 News
-- [*2023.03*] One paper is accepted by IEEE IV 2023!
-- [*2023.02*] Guest Speaker at 2023 AI TIME Youth PhD Talk Forum.
-- [*2022.11*] Invited talk about [our NeurIPS paper (H2O)](https://nips.cc/virtual/2022/poster/54412) at [RLChina](https://rlchina.org/) Academic Seminar! [[video](https://www.bilibili.com/video/BV1c24y1k7dG/?spm_id_from=333.999.0.0&vd_source=9d786508083f588d0e2277de059e0512)]
-- [*2022.11*] Invited talk about [our NeurIPS paper (H2O)](https://nips.cc/virtual/2022/poster/54412) at [DI Lab](https://people.iiis.tsinghua.edu.cn/~dilab/)'s group meeting!
-- [*2022.10*] One paper is accepted by NeurIPS 2022 RL4RealLife Workshop and ML4AD Workshop!
-- [*2022.09*] One paper is accepted by NeurIPS 2022!
-- [*2022.09*] One paper is accepted by CoRL 2022!
+- [*2023.03*] One paper "[Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://arxiv.org/abs/2305.17400)" have been accepted in ICML 2023 MFPL Workshps!
+- [*2023.02*] Our three recent papers "[Offline RL with No OOD Actions: In-Sample Learning via Implicit Value Regularization](https://openreview.net/pdf?id=ueYYgo2pSSU)", "[When Data Geometry Meets Deep Function: Generalizing Offline Reinforcement Learning](https://openreview.net/forum?id=lMO7TC7cuuh)" and "[Mind the Gap: Offline Policy Optimization for Imperfect Rewards](https://openreview.net/forum?id=WumysvcMvV6)" have been accepted in ICLR 2023!
+- [*2022.09*] One paper "[A Policy-Guided Imitation Approach for Offline Reinforcement Learning](https://openreview.net/forum?id=CKbqDtZnSc)" have been accepted in NeurIPS 2022!
+
