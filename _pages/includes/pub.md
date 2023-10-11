@@ -14,10 +14,10 @@
 
 - **Jianxiong Li**, Xianyuan Zhan, Haoran Xu, Xiangyu Zhu, Jingjing Liu, Ya-Qin Zhang, [When Data Geometry Meets Deep Function: Generalizing Offline Reinforcement Learning](https://openreview.net/forum?id=lMO7TC7cuuh), International Conference on Learning Representations (ICLR), 2023. [[Code](https://github.com/Facebear-ljx/DOGE)]
 
-- **Jianxiong Li**$\^*$, Xiao Hu$\^*$, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang, [Mind the Gap: Offline Policy Optimization for Imperfect Rewards](https://openreview.net/forum?id=WumysvcMvV6), International Conference on Learning Representations (ICLR), 2023. [[Code](https://github.com/Facebear-ljx/RGM)]
+- **Jianxiong Li**$^\*$， Xiao Hu$^\*$, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang, [Mind the Gap: Offline Policy Optimization for Imperfect Rewards](https://openreview.net/forum?id=WumysvcMvV6), International Conference on Learning Representations (ICLR), 2023. [[Code](https://github.com/Facebear-ljx/RGM)]
 
 - Haoran Xu, Li Jiang, **Jianxiong Li**, Zhuoran Yang, Zhaoran Wang, Victor Wai Kin Chan, Xianyuan Zhan, [Offline RL with No OOD Actions: Offline RL with Implicit Value Regularization](https://openreview.net/forum?id=ueYYgo2pSSU), International Conference on Learning Representations (ICLR), 2023 <span style="color:red">(Oral)</span>. [[Code](https://github.com/ryanxhr/IVR)]
 
-- Haoran Xu$\^*$, Li Jiang$\^*$, **Jianxiong Li**, Xianyuan Zhan, [A Policy-Guided Imitation Approach for Offline Reinforcement Learning](https://arxiv.org/abs/2210.08323), Neural Information Processing Systems (NeurIPS), 2022 <span style="color:red">(Oral)</span>. [[Code](https://github.com/ryanxhr/POR)]
+- Haoran Xu$^\*$, Li Jiang$^\*$, **Jianxiong Li**, Xianyuan Zhan, [A Policy-Guided Imitation Approach for Offline Reinforcement Learning](https://arxiv.org/abs/2210.08323), Neural Information Processing Systems (NeurIPS), 2022 <span style="color:red">(Oral)</span>. [[Code](https://github.com/ryanxhr/POR)]
 
 - Shiyue Zhao, **Jianxiong Li**, Xiao Hu, Junzhi Zhang, Chengkun He, [Vehicle Extreme Control based on Offline Reinforcement Leaning](https://ieeexplore.ieee.org/document/10055846/), China Automation Congress (CAC), 2022.
