@@ -1,6 +1,9 @@
 
 # 📝 Publications
+\* Equal contribution.
 ## Preprints and Codebases
+- **Jianxiong Li**$^\*$, Shichao Lin$^\*$, Tianyu Shi, Chujie Tian, Yu Mei, Jian Song, Xianyuan Zhan, Ruimin Li, [A Fully Data-Driven Approach for Realistic Traffic Signal Control Using Offline Reinforcement Learning](https://arxiv.org/abs/2311.15920) *Under Review*, 2023.
+
 - Xiangyu Zhu$^\*$, **Jianxiong Li**$^\*$, Haoyi Niu$^\*$, Yinan Zheng$^\*$, Peng Cheng$^\*$, Wenjia Zhang$^\*$, Haoran Xu$^\*$ and Xianyuan Zhan, [D2C: A Data-Driven Control Library Based on Reinforcement Learning](https://github.com/AIR-DI/D2C), *Paper coming soon*, 2023. [[Code](https://github.com/AIR-DI/D2C)][[Documentation](https://air-d2c.readthedocs.io/)]
 
 - **Jianxiong Li**$^\*$, Xiao Hu, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Ya-Qin Zhang, [PROTO: Iterative Policy Regularized Offline-to-Online Reinforcement Learning](https://arxiv.org/abs/2305.15669) *Under Review*, 2023. [[Code](https://github.com/Facebear-ljx/PROTO)]
