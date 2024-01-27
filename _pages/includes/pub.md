@@ -14,7 +14,7 @@
 ## Conference Proceedings
 - Xiao Hu$^\*$, **Jianxiong Li**$^\*$, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang,  [Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D) International Conference on Learning Representations (ICLR), 2024 <span style="color:red">(Spotlight)</span>.
 
-- Yinan Zheng$^\*$, **Jianxiong Li**$^\*$, Dongjie Yu, Yujie Yang, Shengbo Eben Li, Xianyuan Zhan, Jingjing Liu,  [Feasibility-Guided Safe Offline Reinforcement Learning](https://openreview.net/forum?id=j5JvZCaDM0&referrer=%5BAuthor%20Console%5D)" International Conference on Learning Representations (ICLR), 2024. [[Code](https://github.com/ZhengYinan-AIR/FISOR)]
+- Yinan Zheng$^\*$, **Jianxiong Li**$^\*$, Dongjie Yu, Yujie Yang, Shengbo Eben Li, Xianyuan Zhan, Jingjing Liu,  [Safe Offline Reinforcement Learning with Feasibility-Guided Diffusion Model](https://arxiv.org/abs/2401.10700)" International Conference on Learning Representations (ICLR), 2024. [[Code](https://github.com/ZhengYinan-AIR/FISOR)]
 
 - **Jianxiong Li**, Xianyuan Zhan, Haoran Xu, Xiangyu Zhu, Jingjing Liu, Ya-Qin Zhang, [When Data Geometry Meets Deep Function: Generalizing Offline Reinforcement Learning](https://openreview.net/forum?id=lMO7TC7cuuh), International Conference on Learning Representations (ICLR), 2023. [[Code](https://github.com/Facebear-ljx/DOGE)]
 
