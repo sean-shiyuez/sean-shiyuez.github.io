@@ -6,7 +6,7 @@
 
 - Xiangyu Zhu$^\*$, **Jianxiong Li**$^\*$, Haoyi Niu$^\*$, Yinan Zheng$^\*$, Peng Cheng$^\*$, Wenjia Zhang$^\*$, Haoran Xu$^\*$ and Xianyuan Zhan, [D2C: A Data-Driven Control Library Based on Reinforcement Learning](https://github.com/AIR-DI/D2C), *Paper coming soon*, 2023. [[Code](https://github.com/AIR-DI/D2C)][[Documentation](https://air-d2c.readthedocs.io/)]
 
-- **Jianxiong Li**$^\*$, Xiao Hu, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Ya-Qin Zhang, [PROTO: Iterative Policy Regularized Offline-to-Online Reinforcement Learning](https://arxiv.org/abs/2305.15669) *Under Review*, 2023. [[Code](https://github.com/Facebear-ljx/PROTO)]
+- **Jianxiong Li**, Xiao Hu, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Ya-Qin Zhang, [PROTO: Iterative Policy Regularized Offline-to-Online Reinforcement Learning](https://arxiv.org/abs/2305.15669) *Under Review*, 2023. [[Code](https://github.com/Facebear-ljx/PROTO)]
 
 - Haoran Xu, Xianyuan Zhan, **Jianxiong Li**, Honglei Yin, [Offline Reinforcement Learning with Soft Behavior Regularization](https://arxiv.org/abs/2110.07395), *NeurIPS 2022 offline RL workshop*, *Under Review*, 2021. [[Code](https://github.com/Facebear-ljx/SBAC)]
 
