@@ -1,4 +1,5 @@
 # 🔥 News
+- [*2024.05*] [DecisionNCE](https://2toinf.github.io/DecisionNCE/) has been accepted in ICML 2024!
 - [*2024.02*] Happy to announce our work on multimodal representations for robotics🤖, leveraging internet-scale video/language to assist decision making: [DecisionNCE](https://2toinf.github.io/DecisionNCE/)
 - [*2024.01*] One paper "[Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D)" has been selected as **Spotlight** in ICLR 2024!
 - [*2024.01*] Two papers "[Safe Offline Reinforcement Learning with Feasibility-Guided Diffusion Model](https://arxiv.org/abs/2401.10700)" and "[Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D)" have been accepted to ICLR 2024!
