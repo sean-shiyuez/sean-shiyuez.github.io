@@ -2,6 +2,8 @@
 # 📝 Publications
 \* Equal contribution.
 ## Preprints and Codebases
+- Jinliang Zheng$^\*$, **Jianxiong Li**$^\*$, Sijie Cheng, Yinan Zheng, Jiaming Li, Jihao Liu, Yu Liu, Jingjing Liu, Xianyuan Zhan, [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/) (<span style="color:red">Outstanding Paper</span> at MFM-MAI Workshop @ ICML 2024), 2024
+
 - **Jianxiong Li**$^\*$, Shichao Lin$^\*$, Tianyu Shi, Chujie Tian, Yu Mei, Jian Song, Xianyuan Zhan, Ruimin Li, [A Fully Data-Driven Approach for Realistic Traffic Signal Control Using Offline Reinforcement Learning](https://arxiv.org/abs/2311.15920) *Under Review*, 2023.
 
 - Xiangyu Zhu$^\*$, **Jianxiong Li**$^\*$, Haoyi Niu$^\*$, Yinan Zheng$^\*$, Peng Cheng$^\*$, Wenjia Zhang$^\*$, Haoran Xu$^\*$ and Xianyuan Zhan, [D2C: A Data-Driven Control Library Based on Reinforcement Learning](https://github.com/AIR-DI/D2C), *Paper coming soon*, 2023. [[Code](https://github.com/AIR-DI/D2C)][[Documentation](https://air-d2c.readthedocs.io/)]
@@ -12,7 +14,7 @@
 
 
 ## Conference Proceedings
-- **Jianxiong Li**$^\*$, Jinliang Zheng$^\*$, Yinan Zheng$^\*$, Liyuan Mao, Xiao Hu, Sijie Cheng, Haoyi Niu, Jihao Liu, Yu Liu, Jingjing Liu, Ya-Qin Zhang, Xianyuan Zhan, [DecisionNCE: Embodied Multimodal Representations via Implicit Preference Learning](https://arxiv.org/pdf/2402.18137.pdf), International Conference on Machine Learning (ICML), 2024. [[Code]](https://github.com/2toinf/DecisionNCE)[[Project Page]](https://2toinf.github.io/DecisionNCE/)
+- **Jianxiong Li**$^\*$, Jinliang Zheng$^\*$, Yinan Zheng$^\*$, Liyuan Mao, Xiao Hu, Sijie Cheng, Haoyi Niu, Jihao Liu, Yu Liu, Jingjing Liu, Ya-Qin Zhang, Xianyuan Zhan, [DecisionNCE: Embodied Multimodal Representations via Implicit Preference Learning](https://arxiv.org/pdf/2402.18137.pdf), International Conference on Machine Learning (ICML), 2024. (<span style="color:red">Outstanding Paper</span> at MFM-MAI Workshop @ ICML 2024) [[Code]](https://github.com/2toinf/DecisionNCE)[[Project Page]](https://2toinf.github.io/DecisionNCE/)
 
 - Xiao Hu$^\*$, **Jianxiong Li**$^\*$, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang,  [Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D) International Conference on Learning Representations (ICLR), 2024 <span style="color:red">(Spotlight)</span>. [[Code]](https://github.com/huxiao09/QPA)
 
