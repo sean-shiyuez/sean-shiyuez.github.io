@@ -1,7 +1,7 @@
 # 🔥 News
 - [*2024.09*] [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/) has been accepted in NeurIPS 2024!
 - [*2024.07*] [DecisionNCE](https://2toinf.github.io/DecisionNCE/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
-- [*2024.07*] [IVM](https://2toinf.github.io/IVM/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
+- [*2024.07*] [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
 - [*2024.05*] [DecisionNCE](https://2toinf.github.io/DecisionNCE/) has been accepted in ICML 2024!
 - [*2024.01*] [Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D)" has been selected as **Spotlight** in ICLR 2024!
 - [*2024.01*] [Safe Offline Reinforcement Learning with Feasibility-Guided Diffusion Model](https://arxiv.org/abs/2401.10700) and [Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D)" have been accepted to ICLR 2024!
