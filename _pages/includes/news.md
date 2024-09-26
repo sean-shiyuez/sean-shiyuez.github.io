@@ -1,4 +1,5 @@
 # 🔥 News
+- [*2024.09*] [IVM](https://2toinf.github.io/IVM/) has been accepted in NeurIPS 2024!
 - [*2024.07*] [DecisionNCE](https://2toinf.github.io/DecisionNCE/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
 - [*2024.07*] [IVM](https://2toinf.github.io/IVM/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
 - [*2024.05*] [DecisionNCE](https://2toinf.github.io/DecisionNCE/) has been accepted in ICML 2024!
