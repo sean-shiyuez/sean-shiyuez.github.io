@@ -5,8 +5,6 @@
 - **Jianxiong Li**$^\*$, Zhihao Wang$^\*$, Jinliang Zheng$^\*$, Xiaoai Zhou, Guanming Wang, Guanglu Song, Yu Liu, Jingjing Liu, Ya-Qin Zhang, Junzhi Yu, Xianyuan Zhan, [	
 Robo-MUTUAL: Robotic Multimodal Task Specification via Unimodal Learning](https://zh1hao.wang/Robo_MUTUAL/). *NeurIPS 2024 OWA workshop*, 2024.
 
-- Guan Wang$^\*$, Haoyi Niu$^\*$, **Jianxiong Li**, Li Jiang, Jianming HU, Xianyuan Zhan, Are Expressive Models Truly Necessary for Offline RL?. *NeurIPS 2024 OWA workshop*, 2024.
-
 - Haoyi Niu$^\*$, Qimao Chen$^\*$, Tenglong Liu, **Jianxiong Li**, Guyue Zhou, Yi Zhang, Jianming Hu, Xianyuan Zhan, [xTED: Cross-Domain Policy Adaptation via Diffusion-Based Trajectory Editing](https://arxiv.org/abs/2409.08687v1) *NeurIPS 2024 OWA workshop*, 2024.
 
 - **Jianxiong Li**$^\*$, Shichao Lin$^\*$, Tianyu Shi, Chujie Tian, Yu Mei, Jian Song, Xianyuan Zhan, Ruimin Li, [A Fully Data-Driven Approach for Realistic Traffic Signal Control Using Offline Reinforcement Learning](https://arxiv.org/abs/2311.15920) *Under Review*, 2023.
@@ -17,6 +15,8 @@ Robo-MUTUAL: Robotic Multimodal Task Specification via Unimodal Learning](https:
 
 
 ## Conference Proceedings
+- Guan Wang$^\*$, Haoyi Niu$^\*$, **Jianxiong Li**, Li Jiang, Jianming HU, Xianyuan Zhan, Are Expressive Models Truly Necessary for Offline RL?. *AAAI 2025*, 2025.
+
 - Jinliang Zheng$^\*$, **Jianxiong Li**$^\*$, Sijie Cheng, Yinan Zheng, Jiaming Li, Jihao Liu, Yu Liu, Jingjing Liu, Xianyuan Zhan, [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/), Neural Information Processing Systems (NeurIPS), 2024. (<span style="color:red">Outstanding Paper</span> at MFM-MAI Workshop @ ICML 2024), 2024
 
 - **Jianxiong Li**$^\*$, Jinliang Zheng$^\*$, Yinan Zheng$^\*$, Liyuan Mao, Xiao Hu, Sijie Cheng, Haoyi Niu, Jihao Liu, Yu Liu, Jingjing Liu, Ya-Qin Zhang, Xianyuan Zhan, [DecisionNCE: Embodied Multimodal Representations via Implicit Preference Learning](https://arxiv.org/pdf/2402.18137.pdf), International Conference on Machine Learning (ICML), 2024. (<span style="color:red">Outstanding Paper</span> at MFM-MAI Workshop @ ICML 2024) [[Code]](https://github.com/2toinf/DecisionNCE)[[Project Page]](https://2toinf.github.io/DecisionNCE/)
