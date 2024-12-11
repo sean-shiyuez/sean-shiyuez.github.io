@@ -1,4 +1,5 @@
 # 🔥 News
+- [*2024.12*] [Are Expressive Models Truly Necessary for Offline RL?](https://openreview.net/forum?id=19KvVggjVr) has been accepted in AAAI 2025!
 - [*2024.09*] [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/) has been accepted in NeurIPS 2024!
 - [*2024.07*] [DecisionNCE](https://2toinf.github.io/DecisionNCE/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
 - [*2024.07*] [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/) has been selected as **Outstanding paper** at MFM-MEI Workshop@ICML 2024!
