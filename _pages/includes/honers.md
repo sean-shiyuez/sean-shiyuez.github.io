@@ -1,7 +1,8 @@
 # 🎖 Honors and Awards
-- [*2020.11*]  National Fisrt Price in National College Mechanical Innovation Competition (Top 2%)
-- [*2020.10*]  Xi’an Jiaotong University Outstanding Student Candidate Award (Undergraduate) (Top 0.1%)
-- [*2019.11*]  National Scholarship (Undergraduate) (Top 1%)
-- [*2019.8*]   National Fisrt Price in Robocup
-- [*2018.11*]  First-class Scholarship (Top 1%)
-- [*2018.11*]  Fisrt Price in CMCM, Shannxi
+- [*2023*]  The Best Paper Award at IEEE DSInS (2023)
+- [*2023*]  Tsinghua University Comprehensive Outstanding First-Class Scholarship
+- [*2022*]  Infineon Innovation Scholarship
+- [*2022*]  Outstanding Volunteers of the 2022 Beijing Winter Olympics and Paralympics
+- [*2021*]  Outstanding Graduates of Hunan Province
+- [*2021*]  First Prize in the National Competition of Transport Science and Technology for China College Students (Top 1%)
+- [*2018,2019,2020*]  National Scholarship
