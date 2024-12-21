@@ -23,7 +23,7 @@ baidu_site_verification  : # code-ZxFK3f4pfb
 author:
   name             : "Shiyue Zhao | 赵世越"
   avatar           : "images/Photo_Sean.png"
-  bio              : # "Sea AI Lab"
+  bio              : 
   location         : "Michigan, United States"
   employer         :
   pubmed           : 
@@ -38,7 +38,7 @@ author:
   facebook         :
   foursquare       :
   github           : "sean-shiyuez"
-  google_plus      :
+  google_plus      : "https://scholar.google.com.hk/citations?user=3OsNp5wAAAAJ&hl=zh-CN"
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
