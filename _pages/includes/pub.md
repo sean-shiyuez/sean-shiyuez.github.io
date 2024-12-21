@@ -1,36 +1,40 @@
 
 # 📝 Publications
-\* Equal contribution.
-## Preprints and Codebases
-- **Jianxiong Li**$^\*$, Zhihao Wang$^\*$, Jinliang Zheng$^\*$, Xiaoai Zhou, Guanming Wang, Guanglu Song, Yu Liu, Jingjing Liu, Ya-Qin Zhang, Junzhi Yu, Xianyuan Zhan, [	
-Robo-MUTUAL: Robotic Multimodal Task Specification via Unimodal Learning](https://zh1hao.wang/Robo_MUTUAL/). *NeurIPS 2024 OWA workshop*, 2024.
+## Journal Papers （Provide original text whenever possible）
 
-- Haoyi Niu$^\*$, Qimao Chen$^\*$, Tenglong Liu, **Jianxiong Li**, Guyue Zhou, Yi Zhang, Jianming Hu, Xianyuan Zhan, [xTED: Cross-Domain Policy Adaptation via Diffusion-Based Trajectory Editing](https://arxiv.org/abs/2409.08687v1) *NeurIPS 2024 OWA workshop*, 2024.
+- **Zhao S**, Zhang J, Jiang Y, et al. [Tire-Road friction coefficients adaptive estimation through image and vehicle dynamics integration](https://drive.google.com/file/d/1zTifikSaW06fIksXDjQr9h7dws8O3gsA/view?usp=share_link)[J]. Mechanical Systems and Signal Processing, 2025, 224: 112039.
 
-- **Jianxiong Li**$^\*$, Shichao Lin$^\*$, Tianyu Shi, Chujie Tian, Yu Mei, Jian Song, Xianyuan Zhan, Ruimin Li, [A Fully Data-Driven Approach for Realistic Traffic Signal Control Using Offline Reinforcement Learning](https://arxiv.org/abs/2311.15920) *Under Review*, 2023.
+- **Zhao S**, Zhang J, Masoud N, et al. [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://arxiv.org/pdf/2411.11762)[J]. arXiv preprint arXiv:2411.11762, 2024.
 
-- **Jianxiong Li**, Xiao Hu, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Ya-Qin Zhang, [PROTO: Iterative Policy Regularized Offline-to-Online Reinforcement Learning](https://arxiv.org/abs/2305.15669) *Under Review*, 2023. [[Code](https://github.com/Facebear-ljx/PROTO)]
+- **Zhao S**, Zhang J, He C, et al. [Autonomous vehicle extreme control for emergency collision avoidance via Reachability-Guided reinforcement learning](https://drive.google.com/file/d/1dHCw_m89mbfJl-yPkBv-qhTq8YIDRSsJ/view?usp=share_link)[J]. Advanced Engineering Informatics, 2024, 62: 102801.
 
-- Haoran Xu, Xianyuan Zhan, **Jianxiong Li**, Honglei Yin, [Offline Reinforcement Learning with Soft Behavior Regularization](https://arxiv.org/abs/2110.07395), *NeurIPS 2022 offline RL workshop*, *Under Review*, 2021. [[Code](https://github.com/Facebear-ljx/SBAC)]
+- **Zhao S**, Zhang J, He X, et al. [A Harmonized Approach: Beyond-the-Limit Control for Autonomous Vehicles Balancing Performance and Safety in Unpredictable Environments](https://drive.google.com/file/d/1_Hbn5ef1CwqQCXYf1hKjABz296mYkgFT/view?usp=share_link)[J]. IEEE Transactions on Intelligent Transportation Systems, 2024.
 
+- **Zhao S**, Zhang J, He C, et al. [Adaptive drift control of autonomous electric vehicles after brake system failures](https://drive.google.com/file/d/1DRHJwYoV7T6gSx6Av7GBnJkuxJ--IC87/view?usp=sharing)[J]. IEEE Transactions on Industrial Electronics, 2023.
 
+- **Zhao S**, Zhang J, He C, et al. [Collision-free emergency planning and control methods for CAVs considering intentions of surrounding vehicles](https://drive.google.com/file/d/1ECb2eiULj8DFUzP41ASp0b41AI3o1mUL/view?usp=sharing)[J]. ISA transactions, 2023, 136: 535-547.
+
+- Hou, X., Gan, M., Wu, W., Ji, Y., **Zhao, S.**, & Chen, J. (2024). Cross-Observability Optimistic-Pessimistic Safe Reinforcement Learning for Interactive Motion Planning With Visual Occlusion. IEEE Transactions on Intelligent Transportation Systems.
+
+- Zhou, Z., Huang, H., Li, B., **Zhao, S.**, & Mu, Y. (2024). SafeDrive: Knowledge-and Data-Driven Risk-Sensitive Decision-Making for Autonomous Vehicles with Large Language Models. arXiv preprint arXiv:2412.13238.（Being considered for publication in IEEE TITS journal）
+
+- Han, J., Zhang, J., Lv, C., He, C., Wei, H., **Zhao, S.**, ... & Ji, Y. (2024). Safe Replanning and Motion Control for Automated Emergency Braking Under Braking System Failures. IEEE Transactions on Vehicular Technology.
+
+- Han, J., Zhang, J., Lv, C., He, C., Wei, H., & **Zhao, S.** (2024). Robust Fault Tolerant Path Tracking Control for Intelligent Vehicle under Steering System Faults. IEEE Transactions on Intelligent Vehicles.
+
+- Hou, X., Gan, M., Wu, W., Wang, C., Ji, Y., & **Zhao, S.** (2024). Merging planning in dense traffic scenarios using interactive safe reinforcement learning. Knowledge-Based Systems, 290, 111548.
+
+- Han, J., Zhang, J., He, C., Lv, C., Wei, H., Zhang, J., & **Zhao, S.** (2024). Uniform Finite Time Safe Path Tracking Control for Obstacle Avoidance of Autonomous Vehicle via Barrier Function Approach. IEEE Transactions on Intelligent Transportation Systems.
+
+- Huang, H., Liu, J., Shi, G., **Zhao, S.**, Li, B., & Wang, J. (2024). Adaptive Decision-Making for Autonomous Vehicles: A Learning-Enhanced Game-Theoretic Approach in Interactive Environments. arXiv preprint arXiv:2402.11467. （Being considered for publication in IEEE TITS journal）
+
+- Hou, X., Gan, M., Zhang, J., **Zhao, S.**, & Ji, Y. (2023). Vehicle ride comfort optimization in the post-braking phase using residual reinforcement learning. Advanced Engineering Informatics, 58, 102198.
+
+- Hou, X., Gan, M., Zhang, J., **Zhao, S.**, & Ji, Y. (2023). Secondary crash mitigation controller after rear-end collisions using reinforcement learning. Advanced engineering informatics, 58, 102176
 ## Conference Proceedings
-- Guan Wang$^\*$, Haoyi Niu$^\*$, **Jianxiong Li**, Li Jiang, Jianming HU, Xianyuan Zhan, Are Expressive Models Truly Necessary for Offline RL?. *AAAI 2025*, 2025.
 
-- Jinliang Zheng$^\*$, **Jianxiong Li**$^\*$, Sijie Cheng, Yinan Zheng, Jiaming Li, Jihao Liu, Yu Liu, Jingjing Liu, Xianyuan Zhan, [Instruction-Guided Visual Masking](https://2toinf.github.io/IVM/), Neural Information Processing Systems (NeurIPS), 2024. (<span style="color:red">Outstanding Paper</span> at MFM-MAI Workshop @ ICML 2024), 2024
+- **Zhao, S.**, Song, Z., & He, X. (2023, October). [A Finite-Time Safety Filter for Learning-Based Autonomous Driving](https://drive.google.com/file/d/10KBNfvDTjCqqQ5c1vY6YNjazuO0zYpQp/view?usp=sharing). In 2023 IEEE International Conference on Unmanned Systems (ICUS) (pp. 1-6). IEEE.
 
-- **Jianxiong Li**$^\*$, Jinliang Zheng$^\*$, Yinan Zheng$^\*$, Liyuan Mao, Xiao Hu, Sijie Cheng, Haoyi Niu, Jihao Liu, Yu Liu, Jingjing Liu, Ya-Qin Zhang, Xianyuan Zhan, [DecisionNCE: Embodied Multimodal Representations via Implicit Preference Learning](https://arxiv.org/pdf/2402.18137.pdf), International Conference on Machine Learning (ICML), 2024. (<span style="color:red">Outstanding Paper</span> at MFM-MAI Workshop @ ICML 2024) [[Code]](https://github.com/2toinf/DecisionNCE)[[Project Page]](https://2toinf.github.io/DecisionNCE/)
+- **Zhao, S.**, Li, J., Hu, X., Zhang, J., & He, C. (2022, November). [Vehicle Extreme Control based on Offline Reinforcement Leaning](https://drive.google.com/file/d/15DzSQXEpZ2R1TXRJKxyecE2d_uNh5IVF/view?usp=share_link). In 2022 China Automation Congress (CAC) (pp. 4539-4543). IEEE.
 
-- Xiao Hu$^\*$, **Jianxiong Li**$^\*$, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang,  [Query-Policy Misalignment in Preference-Based Reinforcement Learning](https://openreview.net/forum?id=UoBymIwPJR&referrer=%5BAuthor%20Console%5D) International Conference on Learning Representations (ICLR), 2024 <span style="color:red">(Spotlight)</span>. [[Code]](https://github.com/huxiao09/QPA)
-
-- Yinan Zheng$^\*$, **Jianxiong Li**$^\*$, Dongjie Yu, Yujie Yang, Shengbo Eben Li, Xianyuan Zhan, Jingjing Liu,  [Safe Offline Reinforcement Learning with Feasibility-Guided Diffusion Model](https://arxiv.org/abs/2401.10700)" International Conference on Learning Representations (ICLR), 2024. [[Code](https://github.com/ZhengYinan-AIR/FISOR)][[Project Page]](https://zhengyinan-air.github.io/FISOR/)
-
-- **Jianxiong Li**, Xianyuan Zhan, Haoran Xu, Xiangyu Zhu, Jingjing Liu, Ya-Qin Zhang, [When Data Geometry Meets Deep Function: Generalizing Offline Reinforcement Learning](https://openreview.net/forum?id=lMO7TC7cuuh), International Conference on Learning Representations (ICLR), 2023. [[Code](https://github.com/Facebear-ljx/DOGE)]
-
-- **Jianxiong Li**$^\*$， Xiao Hu$^\*$, Haoran Xu, Jingjing Liu, Xianyuan Zhan, Qing-Shan Jia, Ya-Qin Zhang, [Mind the Gap: Offline Policy Optimization for Imperfect Rewards](https://openreview.net/forum?id=WumysvcMvV6), International Conference on Learning Representations (ICLR), 2023. [[Code](https://github.com/Facebear-ljx/RGM)]
-
-- Haoran Xu, Li Jiang, **Jianxiong Li**, Zhuoran Yang, Zhaoran Wang, Victor Wai Kin Chan, Xianyuan Zhan, [Offline RL with No OOD Actions: Offline RL with Implicit Value Regularization](https://openreview.net/forum?id=ueYYgo2pSSU), International Conference on Learning Representations (ICLR), 2023 <span style="color:red">(Oral)</span>. [[Code](https://github.com/ryanxhr/IVR)]
-
-- Haoran Xu$^\*$, Li Jiang$^\*$, **Jianxiong Li**, Xianyuan Zhan, [A Policy-Guided Imitation Approach for Offline Reinforcement Learning](https://arxiv.org/abs/2210.08323), Neural Information Processing Systems (NeurIPS), 2022 <span style="color:red">(Oral)</span>. [[Code](https://github.com/ryanxhr/POR)]
-
-- Shiyue Zhao, **Jianxiong Li**, Xiao Hu, Junzhi Zhang, Chengkun He, [Vehicle Extreme Control based on Offline Reinforcement Leaning](https://ieeexplore.ieee.org/document/10055846/), China Automation Congress (CAC), 2022.
+- Huang, H., Zheng, X., Liu, Y., **Zhao, S.**, Wang, Y., & Wang, J. (2023, November). [Intelligent Adaptive Decision-Making for Autonomous Vehicles: A Learning-Enhanced Game-Theoretic Approach in Interactive Scenarios](https://drive.google.com/file/d/19r-ZDheuFTYboFM1y8zyxn_AvNu4lcez/view?usp=sharing). In 2023 3rd International Conference on Digital Society and Intelligent Systems (DSInS) (pp. 258-264). IEEE.
