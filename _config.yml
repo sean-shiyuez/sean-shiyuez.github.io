@@ -6,9 +6,9 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Jianxiong Li | 李健雄"
-description              : "PhD Student at Institute for AI Industry Research (AIR) and School of Vehicle and Mobility, Tsinghua University. Focusing on Offline Reinforcement Learning and Autonomous Driving."
-repository               : "Facebear-ljx/Facebear-ljx.github.io"
+title                    : "Shiyue Zhao | 赵世越"
+description              : "PhD student at the School of Vehicle and Mobility of Tsinghua University under the supervision of Prof. Junzhi Zhang. Currently, I am a visiting scholar at the Next Generation Intelligent Mobility Systems Lab at the University of Michigan, Ann Arbor.  "
+repository               : "sean-shiyuez/sean-shiyuez.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
@@ -21,15 +21,15 @@ baidu_site_verification  : # code-ZxFK3f4pfb
 
 # Site Author
 author:
-  name             : "Jianxiong Li | 李健雄"
-  avatar           : "images/icon-HD-ljx.jpg"
+  name             : "Shiyue Zhao | 赵世越"
+  avatar           : "images/Photo_sean.jpg"
   bio              : # "Sea AI Lab"
-  location         : "Beijing, China"
+  location         : "Michigan, United States"
   employer         :
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=TRLwpiUAAAAJ&hl"
-  email            : "li-jx21@mails.tsinghua.edu.cn"
-  researchgate     : "https://www.researchgate.net/profile/Jianxiong-Li-13"
+  googlescholar    : "https://scholar.google.com.hk/citations?user=3OsNp5wAAAAJ&hl"
+  email            : "shiyuez@umich.edu"
+  researchgate     : "https://www.researchgate.net/profile/Shiyue-Zhao"
   uri              :
   bitbucket        :
   codepen          :
@@ -37,7 +37,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "Facebear-ljx"
+  github           : "sean-shiyuez"
   google_plus      :
   keybase          :
   instagram        :
