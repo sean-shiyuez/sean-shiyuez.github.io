@@ -21,6 +21,17 @@ redirect_from:
 
 {% include_relative includes/others.md %}
 
+<div id="vcomments"></div>
+<script src="https://cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'DnmcBKBgPiSSCRqppPcCuG6t-gzGzoHsz',
+    appKey: 'PO27sCUx4QEJ67nkJvceP62n',
+    placeholder: 'Leave a comment：',
+    visitor: flase
+  });
+
 <div id="comments">
   <script src="https://utteranc.es/client.js"
           repo="sean-shiyuez/sean-shiyuez.github.io"
