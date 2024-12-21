@@ -21,19 +21,30 @@ redirect_from:
 
 {% include_relative includes/others.md %}
 
+<div id="comments">
+  <script src="https://utteranc.es/client.js"
+          repo="sean-shiyuez/sean-shiyuez.github.io"
+          issue-term="pathname"
+          label="Welcome any Comment："
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+  </script>
+</div>
+
 <div id="clustrmaps-container">
   <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
 </div>
 
 <style>
   #clustrmaps-container {
-    width: 300px; /* 设置地图球的宽度 */
-    height: 300px; /* 设置地图球的高度 */
-    overflow: hidden; /* 避免内容溢出 */
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
   }
 
   #clustrmaps-container canvas {
-    width: 100%; /* 让地图自适应容器 */
-    height: 100%; /* 让地图自适应容器 */
+    width: 100%;
+    height: 100%;
   }
 </style>
