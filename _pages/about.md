@@ -21,4 +21,19 @@ redirect_from:
 
 {% include_relative includes/others.md %}
 
-<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
+<div id="clustrmaps-container">
+  <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
+</div>
+
+<style>
+  #clustrmaps-container {
+    width: 300px; /* 设置地图球的宽度 */
+    height: 300px; /* 设置地图球的高度 */
+    overflow: hidden; /* 避免内容溢出 */
+  }
+
+  #clustrmaps-container canvas {
+    width: 100%; /* 让地图自适应容器 */
+    height: 100%; /* 让地图自适应容器 */
+  }
+</style>
