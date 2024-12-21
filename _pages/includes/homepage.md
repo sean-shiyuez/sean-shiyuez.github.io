@@ -1,5 +1,2 @@
 # 📎 Homepages
-- Personal Pages: https://facebear-ljx.github.io (updated recently🔥)
-# - Linkedin: https://www.linkedin.com/in/rayeren
-- Google Scholar: https://scholar.google.com/citations?user=TRLwpiUAAAAJ&hl
-# - DBLP: https://dblp.org/pid/75/6568-6.html
+- Personal Pages: https://sean-shiyuez.github.io (updated recently🔥)
