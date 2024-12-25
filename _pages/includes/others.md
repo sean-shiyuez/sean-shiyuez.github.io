@@ -1,6 +1,6 @@
 
 # 📖 Educations
-- *2024.10 - Present*, Visiting Scholar, School of Vehicle and Mobility, University of Michigan, Ann Arbor, USA.
+- *2024.10 - Present*, Visiting Scholar, Next Generation Mobility Systems Lab, University of Michigan, Ann Arbor, USA.
 - *2021.08 - Present*, PhD candidate, School of Vehicle and Mobility, Tsinghua University, Beijing, China.
 - *2017.08 - 2021.06*, Undergraduate, School of Traffic & Transportation Engineering, Central South University, Changsha, China.
 
