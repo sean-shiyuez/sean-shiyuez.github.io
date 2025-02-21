@@ -18,6 +18,10 @@
 
 - Hou, X., Gan, M., Wu, W., Ji, Y., **Zhao, S.**, and Chen, J. (2024). Cross-Observability Optimistic-Pessimistic Safe Reinforcement Learning for Interactive Motion Planning With Visual Occlusion. IEEE Transactions on Intelligent Transportation Systems.
 
+- Hou, X., Gan, M., Wu, W., Ji, Y., **Zhao, S.**, & Chen, J. (2024). Equipping With Cognition: Interactive Motion Planning Using Metacognitive-Attribution Inspired Reinforcement Learning for Autonomous Vehicles. IEEE Transactions on Intelligent Transportation Systems.
+
+- Hou, X., Gan, M., Wu, W., **Zhao, S.**, Ji, Y., & Chen, J. (2024). Risk-Conscious Mutations in Jump-Start Reinforcement Learning for Autonomous Racing Policy. IEEE Transactions on Cybernetics.
+
 - Zhou, Z., Huang, H., Li, B., **Zhao, S.**, and Mu, Y. (2024). SafeDrive: Knowledge-and Data-Driven Risk-Sensitive Decision-Making for Autonomous Vehicles with Large Language Models. arXiv preprint arXiv:2412.13238.（Being considered for publication in IEEE TITS journal）
 
 - Han, J., Zhang, J., Lv, C., He, C., Wei, H., **Zhao, S.**, and Ji, Y. (2024). Safe Replanning and Motion Control for Automated Emergency Braking Under Braking System Failures. IEEE Transactions on Vehicular Technology.
