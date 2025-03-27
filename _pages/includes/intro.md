@@ -4,5 +4,4 @@ Hello！ My name is Shiyue Zhao, and I am a PhD student at the [School of Vehicl
 
 I earned my Bachelor’s degree in Engineering from the [School of Traffic and Transportation Engineering](https://stte.csu.edu.cn/) at Central South University in 2021.  
 
-My research focuses on decision-making of CAVs, wheeled robot decision-making, Human-centric AI, and efficient RL algorithms. As of November 2024, I have published [14 SCI papers in Q1 journals.
-](https://www.researchgate.net/profile/Shiyue-Zhao) 
+My research focuses on decision-making of CAVs, wheeled robot decision-making and control, Human-centric AI, and efficient RL algorithms.
