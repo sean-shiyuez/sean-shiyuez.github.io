@@ -1,6 +1,6 @@
 # 🔥 News
 - **[2025.03]** Our team has proposed **SACA (Scenario-Aware Collision Avoidance)**, a novel collision avoidance framework that integrates LLMs-driven reasoning to enhance autonomous vehicle safety under extreme conditions.  
-  🔗 **Project Page**: [https://seanyhuez.github.io/SACA/](https://seanyhuez.github.io/SACA/)  
+  🔗 **Project Page**: [https://sean-shiyuez.github.io/SACA/](https://sean-shiyuez.github.io/SACA/)  
   📄 **Paper on arXiv**: [arXiv:2504.00115](https://arxiv.org/abs/2504.00115)
 
 - [***2025.02***] [Reachability-Aware Reinforcement Learning for Collision Avoidance in Human-Machine Shared Control](https://arxiv.org/pdf/2502.10610) has been preprinted. You can contact us via email to obtain the real vehicle data related with this study and the right to use it freely.
