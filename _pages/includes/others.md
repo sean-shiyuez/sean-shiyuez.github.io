@@ -9,6 +9,7 @@ Reviewer for Journals:
   -  ISA Transactions
   -  IEEE Transactions on Industrial Electronics (TIE)
   -  Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile Engineering
+  -  Scientific Reports
 
 Reviewer for conferences:
    - Chinese Automation Congress (CAC)
