@@ -1,5 +1,5 @@
 # 🔥 News
-- [***2025.04***] [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://arxiv.org/abs/2411.11762) has been accepted by IEEE Transactions on Industrial Electronics, and we provides a very <a href="https://www.youtube.com/watch?v=5wp67FcpfL8" style="color: red;"><b>interesting video</b></a> (https://www.youtube.com/watch?v=5wp67FcpfL8).
+- [***2025.04***] [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://drive.google.com/file/d/1DRHJwYoV7T6gSx6Av7GBnJkuxJ--IC87/view?usp=sharing) has been accepted by IEEE Transactions on Industrial Electronics, and we provides a very <a href="https://www.youtube.com/watch?v=5wp67FcpfL8" style="color: red;"><b>interesting video</b></a> (https://www.youtube.com/watch?v=5wp67FcpfL8).
 - **[2025.03]** Our team has proposed **SACA (Scenario-Aware Collision Avoidance)**, a novel collision avoidance framework that integrates LLMs-driven reasoning to enhance autonomous vehicle safety under extreme conditions.  
   🔗 **Project Page**: [https://sean-shiyuez.github.io/SACA/](https://sean-shiyuez.github.io/SACA/)  
   📄 **Paper on arXiv**: [arXiv:2504.00115](https://arxiv.org/abs/2504.00115)
