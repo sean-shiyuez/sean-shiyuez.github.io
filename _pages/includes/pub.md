@@ -2,6 +2,8 @@
 # 📝 Publications
 ## Journal Papers （Provide original text whenever possible）
 
+- Liu Q, Huang H, **Zhao S**, et al. [RiskNet: interaction-aware risk forecasting for autonomous driving in long-tail scenarios](https://arxiv.org/pdf/2504.15541)[J]. Transportation Research Part E: Logistics and Transportation Review, 2026, 205: 104478.
+
 - **Zhao S**, Zhang J, Jiang Y, et al. [Tire-Road friction coefficients adaptive estimation through image and vehicle dynamics integration](https://drive.google.com/file/d/1zTifikSaW06fIksXDjQr9h7dws8O3gsA/view?usp=share_link)[J]. Mechanical Systems and Signal Processing, 2025, 224: 112039.
 
 - **Zhao S**, Zhang J, Masoud N, et al. [Reachability-Aware Reinforcement Learning for Collision Avoidance in Human-Machine Shared Control](https://arxiv.org/pdf/2502.10610)[J]. arXiv preprint 	arXiv:2502.10610, 2025.
