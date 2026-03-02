@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Shiyue Zhao | 赵世越"
-description              : "I am a PhD student at Tsinghua University under Prof. Junzhi Zhang, and was a visiting scholar at the University of Michigan, Ann Arbor (Oct 2024 – Aug 2025). My research focuses on decision-making of CAVs, wheeled robot decision-making and control, Human-centric AI, and efficient RL algorithms. "
+description              : "I am a PhD student at Tsinghua University under Prof. Junzhi Zhang, and was a visiting scholar at the University of Michigan, Ann Arbor. My research focuses on decision-making of CAVs, wheeled robot decision-making and control, Human-centric AI, and efficient RL algorithms. "
 repository               : "sean-shiyuez/sean-shiyuez.github.io"
 google_scholar_stats_use_cdn : true
 
