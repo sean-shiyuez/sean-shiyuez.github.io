@@ -1,9 +1,7 @@
 # 🔥 News
+- [***2026.04***] Our paper "[Behaviorally informed joint optimization of charger placement and dynamic spatio-temporal pricing for electric vehicle networks](https://authors.elsevier.com/c/1mx2NhVEBKGKT)" co-authored with University of Michigan (Iason Liagkas, Neda Masoud) has been published!
 - [***2026.03***] Our paper "[Human-machine shared driving for vehicle collision avoidance based on Hamilton-Jacobi reachability](https://drive.google.com/file/d/1zrZ0ZPJS5UX9MVdQ6cAzYre4s9EQJ_jt/view?usp=sharing)" has been accepted by *Accident Analysis & Prevention*! You can contact us via email to obtain the real vehicle data related with this study and the right to use it freely.
 - [***2025.04***] [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://drive.google.com/file/d/1GrKSinggEeKKaEKbSS2YadCUwpVo8Nam/view?usp=sharing) has been accepted by IEEE Transactions on Industrial Electronics, and we provides a very <a href="https://www.youtube.com/watch?v=5wp67FcpfL8" style="color: red;"><b>interesting video</b></a> (https://www.youtube.com/watch?v=5wp67FcpfL8).
-- **[2025.03]** Our team has proposed **SACA (Scenario-Aware Collision Avoidance)**, a novel collision avoidance framework that integrates LLMs-driven reasoning to enhance autonomous vehicle safety under extreme conditions.  
-  🔗 **Project Page**: [https://sean-shiyuez.github.io/SACA/](https://sean-shiyuez.github.io/SACA/)  
-  📄 **Paper on arXiv**: [arXiv:2504.00115](https://arxiv.org/abs/2504.00115)
 - [***2025.01***] [The road surface image dataset](https://github.com/sean-shiyuez/Extreme-Road-Image-Dataset) associated with the paper "Tire-Road Friction Coefficients Adaptive Estimation through Image and Vehicle Dynamics Integration" is now publicly available and researchers are welcome to access it.
 - [***2024.12***] We release our 
 <a href="https://github.com/sean-shiyuez/High-Accuracy-Vehicle-Dynamic-Model" style="color: blue;"><b>Python-based high-accuracy vehicle dynamic model</b></a> 
