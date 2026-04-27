@@ -16,5 +16,5 @@ Reviewer for conferences:
    - IEEE International Conference on Unmanned Systems (ICUS)
 
 # 🤔 Team
-Currently, our team is actively promoting the research of intelligent chassis under the leadership of Professor Zhang Junzhi. If you want to be involved in this process or have any questions about my/the team's research, please visit the [team homepage](sean-shiyuez/ichassis-team.github.io) or contact us by [email](mailto:Stary132@163.com?subject=咨询&body=您好，我想咨询以下问题：).
+Currently, our team is actively promoting the research of intelligent chassis under the leadership of Professor Zhang Junzhi. If you want to be involved in this process or have any questions about my/the team's research, please visit the [team homepage](https://sean-shiyuez.github.io/ichassis-team.github.io) or contact us by [email](mailto:Stary132@163.com?subject=咨询&body=您好，我想咨询以下问题：).
 All emails for academic discussions will be replied within 24 hours.

@@ -1,6 +1,6 @@
 
 # 📝 Publications
-## Journal Papers （Provide original text whenever possible）
+## Journal Papers
 -  Iason Liagkas, **Shiyue Zhao**, Neda Masoud. "[Behaviorally informed joint optimization of charger placement and dynamic spatio-temporal pricing for electric vehicle networks](https://authors.elsevier.com/c/1mx2NhVEBKGKT)". *Transportation Research Part B: Methodological*, 2026.
 
 - **Shiyue Zhao**, Junzhi Zhang, Rui Zhou, Neda Masoud, Jianxiong Li, Helai Huang, Shijie Zhao. "[Human-machine shared driving for vehicle collision avoidance based on Hamilton-Jacobi reachability](https://drive.google.com/file/d/1zrZ0ZPJS5UX9MVdQ6cAzYre4s9EQJ_jt/view?usp=drive_link)". *Accident Analysis & Prevention*, 230 (2026): 108474.

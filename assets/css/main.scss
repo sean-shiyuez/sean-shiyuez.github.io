@@ -104,6 +104,219 @@ h1:before, .anchor:before {
     margin-top: .5em;
     margin-left: -.5em;
     color: white;
-    background-color: #00369f;
+    background-color: #2563eb;
     font-size: .8em;
+    border-radius: 4px;
+}
+
+/* ================================================================
+   CUSTOM DESIGN — elegant, minimal, modern
+   ================================================================ */
+
+/* Base */
+html { scroll-behavior: smooth; }
+
+body {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Masthead ---- */
+.masthead {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.masthead__menu-item a {
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2563eb;
+    border-radius: 1px;
+    transition: width 0.22s ease;
+  }
+
+  &:hover {
+    color: #2563eb;
+    text-decoration: none;
+
+    &::after { width: 100%; }
+  }
+}
+
+/* ---- Sidebar ---- */
+.author__avatar img {
+  border: 3px solid #fff !important;
+  box-shadow: 0 0 0 2px #e2e8f0, 0 8px 24px rgba(0, 0, 0, 0.10) !important;
+  transition: box-shadow 0.22s ease !important;
+
+  &:hover {
+    box-shadow: 0 0 0 3px #2563eb, 0 8px 24px rgba(37, 99, 235, 0.18) !important;
+  }
+}
+
+.sidebar .author__name {
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.author__urls li > div {
+  color: #475569;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  white-space: normal;
+  margin-bottom: 0.75em;
+}
+
+.author__urls a {
+  color: #64748b;
+  font-size: 0.9rem;
+  text-decoration: none !important;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: #2563eb;
+    text-decoration: none !important;
+  }
+}
+
+/* ---- Page content: section headings ---- */
+.page__content h1 {
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  border-bottom: none !important;
+  padding-bottom: 0;
+  margin-top: 2.75em;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 2.25rem;
+    height: 3px;
+    background: #2563eb;
+    border-radius: 2px;
+    margin-top: 0.45em;
+    margin-bottom: 0.6em;
+  }
+}
+
+.page__content h2 {
+  font-weight: 600;
+  color: #1e293b;
+  letter-spacing: -0.015em;
+  margin-top: 1.75em;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 0.3em;
+}
+
+.page__content h3,
+.page__content h4 {
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ---- Links inside content ---- */
+.page__content a {
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: #1d4ed8;
+    border-bottom-color: rgba(29, 78, 216, 0.4);
+    text-decoration: none;
+  }
+}
+
+/* ---- List items ---- */
+.page__content ul li {
+  margin-bottom: 0.6em;
+  padding: 0.2em 0.4em 0.2em 0;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f8faff;
+  }
+}
+
+/* ---- News date badges ---- */
+.page__content li strong em,
+.page__content li em strong {
+  font-style: normal;
+  font-weight: 600;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 0.05em 0.35em;
+  border-radius: 3px;
+  font-size: 0.88em;
+  letter-spacing: 0.01em;
+}
+
+/* ---- Footer ---- */
+.page__footer {
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  color: #94a3b8;
+}
+
+.page__footer a { color: #94a3b8; }
+.page__footer a:hover { color: #2563eb; text-decoration: none; }
+
+/* ---- Horizontal rule ---- */
+.page__content hr {
+  border-top: 1px solid #e2e8f0;
+  margin: 2em 0;
+}
+
+/* ---- Inline code ---- */
+.page__content p > code,
+.page__content li > code {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  color: #0f172a;
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+}
+
+/* ---- Blockquote ---- */
+.page__content blockquote {
+  border-left: 3px solid #2563eb;
+  background: #f8faff;
+  border-radius: 0 6px 6px 0;
+  margin: 1.5em 0;
+  padding: 0.75em 1.25em;
+  color: #475569;
+  font-style: normal;
+}
+
+/* ---- Clustrmaps container ---- */
+#clustrmaps-container {
+  margin-top: 1.5em;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+
+  &:hover { opacity: 1; }
 }
