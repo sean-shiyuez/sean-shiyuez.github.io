@@ -19,7 +19,7 @@ main:
   #   url: "/#-invited-talks"
 
   - title: "Internships"
-    url: "/#-internships"
+    url: "#internship-modal"
 
   - title: "Services"
     url: "/#-services"

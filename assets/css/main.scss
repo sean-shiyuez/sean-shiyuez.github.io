@@ -312,6 +312,49 @@ body {
   font-style: normal;
 }
 
+/* ---- VLA Video Grid ---- */
+.vla-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.25rem 0 1.5rem;
+
+  @include breakpoint(max-width $medium) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vla-video-card {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0f172a;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  }
+
+  video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  span {
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #94a3b8;
+    letter-spacing: 0.03em;
+    background: #0f172a;
+  }
+}
+
 /* ---- Clustrmaps container ---- */
 #clustrmaps-container {
   margin-top: 1.5em;

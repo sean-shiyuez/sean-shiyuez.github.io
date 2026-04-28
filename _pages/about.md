@@ -23,6 +23,19 @@ redirect_from:
 
 {% include_relative includes/others.md %}
 
+<!-- Internship modal -->
+<div id="internship-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; border-radius:12px; padding:2.5rem 2.75rem; max-width:520px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2); position:relative; text-align:center;">
+    <button onclick="document.getElementById('internship-modal-overlay').style.display='none'" style="position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.4rem; color:#94a3b8; cursor:pointer; line-height:1;">×</button>
+    <div style="font-size:2rem; margin-bottom:0.75rem;">🤝</div>
+    <h3 style="margin:0 0 0.75rem; color:#0f172a; font-size:1.15rem; font-weight:700;">Join Our Team</h3>
+    <p style="color:#475569; line-height:1.75; margin:0 0 1.25rem; font-size:0.95rem;">We warmly welcome motivated students and researchers to join the Intelligent Chassis team for internships. Feel free to reach out — all emails will be replied within 24 hours.</p>
+    <a href="mailto:Stary132@163.com" style="display:inline-block; background:#2563eb; color:#fff; padding:0.55rem 1.5rem; border-radius:8px; font-weight:600; font-size:0.9rem; text-decoration:none; transition:background 0.2s ease;">
+      ✉ Stary132@163.com
+    </a>
+  </div>
+</div>
+
 <!-- Honors modal -->
 <div id="honors-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
   <div style="background:#fff; border-radius:12px; padding:2.5rem 2.75rem; max-width:520px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2); position:relative; text-align:center;">
@@ -34,18 +47,33 @@ redirect_from:
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Honors modal
     document.querySelectorAll('a[href="#honors-modal"]').forEach(function(link) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        var overlay = document.getElementById('honors-modal-overlay');
-        overlay.style.display = 'flex';
+        document.getElementById('honors-modal-overlay').style.display = 'flex';
       });
     });
     document.getElementById('honors-modal-overlay').addEventListener('click', function(e) {
       if (e.target === this) this.style.display = 'none';
     });
+
+    // Internship modal
+    document.querySelectorAll('a[href="#internship-modal"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('internship-modal-overlay').style.display = 'flex';
+      });
+    });
+    document.getElementById('internship-modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
+    });
+
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') document.getElementById('honors-modal-overlay').style.display = 'none';
+      if (e.key === 'Escape') {
+        document.getElementById('honors-modal-overlay').style.display = 'none';
+        document.getElementById('internship-modal-overlay').style.display = 'none';
+      }
     });
   });
 </script>
