@@ -6,19 +6,19 @@
 <div class="vla-video-grid">
   <div class="vla-video-card">
     <video autoplay muted loop playsinline>
-      <source src="videos/Complex_Traffic_Driving1.mp4" type="video/mp4">
+      <source src="videos/Complex_Traffic_Driving1_h264.mp4" type="video/mp4">
     </video>
     <span>Complex Traffic Driving</span>
   </div>
   <div class="vla-video-card">
     <video autoplay muted loop playsinline>
-      <source src="videos/Critical_Driving2.mp4" type="video/mp4">
+      <source src="videos/Critical_Driving2_h264.mp4" type="video/mp4">
     </video>
     <span>Critical Driving</span>
   </div>
   <div class="vla-video-card">
     <video autoplay muted loop playsinline>
-      <source src="videos/snow.mp4" type="video/mp4">
+      <source src="videos/snow_h264.mp4" type="video/mp4">
     </video>
     <span>Snow Driving</span>
   </div>
