@@ -44,6 +44,6 @@
 
 - **Zhao, S.**, Song, Z., and He, X. (2023, October). [A Finite-Time Safety Filter for Learning-Based Autonomous Driving](https://drive.google.com/file/d/10KBNfvDTjCqqQ5c1vY6YNjazuO0zYpQp/view?usp=sharing). In 2023 IEEE International Conference on Unmanned Systems (ICUS) (pp. 1-6). IEEE.
 
-- **Zhao, S.**, Li, J., Hu, X., Zhang, J., and He, C. (2022, November). [Vehicle Extreme Control based on Offline Reinforcement Leaning](https://drive.google.com/file/d/15DzSQXEpZ2R1TXRJKxyecE2d_uNh5IVF/view?usp=share_link). In 2022 China Automation Congress (CAC) (pp. 4539-4543). IEEE.
+- **Zhao, S.**, Li, J., Hu, X., Zhang, J., and He, C. (2022, November). [Vehicle Extreme Control based on Offline Reinforcement Learning](https://drive.google.com/file/d/15DzSQXEpZ2R1TXRJKxyecE2d_uNh5IVF/view?usp=share_link). In 2022 China Automation Congress (CAC) (pp. 4539-4543). IEEE.
 
 - Huang, H., Zheng, X., Liu, Y., **Zhao, S.**, Wang, Y., and Wang, J. (2023, November). [Intelligent Adaptive Decision-Making for Autonomous Vehicles: A Learning-Enhanced Game-Theoretic Approach in Interactive Scenarios](https://drive.google.com/file/d/19r-ZDheuFTYboFM1y8zyxn_AvNu4lcez/view?usp=sharing). In 2023 3rd International Conference on Digital Society and Intelligent Systems (DSInS) (pp. 258-264). IEEE.
