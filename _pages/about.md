@@ -13,14 +13,18 @@ redirect_from:
 
 <!-- If you like the template of this homepage, welcome to star and fork my open-sourced template version [AcadHomepage ![](https://img.shields.io/github/stars/RayeRen/acad-homepage.github.io?style=social)](https://github.com/RayeRen/acad-homepage.github.io). -->
 
-{% include_relative includes/pub_short.md %}
+{% include_relative includes/projects.md %}
 
 {% include_relative includes/news.md %}
 
+{% include_relative includes/pub.md %}
+
+<div id="honors-section" style="display:none">
+{% include_relative includes/honers.md %}
+</div>
+
 {% include_relative includes/others.md %}
 
-<<<<<<< Updated upstream
-=======
 <!-- Internship modal -->
 <div id="internship-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
   <div style="background:#fff; border-radius:12px; padding:2.5rem 2.75rem; max-width:520px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2); position:relative; text-align:center;">
@@ -76,7 +80,6 @@ redirect_from:
   });
 </script>
 
->>>>>>> Stashed changes
 <div id="comments">
   <script src="https://utteranc.es/client.js"
           repo="sean-shiyuez/sean-shiyuez.github.io"
