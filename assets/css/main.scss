@@ -280,52 +280,17 @@ body {
 }
 
 /* ---- Sidebar ---- */
-.sidebar, .author__urls-wrapper {
-  background-color: var(--bg);
-  transition: background-color 0.25s ease;
-}
-
-.author__avatar {
-  @include breakpoint($large) {
-    text-align: center;
-  }
-}
-
-.author__avatar img {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10) !important;
-  transition: box-shadow 0.22s ease !important;
-
-  &:hover {
-    box-shadow: 0 4px 18px rgba(37, 99, 235, 0.22) !important;
-  }
-}
-
 .author__affiliation { display: none; }
 
-.sidebar .author__name {
-  font-weight: 700;
-  color: var(--heading-1);
-  letter-spacing: -0.02em;
+/* ---- Theme toggle in masthead ---- */
+.masthead__menu {
+  display: flex;
+  align-items: center;
 }
 
-.author__urls li > div {
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  line-height: 1.65;
-  white-space: normal;
-  margin-bottom: 0.75em;
-}
-
-.author__urls a {
-  color: var(--text-subtle);
-  font-size: 0.9rem;
-  text-decoration: none !important;
-  transition: color 0.15s ease;
-
-  &:hover {
-    color: var(--primary);
-    text-decoration: none !important;
-  }
+.masthead__menu .greedy-nav {
+  flex: 1;
+  min-width: 0;
 }
 
 /* ---- Page content: section headings ---- */
