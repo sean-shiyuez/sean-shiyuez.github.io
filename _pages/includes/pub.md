@@ -3,21 +3,21 @@
 ## Journal Papers （Provide original text whenever possible）
 -  Iason Liagkas, **Shiyue Zhao**, Neda Masoud. "[Behaviorally informed joint optimization of charger placement and dynamic spatio-temporal pricing for electric vehicle networks](https://authors.elsevier.com/c/1mx2NhVEBKGKT)". *Transportation Research Part B: Methodological*, 2026.
 
-- **Shiyue Zhao**, Junzhi Zhang, Rui Zhou, Neda Masoud, Jianxiong Li, Helai Huang, Shijie Zhao. "[Human-machine shared driving for vehicle collision avoidance based on Hamilton-Jacobi reachability](https://drive.google.com/file/d/1zrZ0ZPJS5UX9MVdQ6cAzYre4s9EQJ_jt/view?usp=drive_link)". *Accident Analysis & Prevention*, 230 (2026): 108474.
+- **Shiyue Zhao**, Junzhi Zhang, Rui Zhou, Neda Masoud, Jianxiong Li, Helai Huang, Shijie Zhao. "[Human-machine shared driving for vehicle collision avoidance based on Hamilton-Jacobi reachability](https://drive.google.com/file/d/1zrZ0ZPJS5UX9MVdQ6cAzYre4s9EQJ_jt/view?usp=drive_link)". *Accident Analysis & Prevention*, 230 (2026): 108474. <button class="cite-btn" data-bib="zhao2026shared">📋 Cite</button>
 
 - Liu Q, Huang H, **Zhao S**, et al. [RiskNet: interaction-aware risk forecasting for autonomous driving in long-tail scenarios](https://arxiv.org/pdf/2504.15541)[J]. Transportation Research Part E: Logistics and Transportation Review, 2026, 205: 104478.
 
-- **Zhao S**, Zhang J, Jiang Y, et al. [Tire-Road friction coefficients adaptive estimation through image and vehicle dynamics integration](https://drive.google.com/file/d/1zTifikSaW06fIksXDjQr9h7dws8O3gsA/view?usp=share_link)[J]. Mechanical Systems and Signal Processing, 2025, 224: 112039.
+- **Zhao S**, Zhang J, Jiang Y, et al. [Tire-Road friction coefficients adaptive estimation through image and vehicle dynamics integration](https://drive.google.com/file/d/1zTifikSaW06fIksXDjQr9h7dws8O3gsA/view?usp=share_link)[J]. Mechanical Systems and Signal Processing, 2025, 224: 112039. <button class="cite-btn" data-bib="zhao2025mssp">📋 Cite</button>
 
-- **Zhao S**, Zhang J, Masoud N, et al. [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://drive.google.com/file/d/1GrKSinggEeKKaEKbSS2YadCUwpVo8Nam/view?usp=sharing)[J]. *IEEE Transactions on Industrial Electronics*, 2025.
+- **Zhao S**, Zhang J, Masoud N, et al. [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://drive.google.com/file/d/1GrKSinggEeKKaEKbSS2YadCUwpVo8Nam/view?usp=sharing)[J]. *IEEE Transactions on Industrial Electronics*, 2025. <button class="cite-btn" data-bib="zhao2025tie">📋 Cite</button>
 
-- **Zhao S**, Zhang J, He C, et al. [Autonomous vehicle extreme control for emergency collision avoidance via Reachability-Guided reinforcement learning](https://drive.google.com/file/d/1dHCw_m89mbfJl-yPkBv-qhTq8YIDRSsJ/view?usp=share_link)[J]. Advanced Engineering Informatics, 2024, 62: 102801.
+- **Zhao S**, Zhang J, He C, et al. [Autonomous vehicle extreme control for emergency collision avoidance via Reachability-Guided reinforcement learning](https://drive.google.com/file/d/1dHCw_m89mbfJl-yPkBv-qhTq8YIDRSsJ/view?usp=share_link)[J]. Advanced Engineering Informatics, 2024, 62: 102801. <button class="cite-btn" data-bib="zhao2024aei">📋 Cite</button>
 
-- **Zhao S**, Zhang J, He X, et al. [A Harmonized Approach: Beyond-the-Limit Control for Autonomous Vehicles Balancing Performance and Safety in Unpredictable Environments](https://drive.google.com/file/d/1_Hbn5ef1CwqQCXYf1hKjABz296mYkgFT/view?usp=share_link)[J]. IEEE Transactions on Intelligent Transportation Systems, 2024.
+- **Zhao S**, Zhang J, He X, et al. [A Harmonized Approach: Beyond-the-Limit Control for Autonomous Vehicles Balancing Performance and Safety in Unpredictable Environments](https://drive.google.com/file/d/1_Hbn5ef1CwqQCXYf1hKjABz296mYkgFT/view?usp=share_link)[J]. IEEE Transactions on Intelligent Transportation Systems, 2024. <button class="cite-btn" data-bib="zhao2024tits">📋 Cite</button>
 
-- **Zhao S**, Zhang J, He C, et al. [Adaptive drift control of autonomous electric vehicles after brake system failures](https://drive.google.com/file/d/1DRHJwYoV7T6gSx6Av7GBnJkuxJ--IC87/view?usp=sharing)[J]. IEEE Transactions on Industrial Electronics, 2023.
+- **Zhao S**, Zhang J, He C, et al. [Adaptive drift control of autonomous electric vehicles after brake system failures](https://drive.google.com/file/d/1DRHJwYoV7T6gSx6Av7GBnJkuxJ--IC87/view?usp=sharing)[J]. IEEE Transactions on Industrial Electronics, 2023. <button class="cite-btn" data-bib="zhao2023tie">📋 Cite</button>
 
-- **Zhao S**, Zhang J, He C, et al. [Collision-free emergency planning and control methods for CAVs considering intentions of surrounding vehicles](https://drive.google.com/file/d/1ECb2eiULj8DFUzP41ASp0b41AI3o1mUL/view?usp=sharing)[J]. ISA transactions, 2023, 136: 535-547.
+- **Zhao S**, Zhang J, He C, et al. [Collision-free emergency planning and control methods for CAVs considering intentions of surrounding vehicles](https://drive.google.com/file/d/1ECb2eiULj8DFUzP41ASp0b41AI3o1mUL/view?usp=sharing)[J]. ISA transactions, 2023, 136: 535-547. <button class="cite-btn" data-bib="zhao2023isa">📋 Cite</button>
 
 - Hou, X., Gan, M., Wu, W., Ji, Y., **Zhao, S.**, and Chen, J. (2024). Cross-Observability Optimistic-Pessimistic Safe Reinforcement Learning for Interactive Motion Planning With Visual Occlusion. IEEE Transactions on Intelligent Transportation Systems.
 
@@ -40,10 +40,85 @@
 - Hou, X., Gan, M., Zhang, J., **Zhao, S.**, and Ji, Y. (2023). Vehicle ride comfort optimization in the post-braking phase using residual reinforcement learning. Advanced Engineering Informatics, 58, 102198.
 
 - Hou, X., Gan, M., Zhang, J., **Zhao, S.**, and Ji, Y. (2023). Secondary crash mitigation controller after rear-end collisions using reinforcement learning. Advanced engineering informatics, 58, 102176
+
 ## Conference Proceedings
 
-- **Zhao, S.**, Song, Z., and He, X. (2023, October). [A Finite-Time Safety Filter for Learning-Based Autonomous Driving](https://drive.google.com/file/d/10KBNfvDTjCqqQ5c1vY6YNjazuO0zYpQp/view?usp=sharing). In 2023 IEEE International Conference on Unmanned Systems (ICUS) (pp. 1-6). IEEE.
+- **Zhao, S.**, Song, Z., and He, X. (2023, October). [A Finite-Time Safety Filter for Learning-Based Autonomous Driving](https://drive.google.com/file/d/10KBNfvDTjCqqQ5c1vY6YNjazuO0zYpQp/view?usp=sharing). In 2023 IEEE International Conference on Unmanned Systems (ICUS) (pp. 1-6). IEEE. <button class="cite-btn" data-bib="zhao2023icus">📋 Cite</button>
 
-- **Zhao, S.**, Li, J., Hu, X., Zhang, J., and He, C. (2022, November). [Vehicle Extreme Control based on Offline Reinforcement Learning](https://drive.google.com/file/d/15DzSQXEpZ2R1TXRJKxyecE2d_uNh5IVF/view?usp=share_link). In 2022 China Automation Congress (CAC) (pp. 4539-4543). IEEE.
+- **Zhao, S.**, Li, J., Hu, X., Zhang, J., and He, C. (2022, November). [Vehicle Extreme Control based on Offline Reinforcement Learning](https://drive.google.com/file/d/15DzSQXEpZ2R1TXRJKxyecE2d_uNh5IVF/view?usp=share_link). In 2022 China Automation Congress (CAC) (pp. 4539-4543). IEEE. <button class="cite-btn" data-bib="zhao2022cac">📋 Cite</button>
 
 - Huang, H., Zheng, X., Liu, Y., **Zhao, S.**, Wang, Y., and Wang, J. (2023, November). [Intelligent Adaptive Decision-Making for Autonomous Vehicles: A Learning-Enhanced Game-Theoretic Approach in Interactive Scenarios](https://drive.google.com/file/d/19r-ZDheuFTYboFM1y8zyxn_AvNu4lcez/view?usp=sharing). In 2023 3rd International Conference on Digital Society and Intelligent Systems (DSInS) (pp. 258-264). IEEE.
+
+<!-- BibTeX data (hidden) -->
+<pre id="bib-zhao2026shared" style="display:none">@article{zhao2026shared,
+  author  = {Zhao, Shiyue and Zhang, Junzhi and Zhou, Rui and Masoud, Neda and Li, Jianxiong and Huang, Helai and Zhao, Shijie},
+  title   = {Human-machine shared driving for vehicle collision avoidance based on {Hamilton-Jacobi} reachability},
+  journal = {Accident Analysis & Prevention},
+  volume  = {230},
+  pages   = {108474},
+  year    = {2026}
+}</pre>
+
+<pre id="bib-zhao2025mssp" style="display:none">@article{zhao2025mssp,
+  author  = {Zhao, S. and Zhang, J. and Jiang, Y. and others},
+  title   = {Tire-Road friction coefficients adaptive estimation through image and vehicle dynamics integration},
+  journal = {Mechanical Systems and Signal Processing},
+  volume  = {224},
+  pages   = {112039},
+  year    = {2025}
+}</pre>
+
+<pre id="bib-zhao2025tie" style="display:none">@article{zhao2025tie,
+  author  = {Zhao, S. and Zhang, J. and Masoud, N. and others},
+  title   = {High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles},
+  journal = {IEEE Transactions on Industrial Electronics},
+  year    = {2025}
+}</pre>
+
+<pre id="bib-zhao2024aei" style="display:none">@article{zhao2024aei,
+  author  = {Zhao, S. and Zhang, J. and He, C. and others},
+  title   = {Autonomous vehicle extreme control for emergency collision avoidance via {Reachability-Guided} reinforcement learning},
+  journal = {Advanced Engineering Informatics},
+  volume  = {62},
+  pages   = {102801},
+  year    = {2024}
+}</pre>
+
+<pre id="bib-zhao2024tits" style="display:none">@article{zhao2024tits,
+  author  = {Zhao, S. and Zhang, J. and He, X. and others},
+  title   = {A Harmonized Approach: Beyond-the-Limit Control for Autonomous Vehicles Balancing Performance and Safety in Unpredictable Environments},
+  journal = {IEEE Transactions on Intelligent Transportation Systems},
+  year    = {2024}
+}</pre>
+
+<pre id="bib-zhao2023tie" style="display:none">@article{zhao2023tie,
+  author  = {Zhao, S. and Zhang, J. and He, C. and others},
+  title   = {Adaptive drift control of autonomous electric vehicles after brake system failures},
+  journal = {IEEE Transactions on Industrial Electronics},
+  year    = {2023}
+}</pre>
+
+<pre id="bib-zhao2023isa" style="display:none">@article{zhao2023isa,
+  author  = {Zhao, S. and Zhang, J. and He, C. and others},
+  title   = {Collision-free emergency planning and control methods for {CAVs} considering intentions of surrounding vehicles},
+  journal = {ISA Transactions},
+  volume  = {136},
+  pages   = {535--547},
+  year    = {2023}
+}</pre>
+
+<pre id="bib-zhao2023icus" style="display:none">@inproceedings{zhao2023icus,
+  author    = {Zhao, S. and Song, Z. and He, X.},
+  title     = {A Finite-Time Safety Filter for Learning-Based Autonomous Driving},
+  booktitle = {2023 IEEE International Conference on Unmanned Systems (ICUS)},
+  pages     = {1--6},
+  year      = {2023}
+}</pre>
+
+<pre id="bib-zhao2022cac" style="display:none">@inproceedings{zhao2022cac,
+  author    = {Zhao, S. and Li, J. and Hu, X. and Zhang, J. and He, C.},
+  title     = {Vehicle Extreme Control based on Offline Reinforcement Learning},
+  booktitle = {2022 China Automation Congress (CAC)},
+  pages     = {4539--4543},
+  year      = {2022}
+}</pre>

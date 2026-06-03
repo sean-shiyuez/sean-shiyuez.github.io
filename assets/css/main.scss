@@ -48,7 +48,6 @@
     flex-wrap: wrap;
     border-bottom: 1px #efefef solid;
     padding: 2em 0 2em 0;
-    
 
     .paper-box-image{
         justify-content: center;
@@ -61,12 +60,12 @@
             object-fit: cover;
         }
     }
-    
+
     .paper-box-text{
         max-width: 100%;
         order: 1;
     }
-    
+
     @include breakpoint($medium) {
         .paper-box-image{
             justify-content: left;
@@ -74,26 +73,22 @@
             max-width: 40%;
             order: 1;
         }
-        
         .paper-box-text{
             justify-content: left;
             padding-left: 2em;
             max-width: 60%;
             order: 2;
         }
-
     }
-
-
 }
 
 $scroll_offset : 2em;
-h1:before, .anchor:before { 
-    content: ''; 
-    display: block; 
-    position: relative; 
-    width: 0; 
-    height: $scroll_offset; 
+h1:before, .anchor:before {
+    content: '';
+    display: block;
+    position: relative;
+    width: 0;
+    height: $scroll_offset;
     margin-top: -$scroll_offset;
 }
 
@@ -110,6 +105,60 @@ h1:before, .anchor:before {
 }
 
 /* ================================================================
+   CSS CUSTOM PROPERTIES — light & dark themes
+   ================================================================ */
+
+:root {
+  --bg:               #ffffff;
+  --bg-secondary:     #f8fafc;
+  --text:             #1e293b;
+  --text-muted:       #475569;
+  --text-subtle:      #64748b;
+  --primary:          #2563eb;
+  --primary-hover:    #1d4ed8;
+  --primary-light:    #eff6ff;
+  --border:           #e2e8f0;
+  --border-light:     #f1f5f9;
+  --masthead-bg:      rgba(255, 255, 255, 0.96);
+  --masthead-text:    #374151;
+  --heading-1:        #0f172a;
+  --heading-2:        #1e293b;
+  --heading-3:        #334155;
+  --hover-row:        #f8faff;
+  --footer-bg:        #f8fafc;
+  --footer-text:      #94a3b8;
+  --blockquote-bg:    #f8faff;
+  --code-bg:          #f1f5f9;
+  --badge-color:      #2563eb;
+  --badge-bg:         #eff6ff;
+}
+
+[data-theme="dark"] {
+  --bg:               #0f172a;
+  --bg-secondary:     #1e293b;
+  --text:             #e2e8f0;
+  --text-muted:       #94a3b8;
+  --text-subtle:      #64748b;
+  --primary:          #60a5fa;
+  --primary-hover:    #93c5fd;
+  --primary-light:    #1e3a5f;
+  --border:           #334155;
+  --border-light:     #1e293b;
+  --masthead-bg:      rgba(15, 23, 42, 0.96);
+  --masthead-text:    #cbd5e1;
+  --heading-1:        #f1f5f9;
+  --heading-2:        #e2e8f0;
+  --heading-3:        #cbd5e1;
+  --hover-row:        #1e293b;
+  --footer-bg:        #0a0f1e;
+  --footer-text:      #475569;
+  --blockquote-bg:    #1e293b;
+  --code-bg:          #1e293b;
+  --badge-color:      #60a5fa;
+  --badge-bg:         #1e3a5f;
+}
+
+/* ================================================================
    CUSTOM DESIGN — elegant, minimal, modern
    ================================================================ */
 
@@ -118,28 +167,92 @@ h1:before, .anchor:before {
   display: none !important;
 }
 
-/* Base */
+/* ---- Base ---- */
 html { scroll-behavior: smooth; }
 
 body {
   font-size: 15px;
   line-height: 1.75;
-  color: #1e293b;
+  color: var(--text);
+  background-color: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ---- Scroll progress bar ---- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--primary);
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ---- Back-to-top button ---- */
+#back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.2s ease, background 0.15s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  z-index: 999;
+  line-height: 2.5rem;
+  text-align: center;
+
+  &:hover {
+    background: var(--primary-hover);
+    transform: translateY(-3px);
+  }
+}
+
+/* ---- Theme toggle button ---- */
+#theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.25rem 0.65rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.75rem;
+  color: var(--masthead-text);
+  transition: border-color 0.15s ease, background 0.15s ease;
+  vertical-align: middle;
+  line-height: 1.4;
+
+  &:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+  }
 }
 
 /* ---- Masthead ---- */
 .masthead {
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--masthead-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .masthead__menu-item a {
-  color: #374151;
+  color: var(--masthead-text);
   font-weight: 500;
   font-size: 0.875rem;
   letter-spacing: 0.02em;
@@ -154,38 +267,42 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #2563eb;
+    background: var(--primary);
     border-radius: 1px;
     transition: width 0.22s ease;
   }
 
   &:hover {
-    color: #2563eb;
+    color: var(--primary);
     text-decoration: none;
-
     &::after { width: 100%; }
   }
 }
 
 /* ---- Sidebar ---- */
+.sidebar, .author__urls-wrapper {
+  background-color: var(--bg);
+  transition: background-color 0.25s ease;
+}
+
 .author__avatar img {
-  border: 3px solid #fff !important;
-  box-shadow: 0 0 0 2px #e2e8f0, 0 8px 24px rgba(0, 0, 0, 0.10) !important;
+  border: 3px solid var(--bg) !important;
+  box-shadow: 0 0 0 2px var(--border), 0 8px 24px rgba(0, 0, 0, 0.10) !important;
   transition: box-shadow 0.22s ease !important;
 
   &:hover {
-    box-shadow: 0 0 0 3px #2563eb, 0 8px 24px rgba(37, 99, 235, 0.18) !important;
+    box-shadow: 0 0 0 3px var(--primary), 0 8px 24px rgba(37, 99, 235, 0.18) !important;
   }
 }
 
 .sidebar .author__name {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--heading-1);
   letter-spacing: -0.02em;
 }
 
 .author__urls li > div {
-  color: #475569;
+  color: var(--text-muted);
   font-size: 0.875rem;
   line-height: 1.65;
   white-space: normal;
@@ -193,13 +310,13 @@ body {
 }
 
 .author__urls a {
-  color: #64748b;
+  color: var(--text-subtle);
   font-size: 0.9rem;
   text-decoration: none !important;
   transition: color 0.15s ease;
 
   &:hover {
-    color: #2563eb;
+    color: var(--primary);
     text-decoration: none !important;
   }
 }
@@ -207,7 +324,7 @@ body {
 /* ---- Page content: section headings ---- */
 .page__content h1 {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--heading-1);
   letter-spacing: -0.025em;
   border-bottom: none !important;
   padding-bottom: 0;
@@ -218,7 +335,7 @@ body {
     display: block;
     width: 2.25rem;
     height: 3px;
-    background: #2563eb;
+    background: var(--primary);
     border-radius: 2px;
     margin-top: 0.45em;
     margin-bottom: 0.6em;
@@ -227,28 +344,28 @@ body {
 
 .page__content h2 {
   font-weight: 600;
-  color: #1e293b;
+  color: var(--heading-2);
   letter-spacing: -0.015em;
   margin-top: 1.75em;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-light);
   padding-bottom: 0.3em;
 }
 
 .page__content h3,
 .page__content h4 {
   font-weight: 600;
-  color: #334155;
+  color: var(--heading-3);
 }
 
 /* ---- Links inside content ---- */
 .page__content a {
-  color: #2563eb;
+  color: var(--primary);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 
   &:hover {
-    color: #1d4ed8;
+    color: var(--primary-hover);
     border-bottom-color: rgba(29, 78, 216, 0.4);
     text-decoration: none;
   }
@@ -259,10 +376,13 @@ body {
   margin-bottom: 0.6em;
   padding: 0.2em 0.4em 0.2em 0;
   border-radius: 4px;
-  transition: background 0.15s ease;
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
 
   &:hover {
-    background: #f8faff;
+    background: var(--hover-row);
+    border-left-color: var(--primary);
+    padding-left: 0.4em;
   }
 }
 
@@ -271,8 +391,8 @@ body {
 .page__content li em strong {
   font-style: normal;
   font-weight: 600;
-  color: #2563eb;
-  background: #eff6ff;
+  color: var(--badge-color);
+  background: var(--badge-bg);
   padding: 0.05em 0.35em;
   border-radius: 3px;
   font-size: 0.88em;
@@ -281,40 +401,80 @@ body {
 
 /* ---- Footer ---- */
 .page__footer {
-  background: #f8fafc !important;
-  border-top: 1px solid #e2e8f0 !important;
-  color: #94a3b8;
+  background: var(--footer-bg) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--footer-text);
+  transition: background 0.25s ease;
 }
 
-.page__footer a { color: #94a3b8; }
-.page__footer a:hover { color: #2563eb; text-decoration: none; }
+.page__footer a { color: var(--footer-text); }
+.page__footer a:hover { color: var(--primary); text-decoration: none; }
 
 /* ---- Horizontal rule ---- */
 .page__content hr {
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border);
   margin: 2em 0;
 }
 
 /* ---- Inline code ---- */
 .page__content p > code,
 .page__content li > code {
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
   border-radius: 4px;
-  color: #0f172a;
+  color: var(--heading-1);
   font-size: 0.875em;
   padding: 0.15em 0.4em;
 }
 
 /* ---- Blockquote ---- */
 .page__content blockquote {
-  border-left: 3px solid #2563eb;
-  background: #f8faff;
+  border-left: 3px solid var(--primary);
+  background: var(--blockquote-bg);
   border-radius: 0 6px 6px 0;
   margin: 1.5em 0;
   padding: 0.75em 1.25em;
-  color: #475569;
+  color: var(--text-muted);
   font-style: normal;
+}
+
+/* ---- Cite button ---- */
+.cite-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  margin-left: 0.5em;
+  padding: 0.1em 0.55em;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--primary);
+    color: #fff;
+    border-bottom: none !important;
+  }
+}
+
+/* ---- Section entrance animation ---- */
+.section-hidden {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ---- VLA Video Grid ---- */
