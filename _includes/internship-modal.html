@@ -10,24 +10,3 @@
     </a>
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Internship modal
-    document.querySelectorAll('a[href="#internship-modal"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('internship-modal-overlay').style.display = 'flex';
-      });
-    });
-    document.getElementById('internship-modal-overlay').addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        document.getElementById('internship-modal-overlay').style.display = 'none';
-      }
-    });
-  });
-</script>
