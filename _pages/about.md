@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
 <div id="clustrmaps-container" style="margin: 1rem auto; max-width: 280px;">
-  <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
+  <script type="text/javascript" id="clstr_globe" src="https://clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
 </div>
 
 <style>
