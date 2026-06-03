@@ -13,72 +13,23 @@ redirect_from:
 
 <!-- If you like the template of this homepage, welcome to star and fork my open-sourced template version [AcadHomepage ![](https://img.shields.io/github/stars/RayeRen/acad-homepage.github.io?style=social)](https://github.com/RayeRen/acad-homepage.github.io). -->
 
+<span class='anchor' id='projects'></span>
 {% include_relative includes/projects.md %}
 
+<span class='anchor' id='news'></span>
 {% include_relative includes/news.md %}
 
+<span class='anchor' id='publications'></span>
 {% include_relative includes/pub.md %}
 
-<div id="honors-section" style="display:none">
-{% include_relative includes/honers.md %}
-</div>
+<span class='anchor' id='honors-and-awards'></span>
+{% include_relative includes/honors.md %}
 
+<span class='anchor' id='education'></span>
+<span class='anchor' id='services'></span>
 {% include_relative includes/others.md %}
 
-<!-- Internship modal -->
-<div id="internship-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; border-radius:12px; padding:2.5rem 2.75rem; max-width:520px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2); position:relative; text-align:center;">
-    <button onclick="document.getElementById('internship-modal-overlay').style.display='none'" style="position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.4rem; color:#94a3b8; cursor:pointer; line-height:1;">×</button>
-    <div style="font-size:2rem; margin-bottom:0.75rem;">🤝</div>
-    <h3 style="margin:0 0 0.75rem; color:#0f172a; font-size:1.15rem; font-weight:700;">Join Our Team</h3>
-    <p style="color:#475569; line-height:1.75; margin:0 0 1.25rem; font-size:0.95rem;">We warmly welcome motivated students and researchers to join the Intelligent Chassis team for internships. Feel free to reach out — I usually reply within 24 hours.</p>
-    <a href="mailto:Stary132@163.com" style="display:inline-block; background:#2563eb; color:#fff; padding:0.55rem 1.5rem; border-radius:8px; font-weight:600; font-size:0.9rem; text-decoration:none; transition:background 0.2s ease;">
-      ✉ Stary132@163.com
-    </a>
-  </div>
-</div>
-
-<!-- Honors modal -->
-<div id="honors-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; border-radius:12px; padding:2.5rem 2.75rem; max-width:520px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2); position:relative; text-align:center;">
-    <button onclick="document.getElementById('honors-modal-overlay').style.display='none'" style="position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.4rem; color:#94a3b8; cursor:pointer; line-height:1;">×</button>
-    <p style="font-size:1.05rem; line-height:1.8; color:#1e293b; margin:0 0 0.9rem;">荣誉只是纸上之名，真正的价值在于无私的爱在世界留下的微小改变。</p>
-    <p style="font-size:0.92rem; line-height:1.75; color:#64748b; margin:0; font-style:italic;">Honors are mere names on paper; their true value lies in the quiet changes my selfless love leaves in the world.</p>
-  </div>
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Honors modal
-    document.querySelectorAll('a[href="#honors-modal"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('honors-modal-overlay').style.display = 'flex';
-      });
-    });
-    document.getElementById('honors-modal-overlay').addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
-
-    // Internship modal
-    document.querySelectorAll('a[href="#internship-modal"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.getElementById('internship-modal-overlay').style.display = 'flex';
-      });
-    });
-    document.getElementById('internship-modal-overlay').addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        document.getElementById('honors-modal-overlay').style.display = 'none';
-        document.getElementById('internship-modal-overlay').style.display = 'none';
-      }
-    });
-  });
-</script>
+{% include internship-modal.html %}
 
 <div id="comments">
   <script src="https://utteranc.es/client.js"
@@ -91,15 +42,18 @@ redirect_from:
   </script>
 </div>
 
-<div id="clustrmaps-container">
+<div id="clustrmaps-container" style="margin: 1rem auto; max-width: 280px;">
   <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
 </div>
 
 <style>
   #clustrmaps-container {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    max-width: 280px;
+    height: 280px;
     overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   #clustrmaps-container canvas {

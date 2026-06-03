@@ -18,8 +18,8 @@
 
 .page {
   @include breakpoint($large) {
-    @include span(10 of 12 last);
-    @include prefix(0.5 of 12);
+    @include span(9 of 12 last);
+    @include prefix(0 of 12);
     @include suffix(0 of 12);
   }
 
@@ -409,4 +409,55 @@
   margin-bottom: 10px;
   font-size: $type-size-6;
   text-transform: uppercase;
+}
+
+/* === Layout & polish optimizations === */
+
+/* Better readable content width (avoid overly long lines) */
+.page__content {
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include breakpoint($large) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Section headings: more breathing, subtle underline accent */
+.page__content h1 {
+  font-size: 1.35em;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+/* News & pubs lists: tighter, scannable, subtle hover */
+.page__content ul {
+  padding-left: 1.1em;
+}
+.page__content li {
+  margin-bottom: 0.45em;
+  line-height: 1.55;
+}
+.page__content li:hover {
+  background: rgba(122, 130, 136, 0.04);
+  margin-left: -0.3em;
+  padding-left: 0.3em;
+  border-radius: 3px;
+}
+
+/* Projects as simple cards feel */
+.page__content h1 + ul li,
+.page__content h2 + ul li {
+  padding: 0.25em 0.4em;
+}
+
+/* Small screens: restore some left margin for lists */
+@include breakpoint($medium) {
+  .page__content {
+    max-width: none;
+  }
 }
