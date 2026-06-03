@@ -1,17 +1,19 @@
 
 # 📖 Educations
-- *2024.10 - Present*, Visiting Scholar, Next Generation Mobility Systems Lab, University of Michigan, Ann Arbor, USA.
+- *2024.10 - 2025.08*, Visiting Scholar, Next Generation Mobility Systems Lab, University of Michigan, Ann Arbor, USA.
 - *2021.08 - Present*, PhD candidate, School of Vehicle and Mobility, Tsinghua University, Beijing, China.
 - *2017.08 - 2021.06*, Undergraduate, School of Traffic & Transportation Engineering, Central South University, Changsha, China.
 
 # 🧑‍🎨 Services
 Reviewer for Journals:
+  -  Transportation Engineering
   -  ISA Transactions
   -  IEEE Transactions on Industrial Electronics (TIE)
   -  Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile Engineering
   -  Scientific Reports
 
 Reviewer for conferences:
+   - ICRA
    - Chinese Automation Congress (CAC)
    - IEEE International Conference on Unmanned Systems (ICUS)
 
