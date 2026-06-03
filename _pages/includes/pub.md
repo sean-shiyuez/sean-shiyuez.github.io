@@ -9,7 +9,7 @@
 
 - **Zhao S**, Zhang J, Jiang Y, et al. [Tire-Road friction coefficients adaptive estimation through image and vehicle dynamics integration](https://drive.google.com/file/d/1zTifikSaW06fIksXDjQr9h7dws8O3gsA/view?usp=share_link)[J]. Mechanical Systems and Signal Processing, 2025, 224: 112039.
 
-- **Zhao S**, Zhang J, Masoud N, et al. [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://drive.google.com/file/d/1GrKSinggEeKKaEKbSS2YadCUwpVo8Nam/view?usp=sharing)[J]. arXiv preprint arXiv:2411.11762, 2024.
+- **Zhao S**, Zhang J, Masoud N, et al. [High-Speed Cornering Control and Real-Vehicle Deployment for Autonomous Electric Vehicles](https://drive.google.com/file/d/1GrKSinggEeKKaEKbSS2YadCUwpVo8Nam/view?usp=sharing)[J]. *IEEE Transactions on Industrial Electronics*, 2025.
 
 - **Zhao S**, Zhang J, He C, et al. [Autonomous vehicle extreme control for emergency collision avoidance via Reachability-Guided reinforcement learning](https://drive.google.com/file/d/1dHCw_m89mbfJl-yPkBv-qhTq8YIDRSsJ/view?usp=share_link)[J]. Advanced Engineering Informatics, 2024, 62: 102801.
 
