@@ -6,7 +6,7 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Shiyue Zhao | 赵世越"
+title                    : "Shiyue Zhao (赵世越)"
 description              : "I am a PhD student at Tsinghua University under Prof. Junzhi Zhang, and was a visiting scholar at the University of Michigan, Ann Arbor. My research focuses on decision-making for CAVs, driving VLA systems, wheeled robot decision-making and control, human-centered AI, and efficient RL algorithms."
 repository               : "sean-shiyuez/sean-shiyuez.github.io"
 google_scholar_stats_use_cdn : true
