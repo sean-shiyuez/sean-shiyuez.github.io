@@ -67,12 +67,15 @@
     z-index: 5;
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+    max-width: min(92vw, 880px);
     background: rgba(252, 250, 244, 0.92);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(27, 27, 34, 0.07);
-    border-radius: 999px;
+    border-radius: 28px;
     padding: 0.65rem 1.4rem;
     box-shadow: 0 10px 36px rgba(27, 27, 34, 0.10);
     user-select: none;
@@ -91,11 +94,10 @@
   .dot:hover { transform: scale(1.12); }
   .dot.sel { box-shadow: 0 0 0 3px #fcfaf4, 0 0 0 4.5px #2c2c33; }
 
-  .dot--mix   { background: conic-gradient(#1b1b22 0 25%, #2563eb 0 50%, #d94f43 0 75%, #169873 0); }
-  .dot--sumi  { background: #23232b; }
-  .dot--ai    { background: #2563eb; }
-  .dot--beni  { background: #d94f43; }
-  .dot--midori{ background: #169873; }
+  .dot--mix {
+    background: conic-gradient(#23232b 0 12%, #2563eb 0 24%, #06b6d4 0 36%, #169873 0 48%,
+                               #eab308 0 60%, #f97316 0 72%, #d94f43 0 84%, #7c3aed 0);
+  }
 
   .sep {
     width: 1px;
@@ -207,11 +209,17 @@
 <a class="home" href="../">← Home</a>
 
 <div class="bar">
-  <button class="dot dot--mix"    data-ink="mix"    title="Mixed"></button>
-  <button class="dot dot--sumi sel" data-ink="sumi" title="墨 Sumi"></button>
-  <button class="dot dot--ai"     data-ink="ai"     title="藍 Indigo"></button>
-  <button class="dot dot--beni"   data-ink="beni"   title="紅 Crimson"></button>
-  <button class="dot dot--midori" data-ink="midori" title="緑 Green"></button>
+  <button class="dot dot--mix"  data-ink="mix"    title="Mixed"></button>
+  <button class="dot sel" data-ink="sumi"   title="墨 Black"  style="background:#23232b"></button>
+  <button class="dot" data-ink="ai"     title="藍 Blue"   style="background:#2563eb"></button>
+  <button class="dot" data-ink="sora"   title="空 Cyan"   style="background:#06b6d4"></button>
+  <button class="dot" data-ink="midori" title="緑 Green"  style="background:#169873"></button>
+  <button class="dot" data-ink="ki"     title="黄 Yellow" style="background:#eab308"></button>
+  <button class="dot" data-ink="dai"    title="橙 Orange" style="background:#f97316"></button>
+  <button class="dot" data-ink="beni"   title="紅 Red"    style="background:#d94f43"></button>
+  <button class="dot" data-ink="momo"   title="桃 Pink"   style="background:#ec4899"></button>
+  <button class="dot" data-ink="murasaki" title="紫 Purple" style="background:#7c3aed"></button>
+  <button class="dot" data-ink="cha"    title="茶 Brown"  style="background:#92400e"></button>
   <span class="sep"></span>
   <span class="slider-wrap">
     <span class="slider-label">流速</span>
@@ -630,12 +638,18 @@ function render() {
 
 // absorption = 1 - inkRGB  (what the ink soaks out of the paper)
 var INKS = {
-  sumi:   [0.86, 0.86, 0.83],   // 墨  deep black
-  ai:     [0.85, 0.61, 0.08],   // 藍  indigo  #2563eb
-  beni:   [0.15, 0.69, 0.74],   // 紅  crimson #d94f43
-  midori: [0.91, 0.40, 0.55]    // 緑  green   #169873
+  sumi:     [0.86, 0.86, 0.83],   // 墨  black   #23232b
+  ai:       [0.85, 0.61, 0.08],   // 藍  blue    #2563eb
+  sora:     [0.98, 0.29, 0.17],   // 空  cyan    #06b6d4
+  midori:   [0.91, 0.40, 0.55],   // 緑  green   #169873
+  ki:       [0.08, 0.30, 0.97],   // 黄  yellow  #eab308
+  dai:      [0.02, 0.55, 0.91],   // 橙  orange  #f97316
+  beni:     [0.15, 0.69, 0.74],   // 紅  red     #d94f43
+  momo:     [0.08, 0.72, 0.40],   // 桃  pink    #ec4899
+  murasaki: [0.51, 0.77, 0.07],   // 紫  purple  #7c3aed
+  cha:      [0.43, 0.75, 0.95]    // 茶  brown   #92400e
 };
-var inkNames = ['sumi', 'ai', 'beni', 'midori'];
+var inkNames = Object.keys(INKS);
 var currentInk = 'sumi';
 
 function inkColor(scale) {
