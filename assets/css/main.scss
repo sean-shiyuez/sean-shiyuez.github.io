@@ -538,6 +538,72 @@ button:focus-visible {
   }
 }
 
+/* ---- AI Playground cards ---- */
+.playground-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.25rem 0 1.5rem;
+
+  @include breakpoint(max-width $large) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(max-width $medium) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.playground-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent) !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12), 0 0 14px var(--glow);
+  }
+
+  .playground-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .playground-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--heading-1);
+    letter-spacing: -0.01em;
+  }
+
+  .playground-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .playground-go {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: $monospace;
+    color: var(--primary);
+    transition: color 0.15s ease;
+  }
+
+  &:hover .playground-go {
+    color: var(--accent);
+  }
+}
+
 /* ---- Clustrmaps container ---- */
 #clustrmaps-container {
   margin: 1.5em auto 0;

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Suminagashi — Fluid Ink Marbling | Shiyue Zhao</title>
+<meta name="description" content="An interactive suminagashi (Japanese ink marbling) simulation — ink drops melt together like a fluid. Click to drop ink, drag to swirl.">
+<style>
+  :root {
+    --paper:   #f5f1e8;
+    --panel:   rgba(15, 23, 42, 0.82);
+    --text:    #e2e8f0;
+    --muted:   #94a3b8;
+    --primary: #2563eb;
+    --accent:  #06b6d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--paper);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  canvas {
+    display: block;
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  /* ---- Top control bar ---- */
+  .bar {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--panel);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    user-select: none;
+  }
+
+  .bar a, .bar button {
+    appearance: none;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: transparent;
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .bar a:hover, .bar button:hover {
+    background: rgba(37, 99, 235, 0.25);
+    border-color: var(--accent);
+  }
+
+  .bar button.active {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .bar .title {
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    padding: 0 0.4rem;
+    font-weight: 600;
+  }
+
+  /* ---- Hint ---- */
+  .hint {
+    position: fixed;
+    bottom: 1.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(15, 23, 42, 0.45);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 1s ease;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+
+<div class="bar">
+  <a href="../" title="Back to homepage">← Home</a>
+  <span class="title">SUMINAGASHI</span>
+  <button id="auto" class="active" title="Auto-drop ink">Auto</button>
+  <button id="clear" title="Clear the canvas">Clear</button>
+</div>
+
+<div class="hint" id="hint">Click to drop ink &nbsp;·&nbsp; Drag to swirl</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var canvas = document.getElementById('c');
+  var ctx = canvas.getContext('2d');
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0;
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    render();
+  }
+  window.addEventListener('resize', resize);
+
+  /* ============================================================
+     Mathematical marbling (Aubrey Jaffer's formulas)
+     ============================================================ */
+
+  var PAPER = '#f5f1e8';
+  // Sumi ink palette: indigo blues, cyan, deep slate — matches the site theme
+  var PALETTE = ['#1e3a8a', '#2563eb', '#0e7490', '#0f172a', '#475569', '#06b6d4'];
+  var paletteIdx = 0;
+
+  var POINTS_PER_BLOB = 160;
+  var MAX_BLOBS = 90;
+  var blobs = []; // { pts: Float64Array(2N), color: string }
+
+  function dropAt(cx, cy, r, color) {
+    // Displace every existing point outward:
+    // P' = C + (P − C) · sqrt(1 + r² / |P − C|²)
+    var r2 = r * r;
+    for (var b = 0; b < blobs.length; b++) {
+      var pts = blobs[b].pts;
+      for (var i = 0; i < pts.length; i += 2) {
+        var dx = pts[i] - cx;
+        var dy = pts[i + 1] - cy;
+        var d2 = dx * dx + dy * dy;
+        if (d2 < 1e-9) d2 = 1e-9;
+        var s = Math.sqrt(1 + r2 / d2);
+        pts[i] = cx + dx * s;
+        pts[i + 1] = cy + dy * s;
+      }
+    }
+    // New blob: circle of radius r
+    var n = POINTS_PER_BLOB;
+    var npts = new Float64Array(n * 2);
+    for (var k = 0; k < n; k++) {
+      var a = (k / n) * Math.PI * 2;
+      npts[k * 2] = cx + Math.cos(a) * r;
+      npts[k * 2 + 1] = cy + Math.sin(a) * r;
+    }
+    blobs.push({ pts: npts, color: color });
+    if (blobs.length > MAX_BLOBS) blobs.shift();
+  }
+
+  function dropInk(cx, cy) {
+    // Suminagashi style: an ink ring then a paper-colored drop inside,
+    // pushing the ink into a ring — alternate for organic layering.
+    var r = 18 + Math.random() * 38;
+    var color = PALETTE[paletteIdx % PALETTE.length];
+    paletteIdx++;
+    dropAt(cx, cy, r, color);
+    if (Math.random() < 0.55) {
+      dropAt(cx, cy, r * (0.45 + Math.random() * 0.25), PAPER);
+    }
+  }
+
+  // Tine line (stir): P' = P + z · u^d · M
+  // A = line point, M = unit direction, d = perpendicular distance to the line
+  function tine(ax, ay, mx, my, z, c) {
+    var len = Math.sqrt(mx * mx + my * my);
+    if (len < 1e-6) return;
+    mx /= len; my /= len;
+    var nx = -my, ny = mx;            // line normal
+    var u = Math.pow(0.5, 1 / c);     // falloff base
+    for (var b = 0; b < blobs.length; b++) {
+      var pts = blobs[b].pts;
+      for (var i = 0; i < pts.length; i += 2) {
+        var d = Math.abs((pts[i] - ax) * nx + (pts[i + 1] - ay) * ny);
+        var f = z * Math.pow(u, d);
+        pts[i] += f * mx;
+        pts[i + 1] += f * my;
+      }
+    }
+  }
+
+  function render() {
+    ctx.fillStyle = PAPER;
+    ctx.fillRect(0, 0, W, H);
+    for (var b = 0; b < blobs.length; b++) {
+      var blob = blobs[b];
+      var pts = blob.pts;
+      ctx.beginPath();
+      ctx.moveTo(pts[0], pts[1]);
+      for (var i = 2; i < pts.length; i += 2) {
+        ctx.lineTo(pts[i], pts[i + 1]);
+      }
+      ctx.closePath();
+      ctx.fillStyle = blob.color;
+      ctx.fill();
+    }
+  }
+
+  /* ============================================================
+     Interaction
+     ============================================================ */
+
+  var dragging = false;
+  var lastX = 0, lastY = 0, moved = false;
+  var hint = document.getElementById('hint');
+  var interacted = false;
+
+  function pointerPos(e) {
+    if (e.touches && e.touches.length) {
+      return [e.touches[0].clientX, e.touches[0].clientY];
+    }
+    return [e.clientX, e.clientY];
+  }
+
+  function down(e) {
+    if (e.target !== canvas) return;
+    var p = pointerPos(e);
+    dragging = true;
+    moved = false;
+    lastX = p[0]; lastY = p[1];
+    if (!interacted) {
+      interacted = true;
+      hint.style.opacity = '0';
+    }
+    e.preventDefault();
+  }
+
+  function move(e) {
+    if (!dragging) return;
+    var p = pointerPos(e);
+    var dx = p[0] - lastX, dy = p[1] - lastY;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > 2) {
+      moved = true;
+      // stir strength follows drag speed
+      var z = Math.min(dist * 0.55, 28);
+      tine(lastX, lastY, dx, dy, z, 60);
+      lastX = p[0]; lastY = p[1];
+      render();
+    }
+    e.preventDefault();
+  }
+
+  function up(e) {
+    if (!dragging) return;
+    dragging = false;
+    if (!moved) {            // plain click → drop ink
+      dropInk(lastX, lastY);
+      render();
+    }
+    e.preventDefault();
+  }
+
+  canvas.addEventListener('mousedown', down);
+  window.addEventListener('mousemove', move);
+  window.addEventListener('mouseup', up);
+  canvas.addEventListener('touchstart', down, { passive: false });
+  window.addEventListener('touchmove', move, { passive: false });
+  window.addEventListener('touchend', up, { passive: false });
+
+  /* ---- Auto-drop mode ---- */
+  var autoBtn = document.getElementById('auto');
+  var autoOn = true;
+  var wanderX = 0, wanderY = 0;
+
+  autoBtn.addEventListener('click', function () {
+    autoOn = !autoOn;
+    autoBtn.classList.toggle('active', autoOn);
+  });
+
+  setInterval(function () {
+    if (!autoOn) return;
+    // slow random walk so drops cluster organically, like a brush hovering
+    wanderX += (Math.random() - 0.5) * W * 0.25;
+    wanderY += (Math.random() - 0.5) * H * 0.25;
+    wanderX = Math.max(W * 0.15, Math.min(W * 0.85, wanderX));
+    wanderY = Math.max(H * 0.15, Math.min(H * 0.85, wanderY));
+    dropInk(wanderX, wanderY);
+    render();
+  }, 1100);
+
+  /* ---- Clear ---- */
+  document.getElementById('clear').addEventListener('click', function () {
+    blobs = [];
+    render();
+  });
+
+  /* ---- Init ---- */
+  resize();
+  wanderX = W / 2; wanderY = H / 2;
+  // seed a few drops so the page opens alive
+  dropInk(W * 0.5, H * 0.5);
+  dropInk(W * 0.46, H * 0.52);
+  dropInk(W * 0.55, H * 0.47);
+  render();
+})();
+</script>
+</body>
+</html>

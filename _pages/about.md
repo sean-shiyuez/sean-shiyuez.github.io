@@ -32,6 +32,9 @@ redirect_from:
 <span class='anchor' id='services'></span>
 {% include_relative includes/others.md %}
 
+<span class='anchor' id='playground'></span>
+{% include_relative includes/playground.md %}
+
 {% include internship-modal.html %}
 
 <!-- Honors modal -->
