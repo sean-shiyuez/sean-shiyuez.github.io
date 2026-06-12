@@ -122,6 +122,54 @@
   }
   .txtbtn:hover { color: #1b1b22; }
 
+  .slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    flex: none;
+  }
+
+  .slider-label {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Songti SC", serif;
+    font-size: 0.92rem;
+    letter-spacing: 0.22em;
+    color: #5c5850;
+    white-space: nowrap;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 96px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(27, 27, 34, 0.18);
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2c2c33;
+    border: 2.5px solid #fcfaf4;
+    box-shadow: 0 1px 4px rgba(27, 27, 34, 0.3);
+    transition: transform 0.15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #2c2c33;
+    border: 2.5px solid #fcfaf4;
+    box-shadow: 0 1px 4px rgba(27, 27, 34, 0.3);
+  }
+
   .lamp {
     width: 8px;
     height: 8px;
@@ -165,7 +213,12 @@
   <button class="dot dot--beni"   data-ink="beni"   title="紅 Crimson"></button>
   <button class="dot dot--midori" data-ink="midori" title="緑 Green"></button>
   <span class="sep"></span>
-  <button class="txtbtn on" id="auto"><span class="lamp"></span>自動演出</button>
+  <span class="slider-wrap">
+    <span class="slider-label">流速</span>
+    <input type="range" id="flow" min="0" max="100" value="35" title="Flow speed">
+  </span>
+  <span class="sep"></span>
+  <button class="txtbtn" id="auto"><span class="lamp"></span>自動演出</button>
   <button class="txtbtn" id="wash">洗い流す</button>
 </div>
 
@@ -654,9 +707,26 @@ canvas.addEventListener('touchstart', down, { passive: false });
 window.addEventListener('touchmove', move, { passive: false });
 window.addEventListener('touchend', up, { passive: false });
 
+/* ---------- flow speed slider (流速) ---------- */
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function applyFlow(v) {
+  var t = v / 100;   // 0 = still water, 1 = lively current
+  config.VELOCITY_DISSIPATION = lerp(0.9, 0.04, t);
+  config.SPLAT_FORCE = lerp(1800, 6500, t);
+  config.CURL = lerp(14, 32, t);
+}
+
+var flowSlider = document.getElementById('flow');
+applyFlow(parseFloat(flowSlider.value));
+flowSlider.addEventListener('input', function () {
+  applyFlow(parseFloat(this.value));
+});
+
 /* ---------- auto performance (自動演出) ---------- */
 
-var autoOn = true;
+var autoOn = false;
 var autoBtn = document.getElementById('auto');
 autoBtn.addEventListener('click', function () {
   autoOn = !autoOn;
