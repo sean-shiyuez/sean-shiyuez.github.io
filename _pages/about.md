@@ -162,21 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
   </script>
 </div>
 
-<div id="clustrmaps-container" style="margin: 1rem auto; max-width: 280px;">
+<div id="clustrmaps-container" style="width:300px; height:300px; margin:1.5em auto;">
   <script type="text/javascript" id="clstr_globe" src="https://clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
 </div>
-
-<style>
-  #clustrmaps-container {
-    width: 100%;
-    max-width: 280px;
-    height: 280px;
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #clustrmaps-container canvas {
-    width: 100%;
-    height: 100%;
-  }
-</style>

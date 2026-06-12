@@ -1,0 +1,65 @@
+﻿FN Clarivate Analytics Web of Science
+VR 1.0
+PT J
+AU Zhao, SY
+   Zhang, JZ
+   He, CK
+   Hou, XH
+   Huang, HY
+AF Zhao, Shiyue
+   Zhang, Junzhi
+   He, Chengkun
+   Hou, Xiaohui
+   Huang, Heye
+TI Adaptive Drift Control of Autonomous Electric Vehicles After Brake
+   System Failures
+SO IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS
+LA English
+DT Article
+DE Autonomous electric vehicles; drift control; jump-start reinforcement
+   learning (RL); severe brake failure
+AB Brake system failure may occur because of design defects, poor maintenance, or improper operation and is one of the causes of serious traffic accidents. For high-speed vehicles, brake system failure can cause them to almost lose the ability to avoid collisions. Currently, there are no active safety functions for vehicles with near-total brake system failure. In this article, an adaptive drift-control method is proposed to reduce longitudinal speed and avoid collisions after brake system failure. Collision risk is analyzed by combining longitudinal obstacles and lateral traffic environments. The controller adaptively adopts a control policy according to the collision risk. Vehicle modeling is performed considering four-dimensional nonlinear and coupled dynamics in drift control. The control policy is based on a multilayer neural network that is trained using the jump-start soft actor critic algorithm. Initiated from an expert-guided policy, this algorithm iteratively updates the policy. Finally, we test and validate the proposed drift controller in real vehicle tests. The results demonstrate that the adaptive drift controller has the ability to rapidly stop the controlled vehicle and avoid collisions after near-total brake failure. In addition, the lateral displacement during drift is effectively suppressed in real tests, thus avoiding potential lateral collisions and achieving omnidirectional obstacle avoidance.
+C1 [Zhao, Shiyue; Zhang, Junzhi; He, Chengkun; Huang, Heye] Tsinghua Univ, Sch Vehicle & Mobil, Beijing 100084, Peoples R China.
+   [Hou, Xiaohui] Beijing Inst Technol, Sch Automat, Beijing 100081, Peoples R China.
+C3 Tsinghua University; Beijing Institute of Technology
+RP Zhang, JZ (corresponding author), Tsinghua Univ, Sch Vehicle & Mobil, Beijing 100084, Peoples R China.
+EM Stary132@163.com; jzhzhang@tsinghua.edu.cn; hechengkun@tsinghua.edu.cn;
+   7520220229@bit.edu.cn; hhy18@mails.tsinghua.edu.cn
+RI Zhao, Shiyue/IXW-7626-2023; Huang, Heye/JJD-2424-2023
+OI Zhao, Shiyue/0000-0001-6742-2767; Zhang, Junzhi/0000-0002-5055-2941; 
+FU National Natural Science Foundation of China [52072211]; National Key
+   R&D Program of China [2022YFB2503102]
+FX This work was supported in part by the National Natural Science
+   Foundation of China under Grant 52072211 and in part by the National Key
+   R&D Program of China under Grant 2022YFB2503102.
+NR 32
+TC 18
+Z9 19
+U1 16
+U2 69
+PU IEEE-INST ELECTRICAL ELECTRONICS ENGINEERS INC
+PI PISCATAWAY
+PA 445 HOES LANE, PISCATAWAY, NJ 08855-4141 USA
+SN 0278-0046
+EI 1557-9948
+J9 IEEE T IND ELECTRON
+JI IEEE Trans. Ind. Electron.
+PD JUN
+PY 2024
+VL 71
+IS 6
+BP 6041
+EP 6052
+DI 10.1109/TIE.2023.3294594
+EA JUL 2023
+PG 12
+WC Automation & Control Systems; Engineering, Electrical & Electronic;
+   Instruments & Instrumentation
+WE Science Citation Index Expanded (SCI-EXPANDED)
+SC Automation & Control Systems; Engineering; Instruments & Instrumentation
+GA IQ5S8
+UT WOS:001090871600008
+DA 2026-05-25
+ER
+
+EF

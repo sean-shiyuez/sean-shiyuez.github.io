@@ -1,0 +1,70 @@
+﻿FN Clarivate Analytics Web of Science
+VR 1.0
+PT J
+AU Zhao, SY
+   Zhang, JZ
+   Masoud, N
+   Jiang, YH
+   Huang, HY
+   Liu, T
+AF Zhao, Shiyue
+   Zhang, Junzhi
+   Masoud, Neda
+   Jiang, Yuhong
+   Huang, Heye
+   Liu, Tao
+TI Drift Cornering Control and Real-Vehicle Deployment for Electric
+   Vehicles
+SO IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS
+LA English
+DT Article
+DE Optimization; Trajectory; Training; Vehicle dynamics; Roads;
+   Reinforcement learning; Automobiles; Transient analysis; Process
+   control; Iterative methods; Drift maneuvers; electric vehicles;
+   real-vehicle deployment; RL; RL-MPC fusion mechanism
+ID AUTOMATED VEHICLES
+AB Performing drift maneuvers during high-speed cornering poses significant challenges for vehicle control, yet it offers the potential to minimize turning time and enhance driving dynamics. While reinforcement learning (RL) has achieved promising results in simulation, the gap between simulators and real-world conditions has limited its practical deployment. This article introduces an innovative control framework that integrates trajectory optimization with drift maneuvers, aiming to improve the algorithm's adaptability for real-vehicle deployment. We used Bezier-based pretrajectory optimization to enhance rewards and optimize the controller through twin delayed deep deterministic policy gradient (TD3) in the simulators. For real-world deployment, we realize a hybrid RL-MPC fusion mechanism, where TD3-based maneuvers serve as primary inputs for a model predictive controller (MPC). This allows precise real-time tracking of the optimal trajectory, with MPC providing corrective inputs to bridge the gap between simulation and reality. The efficacy of this method is validated through real-vehicle tests on consumer-grade electric vehicles, focusing on drift U-turns and drift right-angle turns. Real vehicle tests indicate that only our method successfully completed drift maneuvers during U-turns, and in right-angle turn tests our approach reduced cornering time by 32% compared to baseline method. We also provide interesting test videos as supporting material.
+C1 [Zhao, Shiyue; Zhang, Junzhi; Jiang, Yuhong; Liu, Tao] Tsinghua Univ, Sch Vehicle & Mobil, Beijing 100084, Peoples R China.
+   [Zhao, Shiyue; Masoud, Neda] Univ Michigan, Ann Arbor, MI 48105 USA.
+   [Huang, Heye] Univ Wisconsin Madison, Madison, WI 53706 USA.
+C3 Tsinghua University; University of Michigan System; University of
+   Michigan; University of Wisconsin System; University of Wisconsin
+   Madison
+RP Zhang, JZ (corresponding author), Tsinghua Univ, Sch Vehicle & Mobil, Beijing 100084, Peoples R China.
+EM zhaosy21@mails.tsinghua.edu.cn; jzhzhang@tsinghua.edu.cn;
+   nmasoud@umich.edu; jiang-yh23@mails.tsinghua.edu.cn; hhuang468@wisc.edu;
+   liu-t23@mails.tsinghua.edu.cn
+RI Masoud, Neda/AAM-4609-2021; Zhao, Shiyue/IXW-7626-2023; Jiang,
+   Yuhong/HII-9259-2022; Huang, Heye/JJD-2424-2023
+OI Masoud, Neda/0000-0002-6526-3317; Zhang, Junzhi/0000-0002-5055-2941
+NR 30
+TC 1
+Z9 1
+U1 29
+U2 58
+PU IEEE-INST ELECTRICAL ELECTRONICS ENGINEERS INC
+PI PISCATAWAY
+PA 445 HOES LANE, PISCATAWAY, NJ 08855-4141 USA
+SN 0278-0046
+EI 1557-9948
+J9 IEEE T IND ELECTRON
+JI IEEE Trans. Ind. Electron.
+PD DEC
+PY 2025
+VL 72
+IS 12
+BP 13509
+EP 13520
+DI 10.1109/TIE.2025.3563719
+EA MAY 2025
+PG 12
+WC Automation & Control Systems; Engineering, Electrical & Electronic;
+   Instruments & Instrumentation
+WE Science Citation Index Expanded (SCI-EXPANDED)
+SC Automation & Control Systems; Engineering; Instruments & Instrumentation
+GA N0551
+UT WOS:001499482700001
+DA 2026-05-25
+ER
+
+EF

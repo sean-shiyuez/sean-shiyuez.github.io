@@ -1,0 +1,67 @@
+﻿FN Clarivate Analytics Web of Science
+VR 1.0
+PT J
+AU Zhao, SY
+   Zhang, JZ
+   He, CK
+   Ji, Y
+   Huang, HY
+   Hou, XH
+AF Zhao, Shiyue
+   Zhang, Junzhi
+   He, Chengkun
+   Ji, Yuan
+   Huang, Heye
+   Hou, Xiaohui
+TI Autonomous vehicle extreme control for emergency collision avoidance via
+   Reachability-Guided reinforcement learning
+SO ADVANCED ENGINEERING INFORMATICS
+LA English
+DT Article
+DE Autonomous vehicles; Collision avoidance; Extreme control; Min-BRT;
+   reachability-guided RL
+AB The emergency collision avoidance capabilities of autonomous vehicles (AVs) are crucial for enhancing their active safety performance, particularly in extreme scenarios where standard methods fall short. This study introduces an Extreme Maneuver Controller (EMC) for AVs, utilizing reachability-guided reinforcement learning (RL) to address these challenging situations. By applying pseudospectral methods, we solve the minimum backward reachable tube (Min-BRT) to identify regions where conventional avoidance maneuvers are infeasible, establishing a theoretical basis for triggering extreme maneuvers. A novel controller, employing reachabilityguided RL, enables vehicles to execute extreme maneuvers to escape these critical regions. During training, the value function derived from the Min-BRT solution informs the initialization of the Critic networks, enhancing training efficiency. Real-world scenario-based experimental results with actual vehicles validate that the proposed policy, effectively executes beyond-the-limit maneuvers, mitigating collision risks under emergency condition. Furthermore, these extreme maneuvers are executed with minimal deviation from the original driving objectives, ensuring a smooth and stable transition upon completion of extreme maneuvers.
+C1 [Zhao, Shiyue; Zhang, Junzhi; He, Chengkun; Hou, Xiaohui] Tsinghua Univ, Sch Vehicle & Mobil, Beijing, Peoples R China.
+   [Zhang, Junzhi] Tsinghua Univ, State Key Lab Intelligent Green Vehicle & Mobil, Beijing, Peoples R China.
+   [Ji, Yuan] Nanyang Technol Univ, Sch Mech & Aerosp Engn, Singapore 639798, Singapore.
+   [Huang, Heye] Univ Wisconsin Madison, Dept Civil & Environm Engn, Madison, WI 53706 USA.
+C3 Tsinghua University; Tsinghua University; Nanyang Technological
+   University; University of Wisconsin System; University of Wisconsin
+   Madison
+RP Zhang, JZ (corresponding author), Tsinghua Univ, Sch Vehicle & Mobil, Beijing, Peoples R China.; Zhang, JZ (corresponding author), Tsinghua Univ, State Key Lab Intelligent Green Vehicle & Mobil, Beijing, Peoples R China.
+EM thu_znqzd@163.com
+RI Huang, Heye/JJD-2424-2023; Zhao, Shiyue/IXW-7626-2023
+FU National Key R & D Program of China [2022YFB2503103]
+FX This work was supported by the National Key R & D Program of China under
+   Grant No.2022YFB2503103.
+NR 36
+TC 21
+Z9 22
+U1 15
+U2 59
+PU ELSEVIER SCI LTD
+PI London
+PA 125 London Wall, London, ENGLAND
+SN 1474-0346
+EI 1873-5320
+J9 ADV ENG INFORM
+JI Adv. Eng. Inform.
+PD OCT
+PY 2024
+VL 62
+AR 102801
+DI 10.1016/j.aei.2024.102801
+EA SEP 2024
+PN C
+PG 16
+WC Computer Science, Artificial Intelligence; Engineering,
+   Multidisciplinary
+WE Science Citation Index Expanded (SCI-EXPANDED)
+SC Computer Science; Engineering
+GA G6R2V
+UT WOS:001317881200001
+OA hybrid
+DA 2026-05-25
+ER
+
+EF

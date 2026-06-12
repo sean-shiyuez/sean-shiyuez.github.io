@@ -1,0 +1,71 @@
+﻿FN Clarivate Analytics Web of Science
+VR 1.0
+PT J
+AU Zhao, SY
+   Zhang, JZ
+   He, XX
+   He, CK
+   Hou, XH
+   Huang, HY
+   Han, JH
+AF Zhao, Shiyue
+   Zhang, Junzhi
+   He, Xiaoxia
+   He, Chengkun
+   Hou, Xiaohui
+   Huang, Heye
+   Han, Jinheng
+TI A Harmonized Approach: Beyond-the-Limit Control for Autonomous Vehicles
+   Balancing Performance and Safety in Unpredictable Environments
+SO IEEE TRANSACTIONS ON INTELLIGENT TRANSPORTATION SYSTEMS
+LA English
+DT Article
+DE Safety; Transient analysis; Training; Task analysis; Autonomous
+   vehicles; Automobiles; Tires; beyond-the-limit driving; hybrid control;
+   RL; performance and safety optimization
+AB This paper introduces an adaptive beyond-the-limit controller, aimed at striking a balance between high-performance maneuvers, such as transient drift, and ensuring safety in unpredictable environments. Our work is motivated by the necessity for autonomous beyond-the-limit control adaptable to real-world uncertainties, where reinforcement learning (RL) faces simulation-to-reality gap challenges in safety and performance. Our approach introduces a hybrid control mechanism that integrates data-driven performance optimization with a robust safety-centric control policy. By leveraging expert demonstrations and employing Jump-Start RL framework in Frenet coordinates, we greatly improve the learning efficiency of performance optimization. Further, an integrated safety control policy is designed to mitigate hazards through predictive trajectory planning, thus significantly reducing the risk of accidents in unforeseen situations. Meanwhile, the hybrid control mechanism employs adaptive weighting between performance and safety considerations, allowing for fusion control based on real-time environmental assessments. Through simulation experiments and initial real-vehicle testing, we validate the effectiveness of our adaptive hybrid controller. The findings confirm that our controller consistently ensures integrated safety in unpredictable environments, with an acceptable impact on performance.
+C1 [Zhao, Shiyue; Zhang, Junzhi; He, Xiaoxia; He, Chengkun; Han, Jinheng] Tsinghua Univ, Sch Vehicle & Mobil, Beijing 100084, Peoples R China.
+   [Hou, Xiaohui] Beijing Inst Technol, Sch Automat, Beijing 100081, Peoples R China.
+   [Huang, Heye] Univ Wisconsin, Connected & Autonomous Transportat Syst Lab, Madison, WI 53715 USA.
+C3 Tsinghua University; Beijing Institute of Technology; University of
+   Wisconsin System; University of Wisconsin Madison
+RP Zhang, JZ (corresponding author), Tsinghua Univ, Sch Vehicle & Mobil, Beijing 100084, Peoples R China.
+EM thu_znqzd@163.com
+RI Zhao, Shiyue/IXW-7626-2023; jinheng, han/QAY-6226-2026; Huang,
+   Heye/JJD-2424-2023; han, jinheng/QAY-6226-2026
+OI Zhao, Shiyue/0000-0001-6742-2767; jinheng, han/0000-0001-6380-4135;
+   Zhang, Junzhi/0000-0002-5055-2941; 
+FU National Key Research and Development Program of China [2022YFB2503103]
+FX This work was supported by the National Key Research and Development
+   Program of China under Grant Number 2022YFB2503103.
+NR 38
+TC 8
+Z9 8
+U1 6
+U2 47
+PU IEEE-INST ELECTRICAL ELECTRONICS ENGINEERS INC
+PI PISCATAWAY
+PA 445 HOES LANE, PISCATAWAY, NJ 08855-4141 USA
+SN 1524-9050
+EI 1558-0016
+J9 IEEE T INTELL TRANSP
+JI IEEE Trans. Intell. Transp. Syst.
+PD NOV
+PY 2024
+VL 25
+IS 11
+BP 15827
+EP 15840
+DI 10.1109/TITS.2024.3419108
+EA JUL 2024
+PG 14
+WC Engineering, Civil; Engineering, Electrical & Electronic; Transportation
+   Science & Technology
+WE Science Citation Index Expanded (SCI-EXPANDED)
+SC Engineering; Transportation
+GA L6O5P
+UT WOS:001263374000001
+DA 2026-05-25
+ER
+
+EF

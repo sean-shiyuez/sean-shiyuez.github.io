@@ -1,0 +1,67 @@
+﻿FN Clarivate Analytics Web of Science
+VR 1.0
+PT J
+AU Zhao, SY
+   Zhang, JZ
+   Zhou, R
+   Masoud, N
+   Li, JX
+   Huang, HL
+   Zhao, SJ
+AF Zhao, Shiyue
+   Zhang, Junzhi
+   Zhou, Rui
+   Masoud, Neda
+   Li, Jianxiong
+   Huang, Helai
+   Zhao, Shijie
+TI Human-machine shared driving for vehicle collision avoidance based on
+   Hamilton-Jacobi reachability
+SO ACCIDENT ANALYSIS AND PREVENTION
+LA English
+DT Article
+DE Collision avoidance; Human-machine shared control; Hamilton-Jacobi
+   reachability; Reinforcement learning; Conflict minimization
+AB Human-machine shared collision avoidance in critical collision scenarios aims to aid drivers' collision avoidance through intervening only when necessary. Existing methods count on replanning collision-free trajectories and imposing human-machine tracking, which usually interrupts the driver's intent and increases the risk of conflict. This paper introduces a Reachability-Aware Reinforcement Learning (RL) framework for shared control, guided by Hamilton-Jacobi (HJ) reachability analysis. Machine intervention is activated only when the vehicle approaches the boundary of the Collision Avoidance Reachable Set (CARS), thereby preventing the system from entering states where collision is theoretically unavoidable. First, we precompute the reachability distributions and the CARS by solving the Bellman equation using offline data. To reduce human-machine conflicts, we develop a driver model for sudden obstacles and propose an authority allocation strategy considering key collision avoidance features. Finally, we train a RL agent to reduce human-machine conflicts while enforcing the hard constraint that prevents the system from entering the CARS. The proposed method was tested on a real vehicle platform. Results show that the controller intervenes effectively before reaching the CARS boundary to prevent collisions while maintaining improved original driving task performance. Robustness analysis further supports its flexibility across different driver attributes.
+C1 [Zhao, Shiyue; Zhang, Junzhi; Li, Jianxiong; Zhao, Shijie] Tsinghua Univ, Sch Vehicle & Mobil, Beijing 10084, Peoples R China.
+   [Zhao, Shiyue; Masoud, Neda] Univ Michigan, Dept Civil & Environm Engn, Ann Arbor, MI 48105 USA.
+   [Zhou, Rui; Huang, Helai] Cent South Univ, Sch Traff & Transportat Engn, Changsha 410075, Peoples R China.
+C3 Tsinghua University; University of Michigan System; University of
+   Michigan; Central South University
+RP Zhang, JZ (corresponding author), 2366 Erie Dr, Ann Arbor, MI 48105 USA.
+EM thu_znqzd@163.com
+RI Masoud, Neda/AAM-4609-2021
+OI Masoud, Neda/0000-0002-6526-3317
+FU National Key R&D Program of China [2024YFB2505104]
+FX Acknowledgement This work was supported by the National Key R&D
+   Program of China under Grant No.2024YFB2505104.
+NR 32
+TC 0
+Z9 0
+U1 6
+U2 6
+PU PERGAMON-ELSEVIER SCIENCE LTD
+PI OXFORD
+PA THE BOULEVARD, LANGFORD LANE, KIDLINGTON, OXFORD OX5 1GB, ENGLAND
+SN 0001-4575
+EI 1879-2057
+J9 ACCIDENT ANAL PREV
+JI Accid. Anal. Prev.
+PD JUN
+PY 2026
+VL 230
+AR 108474
+DI 10.1016/j.aap.2026.108474
+PG 16
+WC Ergonomics; Public, Environmental & Occupational Health; Social
+   Sciences, Interdisciplinary; Transportation
+WE Social Science Citation Index (SSCI)
+SC Engineering; Public, Environmental & Occupational Health; Social
+   Sciences - Other Topics; Transportation
+GA EQ5VO
+UT WOS:001707373600001
+PM 41764865
+DA 2026-05-25
+ER
+
+EF

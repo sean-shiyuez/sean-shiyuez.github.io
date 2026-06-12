@@ -1,5 +1,5 @@
 
-# 📖 Educations
+# 📖 Education
 - *2024.10 - 2025.09*, Visiting Scholar, Next Generation Mobility Systems Lab, University of Michigan, Ann Arbor, USA.
 - *2021.08 - Present*, PhD candidate, School of Vehicle and Mobility, Tsinghua University, Beijing, China.
 - *2017.08 - 2021.06*, Undergraduate, School of Traffic & Transportation Engineering, Central South University, Changsha, China.
@@ -16,5 +16,5 @@ Reviewer for conferences:
    - IEEE International Conference on Unmanned Systems (ICUS)
 
 # 🤔 Team
-Currently, our team is actively promoting the research of intelligent chassis under the leadership of Professor Zhang Junzhi. If you want to be involved in this process or have any questions about my/the team's research, please contact us by [email](mailto:Stary132@163.com?subject=咨询&body=您好，我想咨询以下问题：).
+Currently, our team is actively promoting the research of intelligent chassis under the leadership of Professor Zhang Junzhi. If you want to be involved in this process or have any questions about my/the team's research, please contact us by [email](mailto:Stary132@163.com?subject=Academic%20Inquiry).
 I usually reply to academic discussion emails within 24 hours.
