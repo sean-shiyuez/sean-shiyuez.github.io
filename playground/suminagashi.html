@@ -3,99 +3,148 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Suminagashi — Fluid Ink Marbling | Shiyue Zhao</title>
-<meta name="description" content="An interactive suminagashi (Japanese ink marbling) simulation — ink drops melt together like a fluid. Click to drop ink, drag to swirl.">
+<title>墨流し — Suminagashi | Shiyue Zhao</title>
+<meta name="description" content="Suminagashi — ink dissolution. A WebGL fluid simulation where ink melts together like a fluid. Click to drop ink, drag to stir.">
 <style>
-  :root {
-    --paper:   #f5f1e8;
-    --panel:   rgba(15, 23, 42, 0.82);
-    --text:    #e2e8f0;
-    --muted:   #94a3b8;
-    --primary: #2563eb;
-    --accent:  #06b6d4;
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: var(--paper);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f0ece1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   }
 
   canvas {
     display: block;
+    width: 100vw;
+    height: 100vh;
     cursor: crosshair;
     touch-action: none;
   }
 
-  /* ---- Top control bar ---- */
+  /* ---- Vertical title (left) ---- */
+  .title-wrap {
+    position: fixed;
+    left: 2.2rem;
+    top: 2.4rem;
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    gap: 1.4rem;
+  }
+
+  .title {
+    writing-mode: vertical-rl;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Songti SC", serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: 0.5em;
+    color: #4a463d;
+  }
+
+  /* ---- Home link (top right) ---- */
+  .home {
+    position: fixed;
+    top: 1.6rem;
+    right: 1.8rem;
+    z-index: 5;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: #a09a8c;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .home:hover { color: #1b1b22; }
+
+  /* ---- Bottom control bar ---- */
   .bar {
     position: fixed;
-    top: 1rem;
-    left: 1rem;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: var(--panel);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 0.5rem 0.75rem;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-    z-index: 10;
+    gap: 0.9rem;
+    background: rgba(252, 250, 244, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(27, 27, 34, 0.07);
+    border-radius: 999px;
+    padding: 0.65rem 1.4rem;
+    box-shadow: 0 10px 36px rgba(27, 27, 34, 0.10);
     user-select: none;
   }
 
-  .bar a, .bar button {
-    appearance: none;
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    background: transparent;
-    color: var(--text);
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.3rem 0.7rem;
-    border-radius: 8px;
+  .dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
     cursor: pointer;
-    text-decoration: none;
-    line-height: 1.4;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    border: none;
+    padding: 0;
+    flex: none;
+    transition: transform 0.15s ease;
+  }
+  .dot:hover { transform: scale(1.12); }
+  .dot.sel { box-shadow: 0 0 0 3px #fcfaf4, 0 0 0 4.5px #2c2c33; }
+
+  .dot--mix   { background: conic-gradient(#1b1b22 0 25%, #2563eb 0 50%, #d94f43 0 75%, #169873 0); }
+  .dot--sumi  { background: #23232b; }
+  .dot--ai    { background: #2563eb; }
+  .dot--beni  { background: #d94f43; }
+  .dot--midori{ background: #169873; }
+
+  .sep {
+    width: 1px;
+    height: 22px;
+    background: rgba(27, 27, 34, 0.12);
+    flex: none;
   }
 
-  .bar a:hover, .bar button:hover {
-    background: rgba(37, 99, 235, 0.25);
-    border-color: var(--accent);
-  }
-
-  .bar button.active {
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-color: transparent;
-    color: #fff;
-  }
-
-  .bar .title {
-    color: var(--muted);
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    padding: 0 0.4rem;
-    font-weight: 600;
-  }
-
-  /* ---- Hint ---- */
-  .hint {
-    position: fixed;
-    bottom: 1.1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    color: rgba(15, 23, 42, 0.45);
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
-    z-index: 10;
-    pointer-events: none;
-    transition: opacity 1s ease;
+  .txtbtn {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Songti SC", serif;
+    font-size: 0.92rem;
+    letter-spacing: 0.22em;
+    color: #5c5850;
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.1rem 0.2rem;
+    transition: color 0.2s ease;
     white-space: nowrap;
+  }
+  .txtbtn:hover { color: #1b1b22; }
+
+  .lamp {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid #8b867a;
+    flex: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .txtbtn.on .lamp { background: #2563eb; border-color: #2563eb; }
+
+  /* ---- Fallback message ---- */
+  .nogl {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #5c5850;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    z-index: 20;
+    text-align: center;
+    padding: 2rem;
   }
 </style>
 </head>
@@ -103,222 +152,564 @@
 
 <canvas id="c"></canvas>
 
-<div class="bar">
-  <a href="../" title="Back to homepage">← Home</a>
-  <span class="title">SUMINAGASHI</span>
-  <button id="auto" class="active" title="Auto-drop ink">Auto</button>
-  <button id="clear" title="Clear the canvas">Clear</button>
+<div class="title-wrap">
+  <div class="title">十月 制作</div>
 </div>
 
-<div class="hint" id="hint">Click to drop ink &nbsp;·&nbsp; Drag to swirl</div>
+<a class="home" href="../">← Home</a>
+
+<div class="bar">
+  <button class="dot dot--mix"    data-ink="mix"    title="Mixed"></button>
+  <button class="dot dot--sumi sel" data-ink="sumi" title="墨 Sumi"></button>
+  <button class="dot dot--ai"     data-ink="ai"     title="藍 Indigo"></button>
+  <button class="dot dot--beni"   data-ink="beni"   title="紅 Crimson"></button>
+  <button class="dot dot--midori" data-ink="midori" title="緑 Green"></button>
+  <span class="sep"></span>
+  <button class="txtbtn on" id="auto"><span class="lamp"></span>自動演出</button>
+  <button class="txtbtn" id="wash">洗い流す</button>
+</div>
+
+<div class="nogl" id="nogl">This experiment needs WebGL2.<br>Please open it in a modern browser.</div>
 
 <script>
 (function () {
-  'use strict';
+'use strict';
 
-  var canvas = document.getElementById('c');
-  var ctx = canvas.getContext('2d');
-  var DPR = Math.min(window.devicePixelRatio || 1, 2);
-  var W = 0, H = 0;
+/* ================================================================
+   GPU fluid simulation (Stable Fluids) + Beer–Lambert ink rendering
+   ================================================================ */
 
-  function resize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
-    canvas.width = W * DPR;
-    canvas.height = H * DPR;
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    render();
+var canvas = document.getElementById('c');
+var gl = canvas.getContext('webgl2', { alpha: false, depth: false, stencil: false, antialias: false });
+if (!gl || !gl.getExtension('EXT_color_buffer_float')) {
+  document.getElementById('nogl').style.display = 'flex';
+  return;
+}
+
+var config = {
+  SIM_RESOLUTION: 144,
+  DYE_RESOLUTION: 560,
+  VELOCITY_DISSIPATION: 0.3,
+  DENSITY_DISSIPATION: 0.06,
+  PRESSURE_DECAY: 0.8,
+  PRESSURE_ITERATIONS: 20,
+  CURL: 21,
+  SPLAT_FORCE: 3600,
+  PAPER: [0.941, 0.925, 0.882]   // #f0ece1
+};
+
+/* ---------- shaders ---------- */
+
+var VERT = [
+  '#version 300 es',
+  'precision highp float;',
+  'in vec2 aPosition;',
+  'out vec2 vUv;',
+  'void main(){ vUv = aPosition*0.5+0.5; gl_Position = vec4(aPosition,0.,1.); }'
+].join('\n');
+
+function frag(body) {
+  return [
+    '#version 300 es',
+    'precision highp float;',
+    'precision highp sampler2D;',
+    'in vec2 vUv;',
+    'out vec4 fragColor;',
+    body
+  ].join('\n');
+}
+
+var SHADERS = {
+  splat: frag([
+    'uniform sampler2D uTarget;',
+    'uniform float aspectRatio;',
+    'uniform vec3 color;',
+    'uniform vec2 point;',
+    'uniform float radius;',
+    'void main(){',
+    '  vec2 p = vUv - point;',
+    '  p.x *= aspectRatio;',
+    '  vec3 splat = exp(-dot(p,p)/radius) * color;',
+    '  vec3 base = texture(uTarget, vUv).xyz;',
+    '  fragColor = vec4(base + splat, 1.0);',
+    '}'
+  ].join('\n')),
+
+  advection: frag([
+    'uniform sampler2D uVelocity;',
+    'uniform sampler2D uSource;',
+    'uniform vec2 texelSize;',
+    'uniform float dt;',
+    'uniform float dissipation;',
+    'void main(){',
+    '  vec2 coord = vUv - dt * texture(uVelocity, vUv).xy * texelSize;',
+    '  vec4 result = texture(uSource, coord);',
+    '  float decay = 1.0 + dissipation * dt;',
+    '  fragColor = result / decay;',
+    '}'
+  ].join('\n')),
+
+  divergence: frag([
+    'uniform sampler2D uVelocity;',
+    'uniform vec2 texelSize;',
+    'void main(){',
+    '  float L = texture(uVelocity, vUv - vec2(texelSize.x, 0.)).x;',
+    '  float R = texture(uVelocity, vUv + vec2(texelSize.x, 0.)).x;',
+    '  float B = texture(uVelocity, vUv - vec2(0., texelSize.y)).y;',
+    '  float T = texture(uVelocity, vUv + vec2(0., texelSize.y)).y;',
+    '  float div = 0.5 * (R - L + T - B);',
+    '  fragColor = vec4(div, 0., 0., 1.);',
+    '}'
+  ].join('\n')),
+
+  curl: frag([
+    'uniform sampler2D uVelocity;',
+    'uniform vec2 texelSize;',
+    'void main(){',
+    '  float L = texture(uVelocity, vUv - vec2(texelSize.x, 0.)).y;',
+    '  float R = texture(uVelocity, vUv + vec2(texelSize.x, 0.)).y;',
+    '  float B = texture(uVelocity, vUv - vec2(0., texelSize.y)).x;',
+    '  float T = texture(uVelocity, vUv + vec2(0., texelSize.y)).x;',
+    '  float vorticity = R - L - T + B;',
+    '  fragColor = vec4(0.5 * vorticity, 0., 0., 1.);',
+    '}'
+  ].join('\n')),
+
+  vorticity: frag([
+    'uniform sampler2D uVelocity;',
+    'uniform sampler2D uCurl;',
+    'uniform vec2 texelSize;',
+    'uniform float curl;',
+    'uniform float dt;',
+    'void main(){',
+    '  float L = texture(uCurl, vUv - vec2(texelSize.x, 0.)).x;',
+    '  float R = texture(uCurl, vUv + vec2(texelSize.x, 0.)).x;',
+    '  float B = texture(uCurl, vUv - vec2(0., texelSize.y)).x;',
+    '  float T = texture(uCurl, vUv + vec2(0., texelSize.y)).x;',
+    '  float C = texture(uCurl, vUv).x;',
+    '  vec2 force = 0.5 * vec2(abs(T) - abs(B), abs(R) - abs(L));',
+    '  force /= length(force) + 0.0001;',
+    '  force *= curl * C;',
+    '  force.y *= -1.0;',
+    '  vec2 velocity = texture(uVelocity, vUv).xy;',
+    '  velocity += force * dt;',
+    '  velocity = clamp(velocity, vec2(-1000.), vec2(1000.));',
+    '  fragColor = vec4(velocity, 0., 1.);',
+    '}'
+  ].join('\n')),
+
+  pressure: frag([
+    'uniform sampler2D uPressure;',
+    'uniform sampler2D uDivergence;',
+    'uniform vec2 texelSize;',
+    'void main(){',
+    '  float L = texture(uPressure, vUv - vec2(texelSize.x, 0.)).x;',
+    '  float R = texture(uPressure, vUv + vec2(texelSize.x, 0.)).x;',
+    '  float B = texture(uPressure, vUv - vec2(0., texelSize.y)).x;',
+    '  float T = texture(uPressure, vUv + vec2(0., texelSize.y)).x;',
+    '  float divergence = texture(uDivergence, vUv).x;',
+    '  float pressure = (L + R + B + T - divergence) * 0.25;',
+    '  fragColor = vec4(pressure, 0., 0., 1.);',
+    '}'
+  ].join('\n')),
+
+  gradientSubtract: frag([
+    'uniform sampler2D uPressure;',
+    'uniform sampler2D uVelocity;',
+    'uniform vec2 texelSize;',
+    'void main(){',
+    '  float L = texture(uPressure, vUv - vec2(texelSize.x, 0.)).x;',
+    '  float R = texture(uPressure, vUv + vec2(texelSize.x, 0.)).x;',
+    '  float B = texture(uPressure, vUv - vec2(0., texelSize.y)).x;',
+    '  float T = texture(uPressure, vUv + vec2(0., texelSize.y)).x;',
+    '  vec2 velocity = texture(uVelocity, vUv).xy;',
+    '  velocity -= 0.5 * vec2(R - L, T - B);',
+    '  fragColor = vec4(velocity, 0., 1.);',
+    '}'
+  ].join('\n')),
+
+  fade: frag([
+    'uniform sampler2D uTexture;',
+    'uniform float uFactor;',
+    'void main(){ fragColor = texture(uTexture, vUv) * uFactor; }'
+  ].join('\n')),
+
+  display: frag([
+    'uniform sampler2D uDye;',
+    'uniform vec3 uPaper;',
+    'void main(){',
+    '  vec3 absorb = texture(uDye, vUv).rgb;',
+    // Beer–Lambert absorption: ink soaks light out of the paper
+    '  vec3 col = uPaper * exp(-absorb * 1.15);',
+    '  fragColor = vec4(col, 1.0);',
+    '}'
+  ].join('\n'))
+};
+
+/* ---------- GL plumbing ---------- */
+
+function compile(type, src) {
+  var s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+    throw new Error(gl.getShaderInfoLog(s));
   }
-  window.addEventListener('resize', resize);
+  return s;
+}
 
-  /* ============================================================
-     Mathematical marbling (Aubrey Jaffer's formulas)
-     ============================================================ */
+var quadVS = compile(gl.VERTEX_SHADER, VERT);
 
-  var PAPER = '#f5f1e8';
-  // Sumi ink palette: indigo blues, cyan, deep slate — matches the site theme
-  var PALETTE = ['#1e3a8a', '#2563eb', '#0e7490', '#0f172a', '#475569', '#06b6d4'];
-  var paletteIdx = 0;
+function Program(fsSrc) {
+  this.prog = gl.createProgram();
+  gl.attachShader(this.prog, quadVS);
+  gl.attachShader(this.prog, compile(gl.FRAGMENT_SHADER, fsSrc));
+  gl.linkProgram(this.prog);
+  if (!gl.getProgramParameter(this.prog, gl.LINK_STATUS)) {
+    throw new Error(gl.getProgramInfoLog(this.prog));
+  }
+  this.u = {};
+  var n = gl.getProgramParameter(this.prog, gl.ACTIVE_UNIFORMS);
+  for (var i = 0; i < n; i++) {
+    var name = gl.getActiveUniform(this.prog, i).name;
+    this.u[name] = gl.getUniformLocation(this.prog, name);
+  }
+}
+Program.prototype.bind = function () { gl.useProgram(this.prog); };
 
-  var POINTS_PER_BLOB = 160;
-  var MAX_BLOBS = 90;
-  var blobs = []; // { pts: Float64Array(2N), color: string }
+var programs = {
+  splat: new Program(SHADERS.splat),
+  advection: new Program(SHADERS.advection),
+  divergence: new Program(SHADERS.divergence),
+  curl: new Program(SHADERS.curl),
+  vorticity: new Program(SHADERS.vorticity),
+  pressure: new Program(SHADERS.pressure),
+  gradientSubtract: new Program(SHADERS.gradientSubtract),
+  fade: new Program(SHADERS.fade),
+  display: new Program(SHADERS.display)
+};
 
-  function dropAt(cx, cy, r, color) {
-    // Displace every existing point outward:
-    // P' = C + (P − C) · sqrt(1 + r² / |P − C|²)
-    var r2 = r * r;
-    for (var b = 0; b < blobs.length; b++) {
-      var pts = blobs[b].pts;
-      for (var i = 0; i < pts.length; i += 2) {
-        var dx = pts[i] - cx;
-        var dy = pts[i + 1] - cy;
-        var d2 = dx * dx + dy * dy;
-        if (d2 < 1e-9) d2 = 1e-9;
-        var s = Math.sqrt(1 + r2 / d2);
-        pts[i] = cx + dx * s;
-        pts[i + 1] = cy + dy * s;
-      }
+// fullscreen quad
+var vao = gl.createVertexArray();
+gl.bindVertexArray(vao);
+var vbo = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);
+gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+function blit(target) {
+  if (target == null) {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+  } else {
+    gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+    gl.viewport(0, 0, target.width, target.height);
+  }
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+
+function createFBO(w, h) {
+  var tex = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, w, h, 0, gl.RGBA, gl.HALF_FLOAT, null);
+  var fbo = gl.createFramebuffer();
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+  gl.clearColor(0, 0, 0, 1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  return {
+    tex: tex, fbo: fbo, width: w, height: h,
+    texel: [1 / w, 1 / h],
+    attach: function (unit) {
+      gl.activeTexture(gl.TEXTURE0 + unit);
+      gl.bindTexture(gl.TEXTURE_2D, this.tex);
+      return unit;
     }
-    // New blob: circle of radius r
-    var n = POINTS_PER_BLOB;
-    var npts = new Float64Array(n * 2);
-    for (var k = 0; k < n; k++) {
-      var a = (k / n) * Math.PI * 2;
-      npts[k * 2] = cx + Math.cos(a) * r;
-      npts[k * 2 + 1] = cy + Math.sin(a) * r;
-    }
-    blobs.push({ pts: npts, color: color });
-    if (blobs.length > MAX_BLOBS) blobs.shift();
+  };
+}
+
+function createDoubleFBO(w, h) {
+  return {
+    read: createFBO(w, h),
+    write: createFBO(w, h),
+    width: w, height: h,
+    texel: [1 / w, 1 / h],
+    swap: function () { var t = this.read; this.read = this.write; this.write = t; }
+  };
+}
+
+var velocity, dye, divergenceFBO, curlFBO, pressureFBO;
+
+function initFramebuffers() {
+  var aspect = canvas.width / canvas.height;
+  var simH = config.SIM_RESOLUTION;
+  var simW = Math.round(simH * aspect);
+  var dyeH = config.DYE_RESOLUTION;
+  var dyeW = Math.round(dyeH * aspect);
+  velocity = createDoubleFBO(simW, simH);
+  dye = createDoubleFBO(dyeW, dyeH);
+  divergenceFBO = createFBO(simW, simH);
+  curlFBO = createFBO(simW, simH);
+  pressureFBO = createDoubleFBO(simW, simH);
+}
+
+function resize() {
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var w = Math.floor(window.innerWidth * dpr);
+  var h = Math.floor(window.innerHeight * dpr);
+  if (canvas.width !== w || canvas.height !== h) {
+    canvas.width = w;
+    canvas.height = h;
+    initFramebuffers();
+  }
+}
+window.addEventListener('resize', resize);
+
+/* ---------- simulation steps ---------- */
+
+function splat(x, y, dx, dy, color, radius) {
+  // velocity
+  programs.splat.bind();
+  gl.uniform1i(programs.splat.u.uTarget, velocity.read.attach(0));
+  gl.uniform1f(programs.splat.u.aspectRatio, canvas.width / canvas.height);
+  gl.uniform2f(programs.splat.u.point, x, y);
+  gl.uniform3f(programs.splat.u.color, dx, dy, 0);
+  gl.uniform1f(programs.splat.u.radius, radius / 100);
+  blit(velocity.write);
+  velocity.swap();
+  // dye
+  gl.uniform1i(programs.splat.u.uTarget, dye.read.attach(0));
+  gl.uniform3f(programs.splat.u.color, color[0], color[1], color[2]);
+  blit(dye.write);
+  dye.swap();
+}
+
+var washing = 0;
+
+function step(dt) {
+  gl.disable(gl.BLEND);
+
+  // vorticity confinement
+  programs.curl.bind();
+  gl.uniform2f(programs.curl.u.texelSize, velocity.texel[0], velocity.texel[1]);
+  gl.uniform1i(programs.curl.u.uVelocity, velocity.read.attach(0));
+  blit(curlFBO);
+
+  programs.vorticity.bind();
+  gl.uniform2f(programs.vorticity.u.texelSize, velocity.texel[0], velocity.texel[1]);
+  gl.uniform1i(programs.vorticity.u.uVelocity, velocity.read.attach(0));
+  gl.uniform1i(programs.vorticity.u.uCurl, curlFBO.attach(1));
+  gl.uniform1f(programs.vorticity.u.curl, config.CURL);
+  gl.uniform1f(programs.vorticity.u.dt, dt);
+  blit(velocity.write);
+  velocity.swap();
+
+  // pressure projection
+  programs.divergence.bind();
+  gl.uniform2f(programs.divergence.u.texelSize, velocity.texel[0], velocity.texel[1]);
+  gl.uniform1i(programs.divergence.u.uVelocity, velocity.read.attach(0));
+  blit(divergenceFBO);
+
+  programs.fade.bind();
+  gl.uniform1i(programs.fade.u.uTexture, pressureFBO.read.attach(0));
+  gl.uniform1f(programs.fade.u.uFactor, config.PRESSURE_DECAY);
+  blit(pressureFBO.write);
+  pressureFBO.swap();
+
+  programs.pressure.bind();
+  gl.uniform2f(programs.pressure.u.texelSize, velocity.texel[0], velocity.texel[1]);
+  gl.uniform1i(programs.pressure.u.uDivergence, divergenceFBO.attach(0));
+  for (var i = 0; i < config.PRESSURE_ITERATIONS; i++) {
+    gl.uniform1i(programs.pressure.u.uPressure, pressureFBO.read.attach(1));
+    blit(pressureFBO.write);
+    pressureFBO.swap();
   }
 
-  function dropInk(cx, cy) {
-    // Suminagashi style: an ink ring then a paper-colored drop inside,
-    // pushing the ink into a ring — alternate for organic layering.
-    var r = 18 + Math.random() * 38;
-    var color = PALETTE[paletteIdx % PALETTE.length];
-    paletteIdx++;
-    dropAt(cx, cy, r, color);
-    if (Math.random() < 0.55) {
-      dropAt(cx, cy, r * (0.45 + Math.random() * 0.25), PAPER);
-    }
+  programs.gradientSubtract.bind();
+  gl.uniform2f(programs.gradientSubtract.u.texelSize, velocity.texel[0], velocity.texel[1]);
+  gl.uniform1i(programs.gradientSubtract.u.uPressure, pressureFBO.read.attach(0));
+  gl.uniform1i(programs.gradientSubtract.u.uVelocity, velocity.read.attach(1));
+  blit(velocity.write);
+  velocity.swap();
+
+  // advect velocity
+  programs.advection.bind();
+  gl.uniform2f(programs.advection.u.texelSize, velocity.texel[0], velocity.texel[1]);
+  gl.uniform1i(programs.advection.u.uVelocity, velocity.read.attach(0));
+  gl.uniform1i(programs.advection.u.uSource, velocity.read.attach(0));
+  gl.uniform1f(programs.advection.u.dt, dt);
+  gl.uniform1f(programs.advection.u.dissipation, config.VELOCITY_DISSIPATION);
+  blit(velocity.write);
+  velocity.swap();
+
+  // advect dye
+  gl.uniform1i(programs.advection.u.uVelocity, velocity.read.attach(0));
+  gl.uniform1i(programs.advection.u.uSource, dye.read.attach(1));
+  gl.uniform1f(programs.advection.u.dissipation, config.DENSITY_DISSIPATION);
+  blit(dye.write);
+  dye.swap();
+
+  // wash away (洗い流す)
+  if (washing > 0) {
+    washing--;
+    programs.fade.bind();
+    gl.uniform1i(programs.fade.u.uTexture, dye.read.attach(0));
+    gl.uniform1f(programs.fade.u.uFactor, 0.93);
+    blit(dye.write);
+    dye.swap();
   }
+}
 
-  // Tine line (stir): P' = P + z · u^d · M
-  // A = line point, M = unit direction, d = perpendicular distance to the line
-  function tine(ax, ay, mx, my, z, c) {
-    var len = Math.sqrt(mx * mx + my * my);
-    if (len < 1e-6) return;
-    mx /= len; my /= len;
-    var nx = -my, ny = mx;            // line normal
-    var u = Math.pow(0.5, 1 / c);     // falloff base
-    for (var b = 0; b < blobs.length; b++) {
-      var pts = blobs[b].pts;
-      for (var i = 0; i < pts.length; i += 2) {
-        var d = Math.abs((pts[i] - ax) * nx + (pts[i + 1] - ay) * ny);
-        var f = z * Math.pow(u, d);
-        pts[i] += f * mx;
-        pts[i + 1] += f * my;
-      }
-    }
+function render() {
+  programs.display.bind();
+  gl.uniform1i(programs.display.u.uDye, dye.read.attach(0));
+  gl.uniform3f(programs.display.u.uPaper, config.PAPER[0], config.PAPER[1], config.PAPER[2]);
+  blit(null);
+}
+
+/* ---------- inks ---------- */
+
+// absorption = 1 - inkRGB  (what the ink soaks out of the paper)
+var INKS = {
+  sumi:   [0.86, 0.86, 0.83],   // 墨  deep black
+  ai:     [0.85, 0.61, 0.08],   // 藍  indigo  #2563eb
+  beni:   [0.15, 0.69, 0.74],   // 紅  crimson #d94f43
+  midori: [0.91, 0.40, 0.55]    // 緑  green   #169873
+};
+var inkNames = ['sumi', 'ai', 'beni', 'midori'];
+var currentInk = 'sumi';
+
+function inkColor(scale) {
+  var name = currentInk === 'mix'
+    ? inkNames[Math.floor(Math.random() * inkNames.length)]
+    : currentInk;
+  var a = INKS[name];
+  return [a[0] * scale, a[1] * scale, a[2] * scale];
+}
+
+/* ---------- interaction ---------- */
+
+var pointer = { down: false, moved: false, x: 0, y: 0, px: 0, py: 0 };
+
+function uv(e) {
+  var t = (e.touches && e.touches.length) ? e.touches[0] : e;
+  return [t.clientX / window.innerWidth, 1 - t.clientY / window.innerHeight];
+}
+
+function bloom(x, y) {
+  // a breathing ink drop: dye cloud + a faint swirl so it keeps dissolving
+  splat(x, y, 0, 0, inkColor(0.55), 1.6);
+  var a0 = Math.random() * Math.PI * 2;
+  for (var i = 0; i < 4; i++) {
+    var a = a0 + (i / 4) * Math.PI * 2;
+    var ox = Math.cos(a) * 0.012, oy = Math.sin(a) * 0.012;
+    // tangential push → slow rotation, like ink meeting moving water
+    splat(x + ox, y + oy, -oy * config.SPLAT_FORCE * 0.1, ox * config.SPLAT_FORCE * 0.1, [0, 0, 0], 0.9);
   }
+}
 
-  function render() {
-    ctx.fillStyle = PAPER;
-    ctx.fillRect(0, 0, W, H);
-    for (var b = 0; b < blobs.length; b++) {
-      var blob = blobs[b];
-      var pts = blob.pts;
-      ctx.beginPath();
-      ctx.moveTo(pts[0], pts[1]);
-      for (var i = 2; i < pts.length; i += 2) {
-        ctx.lineTo(pts[i], pts[i + 1]);
-      }
-      ctx.closePath();
-      ctx.fillStyle = blob.color;
-      ctx.fill();
-    }
+function down(e) {
+  if (e.target !== canvas) return;
+  var p = uv(e);
+  pointer.down = true;
+  pointer.moved = false;
+  pointer.x = pointer.px = p[0];
+  pointer.y = pointer.py = p[1];
+  e.preventDefault();
+}
+
+function move(e) {
+  if (!pointer.down) return;
+  var p = uv(e);
+  pointer.px = pointer.x; pointer.py = pointer.y;
+  pointer.x = p[0]; pointer.y = p[1];
+  var dx = pointer.x - pointer.px;
+  var dy = pointer.y - pointer.py;
+  if (Math.abs(dx) + Math.abs(dy) > 0.0005) {
+    pointer.moved = true;
+    splat(pointer.x, pointer.y,
+          dx * config.SPLAT_FORCE, dy * config.SPLAT_FORCE,
+          inkColor(0.22), 0.45);
   }
+  e.preventDefault();
+}
 
-  /* ============================================================
-     Interaction
-     ============================================================ */
+function up(e) {
+  if (!pointer.down) return;
+  pointer.down = false;
+  if (!pointer.moved) bloom(pointer.x, pointer.y);
+  e.preventDefault();
+}
 
-  var dragging = false;
-  var lastX = 0, lastY = 0, moved = false;
-  var hint = document.getElementById('hint');
-  var interacted = false;
+canvas.addEventListener('mousedown', down);
+window.addEventListener('mousemove', move);
+window.addEventListener('mouseup', up);
+canvas.addEventListener('touchstart', down, { passive: false });
+window.addEventListener('touchmove', move, { passive: false });
+window.addEventListener('touchend', up, { passive: false });
 
-  function pointerPos(e) {
-    if (e.touches && e.touches.length) {
-      return [e.touches[0].clientX, e.touches[0].clientY];
-    }
-    return [e.clientX, e.clientY];
-  }
+/* ---------- auto performance (自動演出) ---------- */
 
-  function down(e) {
-    if (e.target !== canvas) return;
-    var p = pointerPos(e);
-    dragging = true;
-    moved = false;
-    lastX = p[0]; lastY = p[1];
-    if (!interacted) {
-      interacted = true;
-      hint.style.opacity = '0';
-    }
-    e.preventDefault();
-  }
+var autoOn = true;
+var autoBtn = document.getElementById('auto');
+autoBtn.addEventListener('click', function () {
+  autoOn = !autoOn;
+  autoBtn.classList.toggle('on', autoOn);
+});
 
-  function move(e) {
-    if (!dragging) return;
-    var p = pointerPos(e);
-    var dx = p[0] - lastX, dy = p[1] - lastY;
-    var dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist > 2) {
-      moved = true;
-      // stir strength follows drag speed
-      var z = Math.min(dist * 0.55, 28);
-      tine(lastX, lastY, dx, dy, z, 60);
-      lastX = p[0]; lastY = p[1];
-      render();
-    }
-    e.preventDefault();
-  }
+var wander = { x: 0.5, y: 0.5 };
+setInterval(function () {
+  if (!autoOn || document.hidden) return;
+  wander.x += (Math.random() - 0.5) * 0.3;
+  wander.y += (Math.random() - 0.5) * 0.3;
+  wander.x = Math.min(0.82, Math.max(0.18, wander.x));
+  wander.y = Math.min(0.8, Math.max(0.2, wander.y));
+  bloom(wander.x, wander.y);
+}, 2300);
 
-  function up(e) {
-    if (!dragging) return;
-    dragging = false;
-    if (!moved) {            // plain click → drop ink
-      dropInk(lastX, lastY);
-      render();
-    }
-    e.preventDefault();
-  }
+/* ---------- wash button (洗い流す) ---------- */
 
-  canvas.addEventListener('mousedown', down);
-  window.addEventListener('mousemove', move);
-  window.addEventListener('mouseup', up);
-  canvas.addEventListener('touchstart', down, { passive: false });
-  window.addEventListener('touchmove', move, { passive: false });
-  window.addEventListener('touchend', up, { passive: false });
+document.getElementById('wash').addEventListener('click', function () {
+  washing = 110;   // ~2s of gentle fading
+});
 
-  /* ---- Auto-drop mode ---- */
-  var autoBtn = document.getElementById('auto');
-  var autoOn = true;
-  var wanderX = 0, wanderY = 0;
+/* ---------- ink swatches ---------- */
 
-  autoBtn.addEventListener('click', function () {
-    autoOn = !autoOn;
-    autoBtn.classList.toggle('active', autoOn);
+var dots = document.querySelectorAll('.dot');
+dots.forEach(function (d) {
+  d.addEventListener('click', function () {
+    dots.forEach(function (x) { x.classList.remove('sel'); });
+    d.classList.add('sel');
+    currentInk = d.dataset.ink;
   });
+});
 
-  setInterval(function () {
-    if (!autoOn) return;
-    // slow random walk so drops cluster organically, like a brush hovering
-    wanderX += (Math.random() - 0.5) * W * 0.25;
-    wanderY += (Math.random() - 0.5) * H * 0.25;
-    wanderX = Math.max(W * 0.15, Math.min(W * 0.85, wanderX));
-    wanderY = Math.max(H * 0.15, Math.min(H * 0.85, wanderY));
-    dropInk(wanderX, wanderY);
+/* ---------- main loop ---------- */
+
+resize();
+// opening scene: a few quiet drops in the middle
+bloom(0.5, 0.55);
+bloom(0.46, 0.5);
+bloom(0.56, 0.48);
+
+var last = performance.now();
+function frame(now) {
+  var dt = Math.min((now - last) / 1000, 0.0166);
+  last = now;
+  if (!document.hidden) {
+    step(dt);
     render();
-  }, 1100);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
 
-  /* ---- Clear ---- */
-  document.getElementById('clear').addEventListener('click', function () {
-    blobs = [];
-    render();
-  });
-
-  /* ---- Init ---- */
-  resize();
-  wanderX = W / 2; wanderY = H / 2;
-  // seed a few drops so the page opens alive
-  dropInk(W * 0.5, H * 0.5);
-  dropInk(W * 0.46, H * 0.52);
-  dropInk(W * 0.55, H * 0.47);
-  render();
 })();
 </script>
 </body>
