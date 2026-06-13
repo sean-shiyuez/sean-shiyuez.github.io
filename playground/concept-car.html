@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>AXIS — Concept EV | Shiyue Zhao</title>
+<meta name="description" content="AXIS — an interactive 3D sports-car microsite. Move the mouse to orbit the car; aerodynamic light-particles stream around the body in real time.">
+<style>
+  :root { --text:#e2e8f0; --muted:#64748b; --accent:#06b6d4; --accent2:#2563eb; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; overflow:hidden; background:#070b16; color:#e2e8f0;
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; cursor:crosshair; }
+  .mono { font-family:"JetBrains Mono","Fira Code",ui-monospace,Menlo,Consolas,monospace; }
+
+  #app { position:fixed; inset:0; display:block; }
+
+  .hud { position:fixed; z-index:6; pointer-events:none; }
+  .hud-tl { top:1.6rem; left:1.9rem; }
+  .brand { font-size:1.55rem; font-weight:700; letter-spacing:0.42em; text-indent:0.42em; }
+  .tagline { margin-top:0.5rem; font-size:0.66rem; letter-spacing:0.34em; color:#64748b; text-transform:uppercase; }
+
+  .home { position:fixed; top:1.7rem; right:1.9rem; z-index:7; font-size:0.74rem; letter-spacing:0.1em;
+    color:#64748b; text-decoration:none; pointer-events:auto; transition:color .2s; }
+  .home:hover { color:var(--accent); }
+
+  .specs { position:fixed; top:50%; right:1.9rem; transform:translateY(-50%); z-index:6; text-align:right; pointer-events:none; }
+  .spec { margin:1.5rem 0; }
+  .spec-val { font-size:2rem; font-weight:700; line-height:1; }
+  .spec-val .unit { font-size:0.8rem; font-weight:500; color:var(--accent); margin-left:0.25em; letter-spacing:0.06em; }
+  .spec-key { margin-top:0.4rem; font-size:0.6rem; letter-spacing:0.28em; color:#64748b; text-transform:uppercase; }
+
+  .switcher { position:fixed; bottom:2.1rem; left:50%; transform:translateX(-50%); z-index:7;
+    display:flex; align-items:center; gap:1.1rem; }
+  .arrow { appearance:none; background:none; border:1px solid #1e293b; color:#e2e8f0; width:34px; height:34px;
+    border-radius:50%; cursor:pointer; font-size:1rem; line-height:1; transition:border-color .2s,color .2s; }
+  .arrow:hover { border-color:var(--accent); color:var(--accent); }
+  .models { display:flex; gap:1.4rem; }
+  .model-tab { background:none; border:none; cursor:pointer; color:#64748b; font-size:0.72rem; letter-spacing:0.22em;
+    text-transform:uppercase; padding:0.2rem 0; position:relative; transition:color .2s; white-space:nowrap; }
+  .model-tab::after { content:''; position:absolute; left:0; right:0; bottom:-6px; height:2px;
+    background:linear-gradient(90deg,var(--accent2),var(--accent)); border-radius:2px; transform:scaleX(0); transition:transform .25s; }
+  .model-tab.active { color:#e2e8f0; }
+  .model-tab.active::after { transform:scaleX(1); }
+
+  .hint { position:fixed; bottom:0.7rem; left:50%; transform:translateX(-50%); z-index:6; font-size:0.62rem;
+    letter-spacing:0.16em; color:rgba(100,116,139,0.6); pointer-events:none; transition:opacity .8s; white-space:nowrap; }
+
+  .loader { position:fixed; inset:0; display:flex; flex-direction:column; gap:1rem; align-items:center; justify-content:center;
+    z-index:20; color:#64748b; font-size:0.78rem; letter-spacing:0.2em; background:#070b16; transition:opacity .6s; }
+  .loader .track { width:160px; height:2px; background:#1e293b; border-radius:2px; overflow:hidden; }
+  .loader .fill { height:100%; width:0%; background:linear-gradient(90deg,var(--accent2),var(--accent)); transition:width .2s; }
+  .nogl { position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:30;
+    color:#94a3b8; text-align:center; padding:2rem; font-size:0.95rem; letter-spacing:0.05em; }
+</style>
+</head>
+<body>
+
+<canvas id="app"></canvas>
+
+<a class="home mono" href="../">← Home</a>
+<div class="hud hud-tl">
+  <div class="brand">AXIS</div>
+  <div class="tagline mono">Autonomous · Intelligent Chassis</div>
+</div>
+
+<div class="specs mono">
+  <div class="spec"><div class="spec-val"><span id="sv-range">680</span><span class="unit">KM</span></div><div class="spec-key">Range</div></div>
+  <div class="spec"><div class="spec-val"><span id="sv-acc">3.2</span><span class="unit">S 0–100</span></div><div class="spec-key">Acceleration</div></div>
+  <div class="spec"><div class="spec-val"><span id="sv-pwr">560</span><span class="unit">KW</span></div><div class="spec-key">Power</div></div>
+</div>
+
+<div class="switcher mono">
+  <button class="arrow" id="prev" aria-label="Previous livery">‹</button>
+  <div class="models" id="models"></div>
+  <button class="arrow" id="next" aria-label="Next livery">›</button>
+</div>
+
+<div class="hint mono" id="hint">MOVE TO ORBIT · APPROACH TO REV THE ENGINE</div>
+<div class="loader mono" id="loader"><div>LOADING&nbsp;·&nbsp;3D&nbsp;MODEL</div><div class="track"><div class="fill" id="fill"></div></div></div>
+<div class="nogl mono" id="nogl">Couldn't load the 3D engine or model.<br>Please check your connection and open in a modern browser.</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
+const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const nogl = document.getElementById('nogl');
+const loader = document.getElementById('loader');
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('app'), antialias: true });
+} catch (e) { loader.style.display = 'none'; nogl.style.display = 'flex'; throw e; }
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x070b16);
+scene.fog = new THREE.Fog(0x070b16, 16, 34);
+
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(36, window.innerWidth / window.innerHeight, 0.1, 100);
+const camTarget = new THREE.Vector3(0, 0.55, 0);
+
+/* ---------- lighting ---------- */
+scene.add(new THREE.HemisphereLight(0x9fc6ff, 0x0a0f1a, 0.5));
+const key = new THREE.DirectionalLight(0xffffff, 2.2);
+key.position.set(6, 9, 6); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.near = 1; key.shadow.camera.far = 40;
+key.shadow.camera.left = -8; key.shadow.camera.right = 8; key.shadow.camera.top = 8; key.shadow.camera.bottom = -8;
+key.shadow.bias = -0.0004; scene.add(key);
+const rim1 = new THREE.SpotLight(0x06b6d4, 140, 40, 0.7, 0.5, 1.4); rim1.position.set(-8, 5, -5); scene.add(rim1);
+const rim2 = new THREE.SpotLight(0x2563eb, 110, 40, 0.7, 0.5, 1.4); rim2.position.set(7, 4, -7); scene.add(rim2);
+// front fill that brightens on "rev"
+const revLight = new THREE.PointLight(0xbff4ff, 0, 14, 2); revLight.position.set(3.4, 0.7, 0); scene.add(revLight);
+
+/* ---------- floor ---------- */
+const floor = new THREE.Mesh(new THREE.CircleGeometry(50, 64),
+  new THREE.MeshStandardMaterial({ color: 0x0b1120, metalness: 0.65, roughness: 0.32 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const grid = new THREE.GridHelper(80, 80, 0x1e293b, 0x141d2e);
+grid.position.y = 0.001; grid.material.transparent = true; grid.material.opacity = 0.45; scene.add(grid);
+
+/* ================================================================
+   Car materials (override the GLB's so we can recolor liveries)
+   ================================================================ */
+const paintMat = new THREE.MeshPhysicalMaterial({
+  color: 0x1f6bff, metalness: 1.0, roughness: 0.4,
+  clearcoat: 1.0, clearcoatRoughness: 0.06, envMapIntensity: 2.0
+});
+const detailsMat = new THREE.MeshStandardMaterial({ color: 0xdfe7ee, metalness: 1.0, roughness: 0.25 });
+const glassMat = new THREE.MeshPhysicalMaterial({
+  color: 0x101820, metalness: 0, roughness: 0.05, transmission: 0.6,
+  transparent: true, opacity: 0.5, envMapIntensity: 1.6
+});
+
+/* ================================================================
+   Load the Ferrari 458 model (official three.js sample asset,
+   served from threejs.org — GitHub Pages, CORS-enabled).
+   ================================================================ */
+const car = new THREE.Group();
+scene.add(car);
+const wheels = [];
+
+const draco = new DRACOLoader();
+draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/');
+const gltf = new GLTFLoader();
+gltf.setDRACOLoader(draco);
+
+const MODEL_URL = 'https://threejs.org/examples/models/gltf/ferrari.glb';
+const AO_URL = 'https://threejs.org/examples/models/gltf/ferrari_ao.png';
+
+let loaded = false;
+gltf.load(MODEL_URL, (g) => {
+  const model = g.scene;
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    o.castShadow = true;
+    if (o.name === 'body') o.material = paintMat;
+    else if (o.name === 'glass') o.material = glassMat;
+    else if (o.name === 'rim_fl' || o.name === 'rim_fr' || o.name === 'rim_rr' || o.name === 'rim_rl' || o.name === 'trim')
+      o.material = detailsMat;
+  });
+  ['wheel_fl','wheel_fr','wheel_rl','wheel_rr'].forEach((n) => {
+    const w = model.getObjectByName(n); if (w) wheels.push(w);
+  });
+
+  // soft baked contact shadow under the car
+  new THREE.TextureLoader().load(AO_URL, (tex) => {
+    const shadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.655 * 6, 1.3 * 6),
+      new THREE.MeshBasicMaterial({ map: tex, blending: THREE.MultiplyBlending, toneMapped: false, transparent: true })
+    );
+    shadow.rotation.x = -Math.PI / 2; shadow.renderOrder = 2;
+    model.add(shadow);
+  });
+
+  car.add(model);
+  // centre on origin, sit on floor
+  const box = new THREE.Box3().setFromObject(model);
+  const c = box.getCenter(new THREE.Vector3());
+  const size = box.getSize(new THREE.Vector3());
+  model.position.x -= c.x; model.position.z -= c.z;
+  model.position.y -= box.min.y;
+  applyLivery(LIVERIES[0]);
+
+  // ---- align the airflow with the car's length axis + nose direction ----
+  model.updateMatrixWorld(true);
+  let fwd = new THREE.Vector3(1, 0, 0);
+  if (wheels.length >= 3) {
+    const fp = new THREE.Vector3(), rp = new THREE.Vector3();
+    wheels[0].getWorldPosition(fp);   // wheel_fl (front)
+    wheels[2].getWorldPosition(rp);   // wheel_rl (rear)
+    fwd = fp.sub(rp);                 // points from rear → front
+  }
+  if (Math.abs(fwd.x) >= Math.abs(fwd.z)) {
+    FLOW.ax = 1; FLOW.az = 0; FLOW.lx = 0; FLOW.lz = 1;
+    FLOW.half = size.x * 0.5; FLOW.front = fwd.x >= 0 ? 1 : -1;
+  } else {
+    FLOW.ax = 0; FLOW.az = 1; FLOW.lx = 1; FLOW.lz = 0;
+    FLOW.half = size.z * 0.5; FLOW.front = fwd.z >= 0 ? 1 : -1;
+  }
+  for (const t of trails) seedTrail(t, true);
+
+  loaded = true;
+  loader.style.opacity = '0';
+  setTimeout(() => loader.style.display = 'none', 600);
+}, (e) => {
+  if (e.total) document.getElementById('fill').style.width = Math.round(e.loaded / e.total * 100) + '%';
+}, () => {
+  loader.style.display = 'none'; nogl.style.display = 'flex';
+});
+
+/* ================================================================
+   Airflow streamlines (3D) — white wind-tunnel smoke that flows
+   from the FRONT of the car, bends over the body and sheds a vortex
+   past the tail. Each line is a short polyline trail advected along
+   the car's length axis (auto-detected after the model loads).
+   ================================================================ */
+const LINES = reduced ? 0 : 120;
+const SEG = 18;                                  // soft puffs per smoke filament
+
+// flow frame: length axis (a*) the air travels along, lateral axis (l*),
+// `front` = +1 means air enters from the +axis end. Updated on model load.
+const FLOW = { ax: 1, az: 0, lx: 0, lz: 1, half: 2.3, front: 1 };
+
+const trails = [];
+for (let i = 0; i < LINES; i++) trails.push({ pts: new Float32Array(SEG * 3), v: 0 });
+
+// soft round smoke sprite (radial gradient → wispy, no hard edge)
+function makeSmokeTexture() {
+  const s = 64, cv = document.createElement('canvas');
+  cv.width = cv.height = s;
+  const g = cv.getContext('2d');
+  const grd = g.createRadialGradient(s/2, s/2, 0, s/2, s/2, s/2);
+  grd.addColorStop(0.0, 'rgba(255,255,255,1)');
+  grd.addColorStop(0.35, 'rgba(255,255,255,0.55)');
+  grd.addColorStop(1.0, 'rgba(255,255,255,0)');
+  g.fillStyle = grd; g.fillRect(0, 0, s, s);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+const flowGeo = new THREE.BufferGeometry();
+const posArr = new Float32Array(LINES * SEG * 3);
+const alphaArr = new Float32Array(LINES * SEG);
+flowGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
+flowGeo.setAttribute('aAlpha', new THREE.BufferAttribute(alphaArr, 1));
+
+// soft white smoke via a tiny custom shader: per-point alpha fade,
+// NORMAL blending (no glow) → realistic thin vapour, not neon particles.
+const flowUniforms = {
+  uTex:     { value: makeSmokeTexture() },
+  uColor:   { value: new THREE.Color(0xdfe7ef) },
+  uOpacity: { value: 0.1 },
+  uSize:    { value: 0.34 },
+  uScale:   { value: 600 }
+};
+const flowMat = new THREE.ShaderMaterial({
+  uniforms: flowUniforms,
+  transparent: true, depthWrite: false, blending: THREE.NormalBlending,
+  vertexShader: `
+    attribute float aAlpha; varying float vA;
+    uniform float uSize; uniform float uScale;
+    void main(){
+      vA = aAlpha;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = uSize * uScale / max(-mv.z, 0.001);
+      gl_Position = projectionMatrix * mv;
+    }`,
+  fragmentShader: `
+    uniform sampler2D uTex; uniform vec3 uColor; uniform float uOpacity;
+    varying float vA;
+    void main(){
+      float a = texture2D(uTex, gl_PointCoord).a * vA * uOpacity;
+      if (a < 0.003) discard;
+      gl_FragColor = vec4(uColor, a);
+    }`
+});
+const flow = new THREE.Points(flowGeo, flowMat);
+if (LINES) scene.add(flow);
+
+// place a point at length-position `along` + lateral `lat`
+function setPoint(arr, o, along, lat, y) {
+  arr[o]   = along * FLOW.ax + lat * FLOW.lx;
+  arr[o+1] = y;
+  arr[o+2] = along * FLOW.az + lat * FLOW.lz;
+}
+function seedTrail(t, anywhere) {
+  // smoke originates AT the car, not far ahead. u-space: +half = nose, -half = tail.
+  const u = anywhere
+    ? (FLOW.half + 0.3) - Math.random() * (2 * FLOW.half + 1.6)   // spread over body + short wake
+    : (FLOW.half + 0.3);                                          // new filament starts at the nose
+  const along = FLOW.front * u;
+  const lat = (Math.random() * 2 - 1) * 0.95;        // narrower band → hugs the car
+  const y = 0.16 + Math.random() * 0.18;             // start LOW at the nose
+  t.hOff = Math.random() * 0.35;                      // band thickness above the body line
+  for (let k = 0; k < SEG; k++) setPoint(t.pts, k * 3, along, lat, y);
+  t.v = 0.05 + Math.random() * 0.07;
+}
+for (const t of trails) seedTrail(t, true);
+
+let windYaw = 0, speedBoost = 0, perf = 0;
+
+function stepFlow() {
+  if (!LINES) return;
+  let vi = 0;
+  const half = FLOW.half;
+  for (let i = 0; i < LINES; i++) {
+    const t = trails[i], pts = t.pts;
+    let x = pts[0], y = pts[1], z = pts[2];
+    const along = x * FLOW.ax + z * FLOW.az;     // signed position along car length
+    const lat   = x * FLOW.lx + z * FLOW.lz;
+
+    const u = FLOW.front * along;                // +half at nose, -half at tail
+    const tail = -u;                             // >0 when behind the car
+
+    // follow the body silhouette: low at the nose, climbing over the cabin,
+    // settling low again at the tail
+    const hump = Math.max(0, 1 - (u * u) / (half * half));
+    const targetY = 0.2 + 0.85 * Math.pow(hump, 0.9) + t.hOff;
+    y += (targetY - y) * 0.13;
+
+    // gentle swirl just behind the tail
+    if (tail > half - 0.2 && tail < half + 1.4) {
+      const sw = Math.cos(perf * 0.003 + y * 1.4) * 0.014;
+      x += FLOW.lx * sw; z += FLOW.lz * sw;
+    }
+
+    // travel front → rear along the length axis
+    const step = -FLOW.front * t.v * (1 + speedBoost);
+    x += FLOW.ax * step; z += FLOW.az * step;
+    // lateral drift from orbit
+    x += FLOW.lx * windYaw * 0.02; z += FLOW.lz * windYaw * 0.02;
+
+    if (tail > half + 1.4 || y > 4) { seedTrail(t, false); }
+    else {
+      for (let k = SEG - 1; k > 0; k--) {
+        pts[k*3] = pts[(k-1)*3]; pts[k*3+1] = pts[(k-1)*3+1]; pts[k*3+2] = pts[(k-1)*3+2];
+      }
+      pts[0] = x; pts[1] = y; pts[2] = z;
+    }
+
+    // emit soft puffs. Alpha = trail-fade × proximity envelope, so smoke is
+    // invisible far ahead, fades IN as it nears the nose, is full over the body,
+    // then dissipates behind the tail.
+    for (let k = 0; k < SEG; k++) {
+      const px = pts[k*3], pz = pts[k*3+2];
+      const u = FLOW.front * (px * FLOW.ax + pz * FLOW.az);   // +half at nose, -half at tail
+      let env;
+      if (u > half)       env = Math.max(0, 1 - (u - half) / 0.5);    // appears right at the nose
+      else if (u < -half) env = Math.max(0, 1 - (-half - u) / 1.4);   // gone shortly behind the tail
+      else                env = 1;                                    // full over the body
+      const f = Math.pow(1 - k / SEG, 1.4) * env;
+      posArr[vi*3] = px; posArr[vi*3+1] = pts[k*3+1]; posArr[vi*3+2] = pz;
+      alphaArr[vi] = f;
+      vi++;
+    }
+  }
+  flowGeo.attributes.position.needsUpdate = true;
+  flowGeo.attributes.aAlpha.needsUpdate = true;
+}
+
+/* ================================================================
+   Liveries (recolor paint) + spec HUD
+   ================================================================ */
+const LIVERIES = [
+  { name:'Azzurro', color:0x1f6bff, specs:[680,3.2,560] },
+  { name:'Cyan',    color:0x0bb6cf, specs:[620,2.6,700] },
+  { name:'Argento', color:0xdfe7ee, specs:[560,4.1,480] }
+];
+let cur = 0;
+function applyLivery(l) {
+  paintMat.color.setHex(l.color);
+  document.documentElement.style.setProperty('--accent', '#' + new THREE.Color(l.color).getHexString());
+}
+
+const svRange = document.getElementById('sv-range'), svAcc = document.getElementById('sv-acc'), svPwr = document.getElementById('sv-pwr');
+let lastSpecs = LIVERIES[0].specs.slice();
+function tweenSpec(node, from, to, dec) {
+  const t0 = performance.now(), dur = 650;
+  (function f(now){ let k = Math.min((now-t0)/dur,1); k = 1-Math.pow(1-k,3);
+    const v = from + (to-from)*k; node.textContent = dec ? v.toFixed(1) : Math.round(v);
+    if (k < 1) requestAnimationFrame(f); })(performance.now());
+}
+function updateSpecs(l) {
+  tweenSpec(svRange, lastSpecs[0], l.specs[0], false);
+  tweenSpec(svAcc,   lastSpecs[1], l.specs[1], true);
+  tweenSpec(svPwr,   lastSpecs[2], l.specs[2], false);
+  lastSpecs = l.specs.slice();
+}
+
+const tabsWrap = document.getElementById('models');
+LIVERIES.forEach((l, i) => {
+  const b = document.createElement('button');
+  b.className = 'model-tab' + (i === 0 ? ' active' : '');
+  b.textContent = l.name;
+  b.addEventListener('click', () => setLivery(i));
+  tabsWrap.appendChild(b);
+});
+const tabs = tabsWrap.querySelectorAll('.model-tab');
+function setLivery(i) {
+  cur = (i + LIVERIES.length) % LIVERIES.length;
+  applyLivery(LIVERIES[cur]); updateSpecs(LIVERIES[cur]);
+  tabs.forEach((t, k) => t.classList.toggle('active', k === cur));
+}
+document.getElementById('prev').addEventListener('click', () => setLivery(cur - 1));
+document.getElementById('next').addEventListener('click', () => setLivery(cur + 1));
+
+/* ================================================================
+   Pointer → orbit + rev
+   ================================================================ */
+const target = { az: 0.5, pol: 0.5, rev: 0 };
+const stateC = { az: 0.5, pol: 0.5, rev: 0 };
+const hint = document.getElementById('hint');
+let touched = false, revLatch = 0;
+function onMove(cx, cy) {
+  target.az = cx / window.innerWidth;
+  target.pol = cy / window.innerHeight;
+  const dx = cx - window.innerWidth * 0.5, dy = cy - window.innerHeight * 0.55;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  if (!touched) target.rev = Math.max(0, 1 - dist / (window.innerWidth * 0.22));
+  hint.style.opacity = '0';
+}
+window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+window.addEventListener('touchstart', e => { touched = true; const t = e.touches[0]; onMove(t.clientX, t.clientY); }, { passive:true });
+window.addEventListener('touchmove', e => { const t = e.touches[0]; onMove(t.clientX, t.clientY); target.rev = revLatch; }, { passive:true });
+document.getElementById('app').addEventListener('touchend', () => { revLatch = revLatch > 0.5 ? 0 : 1; target.rev = revLatch; });
+
+/* ================================================================
+   Resize + loop
+   ================================================================ */
+function resize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  // keep smoke puff size consistent in world units (custom shader)
+  const fovR = THREE.MathUtils.degToRad(camera.fov);
+  flowUniforms.uScale.value = (window.innerHeight * renderer.getPixelRatio()) / (2 * Math.tan(fovR / 2));
+}
+window.addEventListener('resize', resize);
+resize();
+
+const lerp = (a,b,k) => a + (b-a)*k;
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min((now-last)/1000, 0.05); last = now; perf = now;
+
+  stateC.az  = lerp(stateC.az,  target.az,  0.06);
+  stateC.pol = lerp(stateC.pol, target.pol, 0.06);
+  stateC.rev = lerp(stateC.rev, target.rev, 0.08);
+  windYaw = (stateC.az - 0.5) * 2;
+  speedBoost = stateC.rev * 4.0 + Math.abs(windYaw) * 0.3;   // much faster airflow on rev
+
+  const azimuth = (stateC.az - 0.5) * Math.PI * 1.5 + Math.PI * 0.13;
+  const polar = THREE.MathUtils.clamp((stateC.pol - 0.5) * 1.1 + 1.16, 0.55, 1.5);
+  const radius = 8.6 - stateC.rev * 1.0;            // dolly in on rev
+  const sinP = Math.sin(polar);
+  camera.position.set(Math.sin(azimuth)*sinP*radius, Math.cos(polar)*radius + 0.5, Math.cos(azimuth)*sinP*radius);
+  const bob = reduced ? 0 : Math.sin(now*0.0013) * 0.08;
+  camTarget.set(0, 0.55 + bob, 0);
+  camera.lookAt(camTarget);
+
+  const roll = now * 0.001 * (1 + speedBoost * 7);
+  for (const w of wheels) w.rotation.x = -roll;
+  revLight.intensity = stateC.rev * 60;
+
+  if (!document.hidden) stepFlow();
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

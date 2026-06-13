@@ -10,4 +10,10 @@ Fun, interactive AI / generative-art experiments I built.
     <span class="playground-desc">An effect where ink melts together like a fluid — interactive Japanese ink-marbling simulation. Click to drop ink, drag to swirl.</span>
     <span class="playground-go">Try it →</span>
   </a>
+  <a class="playground-card" href="playground/concept-car.html" target="_blank" rel="noopener">
+    <span class="playground-icon">🚗</span>
+    <span class="playground-name">AXIS — Concept Car</span>
+    <span class="playground-desc">A minimal 3D sports-car microsite. Move the mouse to orbit the car and rev it up, while aerodynamic light-particles stream around the body in real time.</span>
+    <span class="playground-go">Try it →</span>
+  </a>
 </div>
