@@ -1,79 +1,98 @@
-
-<h1 align="center">
-AcadHomepage
-</h1>
-
-<div align="center">
-
-[![](https://img.shields.io/github/stars/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io)
-[![](https://img.shields.io/github/forks/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io)
-[![](https://img.shields.io/github/issues/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io)
-[![](https://img.shields.io/github/license/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io/blob/main/LICENSE)  | [中文文档](./docs/README-zh.md) 
-</div>
-
-<p align="center">A Modern and Responsive Academic Personal Homepage</p>
+<h1 align="center">Shiyue Zhao · Academic Homepage</h1>
 
 <p align="center">
-    <br>
-    <img src="docs/screenshot.png" width="100%"/>
-    <br>
+  <b><a href="https://sean-shiyuez.github.io">sean-shiyuez.github.io</a></b><br>
+  Personal academic website of <b>Shiyue Zhao (赵世越)</b> — PhD candidate, School of Vehicle and Mobility, Tsinghua University.
 </p>
 
-Some examples:
-- [Demo Page](https://rayeren.github.io/acad-homepage.github.io/)
-- [Personal Homepage of the author](https://rayeren.github.io/)
-
-## Key Features
-- **Automatically update google scholar citations**: using the google scholar crawler and github action, this REPO can update the author citations and publication citations automatically.
-- **Support Google analytics**: you can trace the traffics of your homepage by easy configuration.
-- **Responsive**: this homepage automatically adjust for different screen sizes and viewports.
-- **Beautiful and Simple Design**: this homepage is beautiful and simple, which is very suitable for academic personal homepage.
-- **SEO**: search Engine Optimization (SEO) helps search engines find the information you publish on your homepage easily, then rank it against similar websites.
-
-## Quick Start
-
-1. Fork this REPO and rename to `USERNAME.github.io`, where `USERNAME` is your github USERNAME.
-1. Configure the google scholar citation crawler:
-    1. Find your google scholar ID in the url of your google scholar page (e.g., https://scholar.google.com/citations?user=SCHOLAR_ID), where `SCHOLAR_ID` is your google scholar ID.
-    1. Set GOOGLE_SCHOLAR_ID variable to your google scholar ID in `Settings -> Secrets -> Actions -> New repository secret` of the REPO website with `name=GOOGLE_SCHOLAR_ID` and `value=SCHOLAR_ID`.
-    1. Click the `Action` of the REPO website and enable the workflows by clicking *"I understand my workflows, go ahead and enable them"*. This github action will generate google scholar citation stats data `gs_data.json` in `google-scholar-stats` branch of your REPO. When you update your main branch, this action will be triggered. This action will also be trigger 08:00 UTC everyday.
-1. Generate favicon using [favicon-generator](https://redketchup.io/favicon-generator) and download all generated files to `REPO/images`.
-1. Modify the configuration of your homepage `_config.yml`:
-    1. `title`: the title of your homepage
-    1. `description`: the description of your homepage
-    1. `repository`: USER_NAME/REPO_NAME  
-    1. `google_analytics_id` (optional): google analytics ID
-    1. SEO Related keys (optional): get these keys from search engine consoles (e.g. Google, Bing and Baidu) and paste here.
-    1. `author`: the author information of this homepage, including some other websites, emails, city and univeristy.
-    1. More configuration details are described in the comments.
-1. Add your homepage content in `_pages/about.md`.
-    1. You can use html+markdown syntax just same as jekyll.
-    1. You can use a `<span>` tag with class `show_paper_citations` and attribute `data` to display the citations of your paper. Set the data to the google scholar paper ID. For
-        ```html
-        <span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span>
-        ``` 
-        > Q: How to get the google scholar paper ID?   
-        > A: Enter your google scholar homepage and click the paper name. Then you can see the paper ID from `citation_for_view=XXXX`, where `XXXX` is the required paper ID.
-1. Your page will be published at `https://USERNAME.github.io`.
-
-## Debug Locally
-
-1. Clone your REPO to local using `git clone`.
-1. Install Jekyll building environment, including `Ruby`, `RubyGems`, `GCC` and `Make` following [the installation guide](https://jekyllrb.com/docs/installation/#requirements).
-1. Run `bash run_server.sh` to start Jekyll livereload server.
-1. Open http://127.0.0.1:4000 in your browser.
-1. If you change the source code of the website, the livereload server will automatically refresh.
-1. When you finish the modification of your homepage, `commit` your changings and `push` to your remote REPO using `git` command.
-
-# Acknowledges
-
-- AcadHomepage incorporates Font Awesome, which is distributed under the terms of the SIL OFL 1.1 and MIT License.
-- AcadHomepage is influenced by the github repo [mmistakes/minimal-mistakes](https://github.com/mmistakes/minimal-mistakes), which is distributed under the MIT License.
-- AcadHomepage is influenced by the github repo [academicpages/academicpages.github.io](https://github.com/academicpages/academicpages.github.io), which is distributed under the MIT License.
-
-# Visitors
 <p align="center">
-    <br>
-    <a href="https://info.flagcounter.com/RB9f"><img src="https://s11.flagcounter.com/count2/RB9f/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-    <br>
+  <a href="https://github.com/sean-shiyuez/sean-shiyuez.github.io/blob/main/LICENSE"><img src="https://img.shields.io/github/license/sean-shiyuez/sean-shiyuez.github.io" alt="License"></a>
+  <img src="https://img.shields.io/badge/Jekyll-GitHub%20Pages-blue" alt="Jekyll">
+  <img src="https://img.shields.io/badge/3D-Three.js-black" alt="Three.js">
 </p>
+
+---
+
+## English
+
+A fast, responsive academic homepage built with **Jekyll** and hosted on **GitHub Pages**, extended with a small **AI Playground** of interactive WebGL / generative-art experiments.
+
+### Features
+- **Single-page profile** — about, news, open-source code, publications, honors, education and services, all assembled from Markdown partials.
+- **One-click BibTeX** — every first-author paper has a `Cite` button that copies a ready BibTeX entry.
+- **Light / dark theme** — a toggle in the navbar; the choice is remembered via `localStorage`.
+- **Tech-styled UI** — scroll progress bar, back-to-top button, section reveal animations, and a subtle dot-grid backdrop.
+- **AI Playground** — self-contained experiments under [`playground/`](playground/):
+  - 🌊 **Suminagashi** — a WebGL fluid simulation where ink melts together like water.
+  - 🚗 **AXIS — Concept Car** — a 3D sports-car microsite (Three.js); orbit with the mouse, rev on approach, with wind-tunnel smoke streaming over the body.
+  - 🫧 **Liquid Glass** — a glassmorphism UI showcase for designing glass-themed sites.
+- **Auto-updated Google Scholar citations** via a GitHub Action.
+
+### Project structure
+| Path | What it holds |
+|------|---------------|
+| `_config.yml` | Site settings, author info, SEO |
+| `_pages/about.md` | Home page; pulls in the partials below |
+| `_pages/includes/` | Content sections: `intro`, `news`, `projects`, `pub`, `honors`, `others` |
+| `_data/navigation.yml` | Top navigation menu |
+| `_includes/`, `_layouts/`, `_sass/` | Theme machinery (header, sidebar, styles) |
+| `assets/css/main.scss` | Custom design + theming + interactions |
+| `playground/` | Standalone interactive experiments |
+| `images/`, `videos/` | Media assets |
+| `google_scholar_crawler/`, `github_myprofile_updater/` | GitHub Actions helpers |
+
+### Run locally
+```bash
+bundle install          # first time only
+bash run_server.sh      # → bundle exec jekyll liveserve
+# open http://127.0.0.1:4000
+```
+
+### Credits
+- Based on the [AcadHomepage](https://github.com/RayeRen/acad-homepage.github.io) template, itself derived from [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) and [Academic Pages](https://github.com/academicpages/academicpages.github.io).
+- 3D playground built with [Three.js](https://threejs.org/); the concept-car uses the official Three.js *Ferrari 458* sample model.
+
+---
+
+## 中文
+
+基于 **Jekyll** 构建、部署在 **GitHub Pages** 上的个人学术主页，并额外加入了一个交互式 **AI Playground**（WebGL / 生成艺术小实验）。
+
+### 功能特性
+- **单页个人主页** —— 关于我、新闻、开源代码、论文、荣誉、教育与学术服务，全部由 Markdown 片段拼装而成。
+- **一键复制 BibTeX** —— 每篇第一作者论文都带 `Cite` 按钮，点击即复制现成的 BibTeX 条目。
+- **明 / 暗主题切换** —— 导航栏按钮切换，选择通过 `localStorage` 记忆。
+- **科技感界面** —— 滚动进度条、回到顶部按钮、区块入场动画、淡点阵背景。
+- **AI Playground** —— 位于 [`playground/`](playground/) 的自包含实验：
+  - 🌊 **墨流 Suminagashi** —— 基于 WebGL 流体模拟，墨水如水般相互交融。
+  - 🚗 **AXIS 概念车** —— Three.js 3D 跑车微站；鼠标环绕视角、靠近踩油门，风洞白烟沿车身掠过。
+  - 🫧 **Liquid Glass** —— 玻璃拟态 UI 展示，可作为设计玻璃风格网站的起点。
+- **Google Scholar 引用自动更新**（通过 GitHub Action）。
+
+### 目录结构
+| 路径 | 内容 |
+|------|------|
+| `_config.yml` | 站点设置、作者信息、SEO |
+| `_pages/about.md` | 主页，引入下面的内容片段 |
+| `_pages/includes/` | 内容区块：`intro` `news` `projects` `pub` `honors` `others` |
+| `_data/navigation.yml` | 顶部导航菜单 |
+| `_includes/`、`_layouts/`、`_sass/` | 主题机制（页头、侧栏、样式） |
+| `assets/css/main.scss` | 自定义设计、主题与交互 |
+| `playground/` | 独立的交互实验页面 |
+| `images/`、`videos/` | 媒体资源 |
+| `google_scholar_crawler/`、`github_myprofile_updater/` | GitHub Actions 辅助脚本 |
+
+### 本地运行
+```bash
+bundle install          # 仅首次需要
+bash run_server.sh      # → bundle exec jekyll liveserve
+# 浏览器打开 http://127.0.0.1:4000
+```
+
+### 致谢
+- 基于 [AcadHomepage](https://github.com/RayeRen/acad-homepage.github.io) 模板，该模板衍生自 [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) 与 [Academic Pages](https://github.com/academicpages/academicpages.github.io)。
+- 3D 实验使用 [Three.js](https://threejs.org/)；概念车采用 Three.js 官方 *Ferrari 458* 示例模型。
+
+---
+
+<p align="center"><sub>© Shiyue Zhao · Built with Jekyll &amp; Three.js</sub></p>
