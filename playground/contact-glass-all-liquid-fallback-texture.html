@@ -128,6 +128,22 @@
   .seclabel .n{color:var(--accent-warm);}
   .seclabel::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.28),transparent);}
   .play-hint{font-size:14px;color:var(--ink-dim);font-weight:300;margin-bottom:16px;line-height:1.55;}
+  /* speed control for the icon shatter — a lightweight glassy range slider under the jar */
+  .speedctl{display:flex;align-items:center;gap:12px;margin:14px 2px 4px;}
+  .speedlab{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;}
+  .speedval{font-size:13px;color:var(--ink-dim);flex:0 0 auto;min-width:38px;text-align:right;font-variant-numeric:tabular-nums;}
+  .speedrange{-webkit-appearance:none;appearance:none;flex:1 1 60px;min-width:0;height:8px;border-radius:6px;outline:none;cursor:pointer;margin:0;
+    background:rgba(255,255,255,0.16);
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(255,255,255,0.18);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  .speedrange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff,#d9dbef 58%,#b7b9d6);
+    box-shadow:0 2px 7px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.5);cursor:grab;}
+  .speedrange:active::-webkit-slider-thumb{cursor:grabbing;}
+  .speedrange::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff,#d9dbef 58%,#b7b9d6);
+    box-shadow:0 2px 7px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.5);cursor:grab;}
+  .speedrange::-moz-range-track{height:8px;border-radius:6px;background:rgba(255,255,255,0.16);}
   /* outer frame: the live WebGL shader (via .webgl-card) supplies the glass; only layout here */
   .stage{position:relative;height:430px;touch-action:none;user-select:none;border-radius:30px;}
   /* The glass body is sized to the membrane's 316-unit space and CLIPPED by the
@@ -187,6 +203,24 @@
       inset 0 30px 60px -30px rgba(255,255,255,0.34), inset 0 -34px 60px -30px rgba(110,90,200,0.20);
     transform:scale(1.1);animation:none;}
   .orb.absorbed{transition:all .5s cubic-bezier(.4,0,.2,1);opacity:0;transform:scale(.15);animation:none;}
+  /* draggable "app icon" tiles — share the orb playground (same --c1/--c2 interface),
+     but instead of melting into the jar they fracture and blow away on the wind */
+  .app-icon{position:absolute;width:50px;height:50px;border-radius:14px;cursor:grab;z-index:7;
+    display:grid;place-items:center;font-size:26px;
+    background:linear-gradient(150deg, var(--c1), var(--c2));
+    border:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 12px 30px rgba(12,10,46,0.42),
+      inset 0 1.5px 1px rgba(255,255,255,0.55), inset 0 -3px 7px rgba(0,0,0,0.18);
+    touch-action:none;user-select:none;-webkit-user-select:none;
+    transition:box-shadow .2s, transform .2s;animation:bob 4s ease-in-out infinite;}
+  .app-icon .glyph{pointer-events:none;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));}
+  .app-icon:active{cursor:grabbing;}
+  .app-icon.held{transform:scale(1.12);animation:none;
+    box-shadow:0 18px 44px rgba(12,10,46,0.52),
+      inset 0 1.5px 1px rgba(255,255,255,0.6), inset 0 -3px 7px rgba(0,0,0,0.2);}
+  /* glittering pieces the icon blows apart into */
+  .shard{position:absolute;border-radius:50%;pointer-events:none;z-index:9;
+    line-height:1;text-align:center;will-change:transform,opacity;}
   .sliders{margin-top:10px;display:flex;flex-direction:column;gap:22px;}
   /* track: glass supplied by the WebGL shader (via .webgl-card); only layout here.
      The .fill value bar stays layered on top. */
@@ -337,7 +371,7 @@
   </div>
 
   <div class="seclabel"><span class="n">01</span>&nbsp;drag the bubbles in</div>
-  <p class="play-hint">Pull the loose orbs into the glass jar. When droplets touch, they melt together like real liquid.</p>
+  <p class="play-hint">Pull the loose orbs into the glass jar — when droplets touch, they melt together like real liquid. Drag the little app icons in too: the jar greets them the same way, but they shatter and blow away on the wind.</p>
   <div class="glass stage webgl-card" id="stage">
     <!-- clip-path that the jar's glass body is masked by; it deforms with the membrane -->
     <svg width="0" height="0" style="position:absolute"><defs>
@@ -362,6 +396,12 @@
       <path id="memPath" fill="url(#memGrad)"
             stroke="rgba(255,255,255,0.72)" stroke-width="1.6" stroke-linejoin="round"/>
     </svg>
+  </div>
+
+  <div class="speedctl">
+    <span class="speedlab">Shatter speed</span>
+    <input id="scatterSpeed" class="speedrange" type="range" min="0" max="1000" value="652" aria-label="Shatter speed">
+    <span class="speedval" id="scatterSpeedVal">1.0&times;</span>
   </div>
 
   <div class="seclabel"><span class="n">02</span>&nbsp;tune it</div>
@@ -473,7 +513,7 @@ function spawnRipple(x,y){
   }
 }
 document.addEventListener('pointerdown',e=>{
-  if(e.target.closest('.orb,.slider,.mail,.chip,.count,.topbar,.passpad'))return;
+  if(e.target.closest('.orb,.app-icon,.slider,.speedctl,.mail,.chip,.count,.topbar,.passpad'))return;
   spawnRipple(e.clientX,e.clientY);
 },true);
 
@@ -598,17 +638,54 @@ const seeds=[{x:9,y:13},{x:81,y:9},{x:5,y:61},{x:89,y:57},{x:23,y:89},{x:71,y:91
 function makeOrb(i){const o=document.createElement('div');o.className='orb';
   const[c1,c2]=palettes[i%palettes.length];o.style.setProperty('--c1',c1);o.style.setProperty('--c2',c2);
   o.style.left=seeds[i].x+'%';o.style.top=seeds[i].y+'%';o.style.animationDelay=(i*0.5)+'s';
-  stage.appendChild(o);attachDrag(o,c1,c2);}
+  stage.appendChild(o);attachDraggable(o,{onDropIntoJar:el=>absorb(el,c1,c2)});}
 let heldOrb=null;
-function attachDrag(o,c1,c2){let dragging=false,ox=0,oy=0;
-  function down(e){dragging=true;heldOrb=o;o.classList.add('held');const p=point(e),r=o.getBoundingClientRect();
-    ox=p.x-r.left-r.width/2;oy=p.y-r.top-r.height/2;e.preventDefault();}
-  function move(e){if(!dragging)return;const p=point(e),sr=stage.getBoundingClientRect();
-    let x=p.x-sr.left-ox,y=p.y-sr.top-oy;o.style.left=(x-o.offsetWidth/2)+'px';o.style.top=(y-o.offsetHeight/2)+'px';o.style.transform='none';checkNear(o);}
-  function up(){if(!dragging)return;dragging=false;heldOrb=null;o.classList.remove('held');if(isOverJar(o))absorb(o,c1,c2);}
-  o.addEventListener('mousedown',down);o.addEventListener('touchstart',down,{passive:false});
-  window.addEventListener('mousemove',move);window.addEventListener('touchmove',move,{passive:false});
-  window.addEventListener('mouseup',up);window.addEventListener('touchend',up);}
+/* One shared drag lifecycle for every loose object in the stage (orbs + app icons).
+   Pointer Events + pointer capture (matching the keypad) so mouse/touch/pen all work and a
+   single `release` handler covers pointerup / pointercancel / lostpointercapture. A
+   per-element dataset.state guards every transition so the pickup and the drop each fire at
+   most once. The caller decides what a drop does: onDropIntoJar(el) (which OWNS the element's
+   terminal state) and an optional onDropOutside(el). */
+function attachDraggable(el, opts){
+  opts=opts||{};
+  if(!el.dataset.state) el.dataset.state='idle';
+  let ox=0,oy=0;
+  function down(e){
+    if(el.dataset.state!=='idle') return;            // only an idle object can be picked up
+    el.dataset.state='dragging';
+    heldOrb=el; el.classList.add('held');
+    const p=point(e),r=el.getBoundingClientRect();
+    ox=p.x-r.left-r.width/2; oy=p.y-r.top-r.height/2;
+    try{ el.setPointerCapture(e.pointerId); }catch(_){}
+    e.preventDefault();
+  }
+  function move(e){
+    if(el.dataset.state!=='dragging') return;
+    const p=point(e),sr=stage.getBoundingClientRect();
+    const x=p.x-sr.left-ox,y=p.y-sr.top-oy;
+    el.style.left=(x-el.offsetWidth/2)+'px'; el.style.top=(y-el.offsetHeight/2)+'px';
+    el.style.transform='none';
+    checkNear(el);                                    // proximity glow (geometry-only, generic)
+  }
+  function release(e){
+    if(el.dataset.state!=='dragging') return;         // ignores duplicate up/cancel/lostcapture
+    el.dataset.state='dropping';                      // transient: blocks re-entrant lostpointercapture
+    try{ el.releasePointerCapture(e.pointerId); }catch(_){}
+    el.classList.remove('held'); heldOrb=null; el.style.filter='';
+    if(isOverJar(el)){
+      if(opts.onDropIntoJar) opts.onDropIntoJar(el);  // handler owns the next state (absorb / scatter)
+      else el.dataset.state='idle';
+    } else {
+      el.dataset.state='idle';                        // dropped outside → grabbable again
+      if(opts.onDropOutside) opts.onDropOutside(el);
+    }
+  }
+  el.addEventListener('pointerdown',down);
+  el.addEventListener('pointermove',move);
+  el.addEventListener('pointerup',release);
+  el.addEventListener('pointercancel',release);
+  el.addEventListener('lostpointercapture',release);
+}
 function point(e){if(e.touches&&e.touches[0])return{x:e.touches[0].clientX,y:e.touches[0].clientY};return{x:e.clientX,y:e.clientY};}
 function isOverJar(o){const a=o.getBoundingClientRect(),b=jar.getBoundingClientRect();const cx=a.left+a.width/2,cy=a.top+a.height/2;return cx>b.left&&cx<b.right&&cy>b.top&&cy<b.bottom;}
 
@@ -727,14 +804,17 @@ function burst(x,y,c1,c2){
     ).onfinish=()=>d.remove();
   }
 }
-function absorb(o,c1,c2){
-  // strong membrane pulse at the entry point, like the skin snapping shut after swallowing
-  pulseMembrane(o);
-  // little "gulp" spring of the jar as it swallows the orb
+/* little "gulp" spring of the jar as it swallows something — shared by orbs and app icons */
+function playJarGulp(){
   jar.animate([{transform:'translate(-50%,-50%) scale(1.06)'},
                {transform:'translate(-50%,-50%) scale(.97)'},
                {transform:'translate(-50%,-50%) scale(1)'}],
               {duration:420,easing:'cubic-bezier(.3,1.3,.5,1)'});
+}
+function absorb(o,c1,c2){
+  // strong membrane pulse at the entry point, like the skin snapping shut after swallowing
+  pulseMembrane(o);
+  playJarGulp();
   // 1) figure out where the orb is *inside the jar* right now
   const ob=o.getBoundingClientRect(), jb=jar.getBoundingClientRect();
   const enterX=ob.left-jb.left+ob.width/2;   // orb centre in jar coords
@@ -784,6 +864,206 @@ countEl.addEventListener('click',()=>{if(absorbed===0)return;
   absorbed=0;countEl.textContent=0;setTimeout(buildOrbs,500);showToast('Poured out — fresh bubbles');});
 function buildOrbs(){stage.querySelectorAll('.orb').forEach(o=>o.remove());seeds.forEach((_,i)=>makeOrb(i));}
 buildOrbs();
+
+/* ============ APP ICONS ============
+   Draggable emoji tiles that share the orb's drag + welcome machinery (attachDraggable →
+   heldOrb → relaxLoop/deformToOrb, plus checkNear / pulseMembrane / playJarGulp). They are
+   NOT liquid: dropping one in the jar triggers scatterAway() — a "blown apart on the wind"
+   burst — and never touches the absorbed count, the goo pool, burst() or pour-out. */
+const APP_ICONS=[
+  {glyph:'💬', c1:'#5ef0a0', c2:'#0f9d58', x:45, y:4},   // chat
+  {glyph:'🎵', c1:'#ff9ec4', c2:'#ff4d7d', x:3,  y:34},  // music
+  {glyph:'📷', c1:'#8ec5ff', c2:'#3a6dff', x:88, y:30},  // camera
+  {glyph:'🧭', c1:'#7df0e0', c2:'#16b3a3', x:48, y:93},  // compass
+];
+const ICON_CONSUME_DELAY=1800;   // scatter → the last flake has blown away → drop the dead element
+let scatterTimeScale=1.5;        // global speed multiplier, set by the #scatterSpeed slider (higher = slower)
+/* rest position is always a percentage of the live stage → resize / orientation safe, and a
+   dragged pixel position is never reused as home (req: home from percentage config). */
+function placeAtHome(el,spec){ el.style.left=spec.x+'%'; el.style.top=spec.y+'%'; }
+function makeIcon(spec,i){
+  const el=document.createElement('div');
+  el.className='app-icon';
+  el._spec=spec;
+  el.dataset.state='idle';
+  el.style.setProperty('--c1',spec.c1);            // same color interface as the orbs
+  el.style.setProperty('--c2',spec.c2);
+  el.style.animationDelay=(0.3+i*0.6)+'s';
+  el.innerHTML='<span class="glyph">'+spec.glyph+'</span>';
+  placeAtHome(el,spec);
+  stage.appendChild(el);
+  attachDraggable(el,{onDropIntoJar:scatterAway});  // dropped in jar → scatter (not absorb)
+  return el;
+}
+function buildIcons(){ APP_ICONS.forEach((s,i)=>makeIcon(s,i)); }
+
+/* The icon fractures into a little-block mosaic and is carried off by a single gust of wind;
+   it is consumed by the jar and does not return. Guarded by dataset.state so a duplicate
+   pointerup / pointercancel / lostpointercapture can never double-scatter or double-spawn. */
+function scatterAway(el){
+  if(el.dataset.state==='scattering') return;
+  el.dataset.state='scattering';
+  el.style.pointerEvents='none';
+  el.classList.remove('held');
+  if(heldOrb===el) heldOrb=null;
+
+  // the jar greets it exactly like an orb — visual only, no liquid state touched
+  pulseMembrane(el);
+  playJarGulp();
+
+  // the tile's footprint in stage coords — the dust mosaic fills it exactly
+  const sr=stage.getBoundingClientRect(), r=el.getBoundingClientRect();
+  const ix=r.left-sr.left, iy=r.top-sr.top, iw=r.width, ih=r.height;
+  const glyph=el.querySelector('.glyph').textContent;
+  const sample=buildIconSampler(el,glyph);          // colour of the icon at any (fx,fy) in [0,1]
+
+  // ONE shared gust (mostly upward, leaning hard left or right): the ash drifts off together
+  // as if caught by the wind — not a radial explosion.
+  const lean=(Math.random()<0.5?-1:1);
+  const gustAng=-Math.PI/2 + lean*(0.45+Math.random()*0.55);
+  const gx=Math.cos(gustAng), gy=Math.sin(gustAng);
+  const GUST=130+Math.random()*70;
+  // perpendicular to the gust — the axis each flake swings across to bow its path into a curve
+  const perpX=-gy, perpY=gx;
+
+  // Timeline (deliberately QUICK so the icon stops looking present almost immediately):
+  //   CRACK = the icon shatters into the little-block mosaic fast,
+  //   HOLD  = a brief beat where it visibly sits as bits,
+  //   WAVE  = the blocks then peel off in a short curved wave (each on its own bowed path).
+  // The icon-shaped mosaic is fully in motion within ~CRACK+HOLD+WAVE ms — no long static pause.
+  const S=scatterTimeScale;        // speed-slider multiplier (higher = slower); scales every duration below
+  const CRACK=120*S, HOLD=90*S, WAVE=140*S;
+
+  // The fracture / peel order is NOT a straight top→bottom line. We pick a RANDOM direction + a
+  // curvy ripple, so both the shatter and the blow roll across the tile as an organic, bowed wave.
+  const waveAng=Math.random()*Math.PI*2, wdx=Math.cos(waveAng), wdy=Math.sin(waveAng);
+  const wavePh=Math.random()*Math.PI*2, waveAmp=0.12+Math.random()*0.12;
+
+  // STAGE 1 — the real tile is visible only for the brief moment the mosaic is FORMING on top of
+  // it (blocks are opaque, same colour, same place → they pop in seamlessly over it). The instant
+  // the mosaic is complete (~CRACK+grain), hide the real tile, so from there on it is PURE blocks:
+  // the original icon is gone the moment it has turned to bits and can never resurface as the dust
+  // blows off. Plain inline-style flip (not a fill:forwards animation) because Chrome auto-removes
+  // a finished fill animation here (the element runs the CSS `bob` animation) and it would pop
+  // the icon back to opacity 1.
+  const MOSAIC_DONE=CRACK+50*S;                        // last block has appeared (max appearAt = CRACK+40*S)
+  el.style.opacity='1';
+  setTimeout(()=>{ if(el.dataset.state==='scattering') el.style.opacity='0'; }, MOSAIC_DONE);
+
+  // STAGE 2 — each cell pops in as an icon-coloured BLOCK when the curved fracture wave reaches
+  // it, holds as part of the little-block mosaic, then is blown off along a bowed (not straight)
+  // path: an intermediate keyframe pushes it sideways across the gust axis so the trajectory curves.
+  const COLS=14, ROWS=16;          // dense, fine grain → small blocks, not chunky slabs
+  const cw=iw/COLS, ch=ih/ROWS;
+  for(let row=0;row<ROWS;row++){
+    for(let col=0;col<COLS;col++){
+      const fx=(col+0.5)/COLS, fy=(row+0.5)/ROWS;
+      const px=ix+fx*iw, py=iy+fy*ih;
+      const col0=sample(fx,fy);                      // the icon's colour right here
+
+      const p=document.createElement('span');
+      p.className='shard';
+      p.style.width=(cw+0.8)+'px'; p.style.height=(ch+0.8)+'px';   // overlap → no gaps at rest
+      p.style.borderRadius='1.5px';                  // little blocks, not round droplets
+      p.style.left=px+'px'; p.style.top=py+'px';
+      stage.appendChild(p);
+
+      // curved, randomised fracture order: project onto a random axis, bend it with a ripple,
+      // add per-cell grain → a bowed wavefront in [0,1], never a tidy line
+      let w=(fx-0.5)*wdx + (fy-0.5)*wdy;
+      w += waveAmp*Math.sin(fx*Math.PI*2.2 + fy*Math.PI*1.7 + wavePh);
+      let waveFrac=w*0.7 + 0.5 + (Math.random()*2-1)*0.12;
+      waveFrac=Math.min(1,Math.max(0,waveFrac));
+
+      const blowDur=(760+Math.random()*520)*S;       // drift off the wind (dust lingers, icon doesn't)
+      // shatter fast, then peel off in a short curved wave ordered by the SAME wavefront, so the
+      // side that cracked first also blows first → a coherent rolling dissolve, gone quickly.
+      const appearAt=waveFrac*CRACK + Math.random()*40*S;
+      const blowAt=CRACK+HOLD + waveFrac*WAVE;       // this block's moment the wind takes it
+      const total=blowAt+blowDur;
+      const oApp=appearAt/total;                     // this block snaps into existence
+      const oHold=blowAt/total;                      // …holds as a bit until the wave reaches it
+
+      const jit=()=>(Math.random()*2-1)*1.2;         // micro-shake as the block cracks loose
+      const ride=0.65+Math.random()*0.7;             // each flake catches the gust differently
+      const swing=(Math.random()*2-1)*(36+Math.random()*40);   // how far it bows across the gust
+      const midF=0.42+Math.random()*0.12;            // curve apex along the blow
+      const midX=gx*GUST*ride*midF + perpX*swing;    // bowed-out waypoint → curved path
+      const midY=gy*GUST*ride*midF + perpY*swing - (6+Math.random()*12);
+      const endX=gx*GUST*ride + perpX*swing*0.25;
+      const endY=gy*GUST*ride + perpY*swing*0.25;
+      const rot=(Math.random()*2-1)*240;
+      const oMid=oHold + (1-oHold)*(0.45+Math.random()*0.1);
+      p.animate(
+        [ // INVISIBLE before the fracture wave reaches it → the real icon shows through here
+          {transform:'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', backgroundColor:col0, opacity:0, offset:0},
+          {transform:'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', backgroundColor:col0, opacity:0, offset:Math.max(0,oApp-0.001)},
+          // SNAPS in as a chunky, icon-coloured block, with a tiny crack-loose jitter
+          {transform:`translate(-50%,-50%) translate(${jit()}px,${jit()}px) rotate(${jit()*4}deg) scale(.96)`, backgroundColor:col0, opacity:1, offset:oApp},
+          // HOLDS as part of the little-block mosaic — still icon-coloured, barely moving
+          {transform:`translate(-50%,-50%) translate(${jit()}px,${jit()}px) rotate(${jit()*5}deg) scale(.94)`, backgroundColor:col0, opacity:1, offset:oHold},
+          // bows out along the curved path, bleaching toward white as it lifts
+          {transform:`translate(-50%,-50%) translate(${midX}px,${midY}px) rotate(${rot*0.4}deg) scale(.5)`, backgroundColor:'#ffffff', opacity:1, offset:oMid},
+          // the gust carries it off — white ash, spinning, shrinking, fading to nothing
+          {transform:`translate(-50%,-50%) translate(${endX}px,${endY}px) rotate(${rot}deg) scale(.12)`, backgroundColor:'#ffffff', opacity:0, offset:1}
+        ],
+        {duration:total,easing:'cubic-bezier(.3,.45,.2,1)',fill:'backwards'}
+      ).onfinish=()=>p.remove();
+    }
+  }
+
+  // the dragged-in icon is CONSUMED by the jar: it turned to bits and blew away, so it does not
+  // come back at its home spot (req: after it mosaics, don't keep / revive the original icon).
+  // Once the last flake has blown off, drop the now-invisible element from the DOM.
+  setTimeout(()=>{ if(el.dataset.state==='scattering') el.remove(); }, ICON_CONSUME_DELAY*S);
+}
+
+/* Sample the icon's colour at any normalized (fx,fy): redraw its gradient + emoji onto a
+   small same-origin canvas (never tainted → getImageData is allowed) and read the pixel.
+   Falls back to a --c1/--c2 blend if the canvas is unavailable. */
+function buildIconSampler(el,glyph){
+  const cs=getComputedStyle(el);
+  const c1=(cs.getPropertyValue('--c1').trim())||'#ffffff';
+  const c2=(cs.getPropertyValue('--c2').trim())||'#cccccc';
+  let data=null,W=0,H=0;
+  try{
+    const SS=3, w=el.offsetWidth||50, h=el.offsetHeight||50;
+    const cv=document.createElement('canvas'); cv.width=W=w*SS; cv.height=H=h*SS;
+    const ctx=cv.getContext('2d');
+    const g=ctx.createLinearGradient(0,0,W*0.4,H);   // ~ the tile's 150deg gradient
+    g.addColorStop(0,c1); g.addColorStop(1,c2);
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.font=(26*SS)+'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",system-ui,sans-serif';
+    ctx.fillText(glyph,W/2,H/2);
+    data=ctx.getImageData(0,0,W,H).data;
+  }catch(_){ data=null; }
+  return function(fx,fy){
+    if(data){
+      const x=Math.min(W-1,Math.max(0,Math.round(fx*W)));
+      const y=Math.min(H-1,Math.max(0,Math.round(fy*H)));
+      const i=(y*W+x)*4;
+      if(data[i+3]>24) return 'rgb('+data[i]+','+data[i+1]+','+data[i+2]+')';
+    }
+    return fy<0.5?c1:c2;                              // fallback blend by height
+  };
+}
+
+buildIcons();
+
+/* Shatter-speed slider: scales the whole crumble+blow timeline (scatterTimeScale). The track runs
+   slow (left) → fast (right); the readout is normalised so the default sits at exactly 1.0×. */
+(function(){
+  const sl=document.getElementById('scatterSpeed'), out=document.getElementById('scatterSpeedVal');
+  if(!sl||!out) return;
+  const DEF=1.5;                                   // default scatterTimeScale → shown as 1.0×
+  const apply=()=>{
+    const p=(+sl.value)/1000;                      // 0 (left) … 1 (right)
+    scatterTimeScale=3.0+(0.7-3.0)*p;              // left = slow (3.0×), right = fast (0.7×)
+    out.textContent=(DEF/scatterTimeScale).toFixed(1)+'×';
+  };
+  sl.addEventListener('input',apply); apply();
+})();
 
 function bindSlider(id,onChange,emitLayer){
   const el=document.getElementById(id),fill=el.querySelector('.fill');
