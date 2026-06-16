@@ -230,6 +230,31 @@
   .cslider .val{position:absolute;right:27px;top:50%;transform:translateY(-50%);z-index:3;
     font-family:'Space Mono',monospace;font-size:15px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.45);}
   .knob-hint{font-size:12px;color:var(--ink-faint);text-align:center;margin-top:2px;font-weight:300;}
+  /* ---- "04 unlock": liquid-glass passcode keypad ---- */
+  .passcode{margin-top:14px;}
+  .dots{display:flex;gap:18px;justify-content:center;margin-bottom:30px;}
+  .dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);
+    background:transparent;transition:background .2s, border-color .2s, transform .2s;}
+  .dot.on{background:#fff;border-color:#fff;box-shadow:0 0 10px rgba(255,255,255,.5);}
+  .dots.ok .dot{background:#7af5b0;border-color:#7af5b0;box-shadow:0 0 12px rgba(122,245,176,.6);}
+  .dots.shake{animation:pcShake .42s cubic-bezier(.36,.07,.19,.97);}
+  @keyframes pcShake{10%,90%{transform:translateX(-2px);}20%,80%{transform:translateX(4px);}
+    30%,50%,70%{transform:translateX(-8px);}40%,60%{transform:translateX(8px);}}
+  .passpad{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+    max-width:300px;margin:0 auto;justify-items:center;}
+  .key{position:relative;width:76px;height:76px;border-radius:50%;border:0;background:transparent;
+    padding:0;cursor:pointer;touch-action:none;color:#fff;
+    display:grid;place-items:center;will-change:transform;
+    transition:transform .2s cubic-bezier(.2,.9,.3,1.3);}
+  .key span{font-family:'Fraunces',serif;font-weight:400;font-size:30px;line-height:1;
+    pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.45);position:relative;z-index:2;}
+  .key.press{transition:transform .12s cubic-bezier(.2,.8,.2,1);}
+  .key-spacer{width:76px;height:76px;}
+  .key-del{width:76px;height:76px;display:grid;place-items:center;border:0;background:transparent;
+    cursor:pointer;color:rgba(255,255,255,.82);border-radius:50%;transition:transform .15s, color .15s;}
+  .key-del svg{width:30px;height:30px;}
+  .key-del:hover{color:#fff;}
+  .key-del:active{transform:scale(.9);}
   footer{margin-top:70px;text-align:center;font-size:11.5px;color:var(--ink-faint);
     font-family:'Space Mono',monospace;letter-spacing:.1em;line-height:2;}
   footer a{color:var(--ink-dim);text-decoration:none;}
@@ -381,6 +406,31 @@
     <div class="knob-hint">drag any bar — current values are the defaults</div>
   </div>
 
+  <div class="seclabel"><span class="n">04</span>&nbsp;unlock</div>
+  <p class="play-hint">Tap the liquid-glass keys — they swell and brighten. Press and drag one and the circle stretches toward your finger.</p>
+  <div class="passcode">
+    <div class="dots" id="dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+    <div class="passpad" id="passpad">
+      <button class="key webgl-card" type="button" data-d="1"><span>1</span></button>
+      <button class="key webgl-card" type="button" data-d="2"><span>2</span></button>
+      <button class="key webgl-card" type="button" data-d="3"><span>3</span></button>
+      <button class="key webgl-card" type="button" data-d="4"><span>4</span></button>
+      <button class="key webgl-card" type="button" data-d="5"><span>5</span></button>
+      <button class="key webgl-card" type="button" data-d="6"><span>6</span></button>
+      <button class="key webgl-card" type="button" data-d="7"><span>7</span></button>
+      <button class="key webgl-card" type="button" data-d="8"><span>8</span></button>
+      <button class="key webgl-card" type="button" data-d="9"><span>9</span></button>
+      <span class="key-spacer" aria-hidden="true"></span>
+      <button class="key webgl-card" type="button" data-d="0"><span>0</span></button>
+      <button class="key-del" id="keyDel" type="button" aria-label="Delete">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H8.5a2 2 0 0 0-1.5.7L2.6 11a1.5 1.5 0 0 0 0 2L7 18.3a2 2 0 0 0 1.5.7H21a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/><path d="m17 9-5 5M12 9l5 5"/></svg>
+      </button>
+    </div>
+  </div>
+
   <footer>Made with light &amp; glass<br><a href="mailto:Stary132@163.com">Stary132@163.com</a></footer>
 </div>
 
@@ -423,7 +473,7 @@ function spawnRipple(x,y){
   }
 }
 document.addEventListener('pointerdown',e=>{
-  if(e.target.closest('.orb,.slider,.mail,.chip,.count,.topbar'))return;
+  if(e.target.closest('.orb,.slider,.mail,.chip,.count,.topbar,.passpad'))return;
   spawnRipple(e.clientX,e.clientY);
 },true);
 
@@ -818,6 +868,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
   uniform float uActive[N];   // 1 when box is on screen, else 0
   uniform float uRound[N];    // per-box corner power exponent (superellipse mode)
   uniform float uRadius[N];   // per-box corner radius in px; >=0 = rounded-rect mode
+  uniform float uBright[N];   // per-box extra brightness (0 = none); used by tapped keys
   uniform float uWhite;       // 0..1 whiteness of the glass
   uniform float uRefract;     // lens strength: how much the backdrop bends
   uniform float uBlur;        // sample spread: backdrop softness
@@ -889,6 +940,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
                        clamp((clamp(-dy, -1000.0, 0.2) * rb3 + 0.1) / 2.0, 0.0, 1.0);
       vec4 lighting = clamp(acc + (vec4(rb1) * gradient + vec4(rb2) * 0.3) * uEdge, 0.0, 1.0);
       lighting = mix(lighting, vec4(1.0), uWhite * 0.97);
+      lighting = mix(lighting, vec4(1.0), uBright[i]);   // tapped keys glow brighter
       color = mix(bg, lighting, transition);
     }
     gl_FragColor = vec4(color.rgb, 1.0);
@@ -900,7 +952,6 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
   const gl = canvas.getContext("webgl", { preserveDrawingBuffer:true });
   // Every element that should show the live refraction. The shader refracts each
   // as its own rounded box; `round` is the corner power (lower = rounder).
-  const N = 9;
   // `round` = superellipse power (used when radius < 0). `radius` = CSS corner
   // radius in px for rounded-rect mode (sliders are pills: border-radius 40 on
   // an 80px-tall bar). The jar stays a superellipse (it's clipped to a blob).
@@ -915,6 +966,13 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
     { el: document.getElementById("pBlur"),    round: 6.0, radius:40 },
     { el: document.getElementById("pEdge"),    round: 6.0, radius:40 },
   ];
+  // "04 unlock" keypad: each digit key is a circular refraction box. A huge radius
+  // clamps (in-shader) to half the element → a perfect circle; index range is kept
+  // so the press handlers can brighten the right box.
+  const keyEls = Array.from(document.querySelectorAll(".key"));
+  const KEY_BASE = cards.length;
+  keyEls.forEach(el => cards.push({ el, round: 6.0, radius: 999 }));
+  const N = cards.length;
   const photoBg = document.getElementById("photoBg");
   const srcImage = document.getElementById("srcImage");
   if(!gl){ return; }   // no WebGL → keep CSS fallback (.photo-bg + .glass)
@@ -931,7 +989,8 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
   setCanvasSize();
 
   const vsSource = `attribute vec2 position; void main(){ gl_Position = vec4(position,0.0,1.0); }`;
-  const fsSource = document.getElementById("fragShader").textContent;
+  // Box count is data-driven (panels + keypad keys); patch the shader's array size to match.
+  const fsSource = document.getElementById("fragShader").textContent.replace("#define N 9", "#define N " + N);
   function createShader(type, src){
     const sh = gl.createShader(type);
     gl.shaderSource(sh, src); gl.compileShader(sh);
@@ -962,6 +1021,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
     refract:    gl.getUniformLocation(program, "uRefract"),
     blur:       gl.getUniformLocation(program, "uBlur"),
     edge:       gl.getUniformLocation(program, "uEdge"),
+    bright:     gl.getUniformLocation(program, "uBright"),
     texture:    gl.getUniformLocation(program, "iChannel0"),
   };
   // Reusable typed arrays uploaded to the box uniforms each frame.
@@ -970,6 +1030,8 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
   const activeArr = new Float32Array(N);
   const roundArr = new Float32Array(N);
   const radiusArr = new Float32Array(N);   // px corner radius (dpr-scaled per frame)
+  const brightArr = new Float32Array(N);   // current per-box extra brightness (eased)
+  const brightTarget = new Float32Array(N);// where each box's brightness is heading
   for (let i = 0; i < N; i++) roundArr[i] = cards[i] ? cards[i].round : 6.0;
 
   const texture = gl.createTexture();
@@ -1061,7 +1123,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
   // preserveDrawingBuffer the canvas keeps the last frame between draws, so
   // skipping is invisible — it just stops burning GPU/CPU while idle.
   const prevPos = new Float32Array(N*2), prevHalf = new Float32Array(N*2);
-  const prevActive = new Float32Array(N), prevRadius = new Float32Array(N);
+  const prevActive = new Float32Array(N), prevRadius = new Float32Array(N), prevBright = new Float32Array(N);
   let prevW=0, prevH=0, prevWhite=NaN, prevRefract=NaN, prevBlur=NaN, prevEdge=NaN;
   let needsDraw = true;
   function render(){
@@ -1081,13 +1143,16 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
         const rad = cards[i].radius;
         radiusArr[i] = (rad != null && rad >= 0) ? rad * dpr : -1.0;
         activeArr[i] = onScreen ? 1.0 : 0.0;
+        // ease brightness toward its target (tapped keys glow, then settle back)
+        const b = brightArr[i] + (brightTarget[i] - brightArr[i]) * 0.25;
+        brightArr[i] = Math.abs(b - brightTarget[i]) < 0.002 ? brightTarget[i] : b;
       }
 
       let changed = needsDraw || canvas.width!==prevW || canvas.height!==prevH ||
         glassParams.white!==prevWhite || glassParams.refract!==prevRefract ||
         glassParams.blur!==prevBlur || glassParams.edge!==prevEdge;
       for (let i=0; i<N*2 && !changed; i++) if(posArr[i]!==prevPos[i]||halfArr[i]!==prevHalf[i]) changed=true;
-      for (let i=0; i<N && !changed; i++) if(activeArr[i]!==prevActive[i]||radiusArr[i]!==prevRadius[i]) changed=true;
+      for (let i=0; i<N && !changed; i++) if(activeArr[i]!==prevActive[i]||radiusArr[i]!==prevRadius[i]||brightArr[i]!==prevBright[i]) changed=true;
 
       if(changed){
         gl.viewport(0,0,canvas.width,canvas.height);
@@ -1099,6 +1164,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
         gl.uniform1fv(U.active, activeArr);
         gl.uniform1fv(U.round, roundArr);
         gl.uniform1fv(U.radius, radiusArr);
+        gl.uniform1fv(U.bright, brightArr);
         gl.uniform1f(U.white, glassParams.white);
         gl.uniform1f(U.refract, glassParams.refract);
         gl.uniform1f(U.blur, glassParams.blur);
@@ -1108,7 +1174,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
         gl.uniform1i(U.texture, 0);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
-        prevPos.set(posArr); prevHalf.set(halfArr); prevActive.set(activeArr); prevRadius.set(radiusArr);
+        prevPos.set(posArr); prevHalf.set(halfArr); prevActive.set(activeArr); prevRadius.set(radiusArr); prevBright.set(brightArr);
         prevW=canvas.width; prevH=canvas.height;
         prevWhite=glassParams.white; prevRefract=glassParams.refract; prevBlur=glassParams.blur; prevEdge=glassParams.edge;
         needsDraw=false;
@@ -1190,6 +1256,89 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
       try{ localStorage.removeItem(LS_KEY); }catch(_){}
       if(DEFAULT_BG){ loadUrlIntoTexture(DEFAULT_BG); } else { uploadFallbackTexture(); needsDraw = true; }
       showToast("Default background restored");
+    });
+  }
+
+  // ---- "04 unlock": passcode keypad interaction ----
+  const PASSCODE = "123456";   // ← change me: the 6-digit code that "unlocks"
+  const dotsEl = document.getElementById("dots");
+  const dotEls = dotsEl ? Array.from(dotsEl.querySelectorAll(".dot")) : [];
+  const keyDel = document.getElementById("keyDel");
+  let entry = "", locked = false;
+
+  function renderDots(){
+    dotEls.forEach((d,i)=> d.classList.toggle("on", i < entry.length));
+  }
+  function clearEntry(){ entry = ""; dotsEl.classList.remove("ok"); renderDots(); }
+
+  function submit(){
+    if(entry === PASSCODE){
+      dotsEl.classList.add("ok");
+      // flash every key bright, then settle
+      for(let i=0;i<keyEls.length;i++) brightTarget[KEY_BASE+i] = 0.5;
+      needsDraw = true;
+      showToast("Unlocked ✓");
+      setTimeout(()=>{ for(let i=0;i<keyEls.length;i++) brightTarget[KEY_BASE+i]=0; }, 450);
+      setTimeout(clearEntry, 1100);
+    } else {
+      dotsEl.classList.remove("shake"); void dotsEl.offsetWidth;  // restart animation
+      dotsEl.classList.add("shake");
+      showToast("Wrong passcode");
+      setTimeout(clearEntry, 460);
+    }
+  }
+  function addDigit(d){
+    if(locked || entry.length >= PASSCODE.length) return;
+    entry += d; renderDots();
+    if(entry.length === PASSCODE.length){
+      locked = true;
+      setTimeout(()=>{ submit(); locked = false; }, 180);
+    }
+  }
+
+  // Per-key press + drag-deform. The key element's CSS transform drives its WebGL
+  // refraction box (it follows getBoundingClientRect), so scaling/translating the
+  // element grows and stretches the glass circle live.
+  keyEls.forEach((el, i)=>{
+    const idx = KEY_BASE + i;
+    let startX=0, startY=0, pressed=false, moved=0;
+    function setTransform(s){ el.style.transform = s; needsDraw = true; }
+    el.addEventListener("pointerdown", e=>{
+      pressed = true; moved = 0; startX = e.clientX; startY = e.clientY;
+      el.setPointerCapture(e.pointerId);
+      el.classList.add("press");
+      setTransform("scale(1.14)");
+      brightTarget[idx] = 0.34;
+    });
+    el.addEventListener("pointermove", e=>{
+      if(!pressed) return;
+      let dx = e.clientX - startX, dy = e.clientY - startY;
+      moved = Math.hypot(dx, dy);
+      const cap = 34;                                   // clamp the wander
+      dx = Math.max(-cap, Math.min(cap, dx));
+      dy = Math.max(-cap, Math.min(cap, dy));
+      // stretch slightly along the dominant axis → the refraction capsule elongates
+      const ax = Math.abs(dx), ay = Math.abs(dy);
+      const sx = 1.14 + Math.min(0.12, ax/300) - Math.min(0.05, ay/400);
+      const sy = 1.14 + Math.min(0.12, ay/300) - Math.min(0.05, ax/400);
+      setTransform(`translate(${dx*0.28}px,${dy*0.28}px) scale(${sx},${sy})`);
+    });
+    function release(e){
+      if(!pressed) return;
+      pressed = false;
+      try{ el.releasePointerCapture(e.pointerId); }catch(_){}
+      el.classList.remove("press");
+      setTransform("");
+      brightTarget[idx] = 0;
+      if(moved < 12) addDigit(el.dataset.d);   // treat as a tap
+    }
+    el.addEventListener("pointerup", release);
+    el.addEventListener("pointercancel", release);
+  });
+  if(keyDel){
+    keyDel.addEventListener("click", ()=>{
+      if(locked) return;
+      entry = entry.slice(0, -1); dotsEl.classList.remove("ok"); renderDots();
     });
   }
 
