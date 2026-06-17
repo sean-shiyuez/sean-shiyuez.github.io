@@ -289,6 +289,21 @@
   .key-del svg{width:30px;height:30px;}
   .key-del:hover{color:#fff;}
   .key-del:active{transform:scale(.9);}
+  /* ---- "05 pick a span": glass segmented control ---- */
+  .segmented{position:relative;display:flex;height:52px;margin-top:14px;padding:5px;
+    border-radius:26px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);
+    box-shadow:inset 0 2px 6px rgba(12,10,46,0.28), inset 0 1px 1px rgba(255,255,255,0.10);
+    touch-action:none;user-select:none;-webkit-user-select:none;}
+  .seg-opt{position:relative;z-index:2;flex:1;border:0;background:transparent;cursor:pointer;padding:0;
+    font-family:inherit;font-size:15px;font-weight:400;letter-spacing:.02em;color:var(--ink-dim);
+    -webkit-tap-highlight-color:transparent;
+    transition:color .25s, font-weight .25s, transform .12s cubic-bezier(.2,.8,.2,1);}
+  .seg-opt:active{transform:scale(.94);}
+  .seg-opt.active{color:#fff;font-weight:600;text-shadow:0 1px 6px rgba(12,10,46,.45);}
+  /* the bright glass highlight — material comes from the live WebGL shader (.webgl-card) */
+  .seg-pill{position:absolute;top:5px;bottom:5px;left:5px;z-index:1;border-radius:21px;
+    will-change:transform;transform:translateX(0);cursor:grab;}
+  .seg-pill:active{cursor:grabbing;}
   footer{margin-top:70px;text-align:center;font-size:11.5px;color:var(--ink-faint);
     font-family:'Space Mono',monospace;letter-spacing:.1em;line-height:2;}
   footer a{color:var(--ink-dim);text-decoration:none;}
@@ -483,6 +498,16 @@
     </div>
   </div>
 
+  <div class="seclabel"><span class="n">05</span>&nbsp;pick a span</div>
+  <p class="play-hint">Tap an option — the glass pill glides over and springs. Or grab the pill and drag it; it snaps to the nearest one.</p>
+  <div class="segmented" id="segmented">
+    <div class="seg-pill webgl-card" id="segPill"></div>
+    <button class="seg-opt active" type="button" data-i="0">Day</button>
+    <button class="seg-opt" type="button" data-i="1">Week</button>
+    <button class="seg-opt" type="button" data-i="2">Month</button>
+    <button class="seg-opt" type="button" data-i="3">Year</button>
+  </div>
+
   <footer>Made with light &amp; glass<br><a href="mailto:Stary132@163.com">Stary132@163.com</a></footer>
 </div>
 
@@ -525,7 +550,7 @@ function spawnRipple(x,y){
   }
 }
 document.addEventListener('pointerdown',e=>{
-  if(e.target.closest('.orb,.app-icon,.slider,.speedctl,.mail,.chip,.count,.topbar,.passpad'))return;
+  if(e.target.closest('.orb,.app-icon,.slider,.speedctl,.mail,.chip,.count,.topbar,.passpad,.segmented'))return;
   spawnRipple(e.clientX,e.clientY);
 },true);
 
@@ -918,13 +943,25 @@ const IconScatter = (function(){
     blockBleed: 0.8,        // px added to each block's w/h so they overlap (no gaps at rest)
     blockRadius: 1.5,       // px corner radius (little flakes, not round droplets)
 
+    // touch / mobile path — phones can't afford the desktop look (224 blocks each animating
+    // background-color = a per-frame main-thread repaint), so the mosaic janks past invisibly.
+    // On coarse pointers we use a coarser grid and bleach toward white via a GPU-composited
+    // `filter` (set the colour once, no per-frame paint) so the mosaic actually renders smoothly.
+    isTouch: matchMedia('(pointer:coarse)').matches,
+    mobileCols: 10,         // coarser grid on touch → far fewer compositor layers + cheaper 1st frame
+    mobileRows: 11,
+    mobileBleach: true,     // true = keep the white-ash look via filter; false = plain colour fade
+    mobileBleachFilter: 'brightness(2.6) saturate(0)',   // bleached end state for the filter path
+
     // timeline in ms (BEFORE the speed multiplier). The icon is fully in motion
     // within ~crackMs + holdMs + waveMs, so it stops looking present almost at once.
     crackMs: 120,           // shatter the tile into the block mosaic
     holdMs: 90,             // brief beat it visibly sits as bits
     waveMs: 140,            // blocks then peel off in a short curved wave
-    crackGrainMs: 30,       // extra random delay per block during the shatter
-    hideGuardMs: 31,        // hide the real tile crackMs+this later — just past crackGrainMs(30), so it
+    crackGrainMs: 14,       // random spread of when blocks pop in. Kept small: this spread is
+                            //   INVISIBLE (blocks appear over the still-shown tile) but it gates the
+                            //   hide below, so smaller = the original tile can vanish sooner.
+    hideGuardMs: 16,        // hide the real tile crackMs+this later — just past crackGrainMs(14), so it
                             //   drops the instant the blocks cover it (≥ crackGrainMs avoids a gap)
     blowMinMs: 760,         // a block's drift-off duration …
     blowVarMs: 520,         // … plus up to this much at random
@@ -1068,12 +1105,17 @@ const IconScatter = (function(){
      the gust axis, bleaching to ash as it lifts, shrinks and fades. */
   function spawnShard(o){
     const cfg=o.cfg, S=o.S, gust=o.gust, waveFrac=o.waveFrac, color=o.color, ash=cfg.ashColor;
+    const mode=o.bleach||'bg';   // 'bg' = animate background-color (desktop); 'filter'/'none' = mobile
 
     const p=document.createElement('span');
     p.className='shard';
     p.style.width=(o.w+cfg.blockBleed)+'px'; p.style.height=(o.h+cfg.blockBleed)+'px';  // overlap → no gaps at rest
     p.style.borderRadius=cfg.blockRadius+'px';        // little blocks, not round droplets
     p.style.left=o.px+'px'; p.style.top=o.py+'px';
+    // Mobile modes set the colour ONCE so only GPU-composited props animate (no per-frame
+    // background-color repaint, which is what janks the mosaic off-screen on phones).
+    if(mode!=='bg'){ p.style.backgroundColor=color; }
+    if(mode==='filter'){ p.style.willChange='transform,opacity,filter'; }   // promote the bleach
     stage.appendChild(p);
 
     // timing — all scaled by the speed multiplier S
@@ -1097,21 +1139,30 @@ const IconScatter = (function(){
     const rot=signedRand(cfg.rotMax);
     const oMid=oHold + (1-oHold)*rand(cfg.oMidMin, cfg.oMidVar);
 
-    p.animate(
-      [ // INVISIBLE before the fracture wave reaches it → the real icon shows through here
-        {transform:'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', backgroundColor:color, opacity:0, offset:0},
-        {transform:'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', backgroundColor:color, opacity:0, offset:Math.max(0,oApp-0.001)},
-        // SNAPS in as a chunky, icon-coloured block, with a tiny crack-loose jitter
-        {transform:`translate(-50%,-50%) translate(${jit()}px,${jit()}px) rotate(${jit()*4}deg) scale(.96)`, backgroundColor:color, opacity:1, offset:oApp},
-        // HOLDS as part of the little-block mosaic — still icon-coloured, barely moving
-        {transform:`translate(-50%,-50%) translate(${jit()}px,${jit()}px) rotate(${jit()*5}deg) scale(.94)`, backgroundColor:color, opacity:1, offset:oHold},
-        // bows out along the curved path, bleaching toward ash as it lifts
-        {transform:`translate(-50%,-50%) translate(${midX}px,${midY}px) rotate(${rot*cfg.midRotFactor}deg) scale(.5)`, backgroundColor:ash, opacity:1, offset:oMid},
-        // the gust carries it off — ash, spinning, shrinking, fading to nothing
-        {transform:`translate(-50%,-50%) translate(${endX}px,${endY}px) rotate(${rot}deg) scale(.12)`, backgroundColor:ash, opacity:0, offset:1}
-      ],
-      {duration:total, easing:cfg.blockEasing, fill:'backwards'}
-    ).onfinish=()=>p.remove();
+    // Shared transform/opacity timeline (identical for every mode); the colour track is layered
+    // on per `mode` below. Stages: INVISIBLE → SNAP in as a block → HOLD as the mosaic → bow out
+    // along the curved path → blown off, shrinking and fading to nothing.
+    const frames=[
+      {t:'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', o:0, k:0},
+      {t:'translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1)', o:0, k:Math.max(0,oApp-0.001)},
+      {t:`translate(-50%,-50%) translate(${jit()}px,${jit()}px) rotate(${jit()*4}deg) scale(.96)`, o:1, k:oApp},
+      {t:`translate(-50%,-50%) translate(${jit()}px,${jit()}px) rotate(${jit()*5}deg) scale(.94)`, o:1, k:oHold},
+      {t:`translate(-50%,-50%) translate(${midX}px,${midY}px) rotate(${rot*cfg.midRotFactor}deg) scale(.5)`, o:1, k:oMid},
+      {t:`translate(-50%,-50%) translate(${endX}px,${endY}px) rotate(${rot}deg) scale(.12)`, o:0, k:1}
+    ];
+    // per-mode colour track, index-aligned with frames:
+    //   bg     — animate background-color icon→ash (desktop look; a main-thread paint)
+    //   filter — colour set once, bleach toward white via GPU-composited brightness/desaturate
+    //   none   — colour set once, no bleach (plain fade); only transform+opacity animate
+    const bgTrack    = [color,color,color,color,ash,ash];
+    const filterTrack= ['none','none','none','none','brightness(2.4) saturate(.15)', cfg.mobileBleachFilter];
+    const kf=frames.map((f,i)=>{
+      const k={transform:f.t, opacity:f.o, offset:f.k};
+      if(mode==='bg')          k.backgroundColor=bgTrack[i];
+      else if(mode==='filter') k.filter=filterTrack[i];
+      return k;
+    });
+    p.animate(kf, {duration:total, easing:cfg.blockEasing, fill:'backwards'}).onfinish=()=>p.remove();
   }
 
   /* MAIN effect — fracture `el` into a mosaic and blow it off on the wind. The
@@ -1140,21 +1191,33 @@ const IconScatter = (function(){
     const gust=pickGust(cfg);                          // shared wind
     const wavefront=makeWavefront(cfg);                // shatter / blow order
 
-    // STAGE 1 — the real tile is visible only while the mosaic is FORMING on top
-    // of it (opaque blocks, same colour + place → seamless). The instant the mosaic
-    // is complete, hide it with a plain inline flip (NOT a fill:forwards animation —
-    // Chrome auto-removes finished fills here because the element runs the CSS `bob`
-    // animation, which would pop opacity back to 1 and leave the icon standing).
+    // STAGE 1 — the real tile is visible only while the mosaic is FORMING on top of it
+    // (opaque blocks, same colour + place → seamless). The instant the mosaic completes,
+    // it vanishes. The hide is driven by a WAAPI `opacity` animation, NOT a setTimeout:
+    // spawning 224 blocks (+ their background-color animations) janks the main thread, and a
+    // timer scheduled here fires late — late enough that the smooth tile is still showing when
+    // blocks start lifting, so it "flashes" during the blow. `opacity` is compositor-accelerated,
+    // so this lands on the timeline regardless of main-thread jank. onfinish commits inline
+    // opacity:0 (which the CSS `bob` animation never touches) so the end-state can't pop back —
+    // the pitfall a bare fill:forwards hits (Chrome drops the finished fill, bob restores 1).
     const hideAt=(cfg.crackMs + cfg.hideGuardMs)*S;
     el.style.opacity='1';
-    setTimeout(()=>{ if(el.dataset.state==='scattering') el.style.opacity='0'; }, hideAt);
+    const hide=el.animate(
+      [{opacity:1, offset:0},{opacity:1, offset:0.999},{opacity:0, offset:1}],
+      {duration:hideAt+1, fill:'forwards'}
+    );
+    hide.onfinish=()=>{ if(el.dataset.state==='scattering'){ el.style.opacity='0'; } try{ hide.cancel(); }catch(_){} };
 
     // STAGE 2 — dice into cols × rows blocks; each pops in, holds, then blows off.
-    const cw=iw/cfg.cols, ch=ih/cfg.rows;
-    for(let row=0; row<cfg.rows; row++){
-      for(let col=0; col<cfg.cols; col++){
-        const fx=(col+0.5)/cfg.cols, fy=(row+0.5)/cfg.rows;
-        spawnShard({ cfg, S, gust, waveFrac:wavefront(fx,fy),
+    // Touch devices use a coarser grid and a GPU-cheap bleach so the mosaic actually paints.
+    const cols = cfg.isTouch ? cfg.mobileCols : cfg.cols;
+    const rows = cfg.isTouch ? cfg.mobileRows : cfg.rows;
+    const bleach = cfg.isTouch ? (cfg.mobileBleach ? 'filter' : 'none') : 'bg';
+    const cw=iw/cols, ch=ih/rows;
+    for(let row=0; row<rows; row++){
+      for(let col=0; col<cols; col++){
+        const fx=(col+0.5)/cols, fy=(row+0.5)/rows;
+        spawnShard({ cfg, S, gust, bleach, waveFrac:wavefront(fx,fy),
           px:ix+fx*iw, py:iy+fy*ih, w:cw, h:ch, color:sample(fx,fy) });
       }
     }
@@ -1372,7 +1435,9 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
     { el: document.getElementById("pRefract"), round: 6.0, radius:40 },
     { el: document.getElementById("pBlur"),    round: 6.0, radius:40 },
     { el: document.getElementById("pEdge"),    round: 6.0, radius:40 },
+    { el: document.getElementById("segPill"),  round: 6.0, radius:999 },  // "05" segmented pill (stadium)
   ];
+  const SEG_INDEX = cards.length - 1;   // the segmented control's glass pill
   // "04 unlock" keypad: each digit key is a circular refraction box. A huge radius
   // clamps (in-shader) to half the element → a perfect circle; index range is kept
   // so the press handlers can brighten the right box.
@@ -1753,6 +1818,85 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
       if(locked) return;
       entry = entry.slice(0, -1); dotsEl.classList.remove("ok"); renderDots();
     });
+  }
+
+  // ---- "05 pick a span": glass segmented control ----
+  // One bright glass pill (a shader card, index SEG_INDEX) slides over 4 options. Tapping an
+  // option springs it there; grabbing the pill drags it and it snaps to the nearest option.
+  // All pointer logic lives on the container; events from the options/pill bubble up to it.
+  const segmented = document.getElementById("segmented");
+  const segPill   = document.getElementById("segPill");
+  const segOpts   = segmented ? Array.from(segmented.querySelectorAll(".seg-opt")) : [];
+  if(segmented && segPill && segOpts.length){
+    const PAD = 5;                                  // matches .segmented padding / .seg-pill left
+    const LAST = segOpts.length - 1;
+    let segW = 0, current = 0, curX = 0;            // step px, selected index, pill left px
+    let dragging = false, grab = 0, downX = 0, moved = false;
+
+    const trackX = clientX => clientX - segmented.getBoundingClientRect().left - PAD;
+    const idxAt  = x => Math.max(0, Math.min(LAST, Math.floor(x / segW)));
+    const setActive = i => segOpts.forEach((o,k)=> o.classList.toggle("active", k===i));
+
+    function layout(){                              // size + place the pill (init + on resize)
+      segW = segOpts[0].offsetWidth;                // one segment (box-sizing:border-box, flex:1)
+      segPill.style.width = segW + "px";
+      curX = current * segW;
+      segPill.style.transform = `translateX(${curX}px)`;
+      needsDraw = true;
+    }
+
+    function moveTo(i, bounce){                      // slide to option i (+ optional scale spring)
+      const fromX = curX, toX = i * segW;
+      current = i; curX = toX; setActive(i);
+      const frames = bounce
+        ? [{transform:`translateX(${fromX}px) scale(1)`},
+           {transform:`translateX(${(fromX+toX)/2}px) scale(1.09)`, offset:.5},
+           {transform:`translateX(${toX}px) scale(1)`}]
+        : [{transform:`translateX(${fromX}px) scale(1)`},
+           {transform:`translateX(${toX}px) scale(1)`}];
+      const a = segPill.animate(frames, {duration:bounce?420:300, easing:"cubic-bezier(.34,1.3,.4,1)", fill:"forwards"});
+      // commit the end transform so it persists if Chrome drops the finished fill (the live rect
+      // sampling refracts the pill through the whole slide either way)
+      a.onfinish = ()=>{ segPill.style.transform = `translateX(${toX}px)`; try{ a.cancel(); }catch(_){} };
+      brightTarget[SEG_INDEX] = 0.32;                // a quick glow pulse, like a tapped key
+      setTimeout(()=>{ brightTarget[SEG_INDEX] = 0; }, 260);
+      needsDraw = true;
+    }
+
+    segmented.addEventListener("pointerdown", e=>{
+      downX = e.clientX; moved = false;
+      const x = trackX(e.clientX);
+      dragging = (idxAt(x) === current);             // grabbed the pill → drag; else a tap to select
+      if(dragging){
+        grab = x - curX;                             // keep the grab offset so the pill doesn't jump
+        try{ segmented.setPointerCapture(e.pointerId); }catch(_){}
+        brightTarget[SEG_INDEX] = 0.3; needsDraw = true;
+      }
+      e.preventDefault();
+    });
+    segmented.addEventListener("pointermove", e=>{
+      if(Math.abs(e.clientX - downX) > 4) moved = true;
+      if(!dragging) return;
+      const x = Math.max(0, Math.min(LAST*segW, trackX(e.clientX) - grab));
+      curX = x;
+      segPill.style.transform = `translateX(${x}px) scale(1.05)`;   // slight lift while held
+      needsDraw = true;
+    });
+    function endSeg(e){
+      if(dragging){
+        dragging = false;
+        try{ segmented.releasePointerCapture(e.pointerId); }catch(_){}
+        brightTarget[SEG_INDEX] = 0;
+        moveTo(Math.max(0, Math.min(LAST, Math.round(curX / segW))), true);   // snap to nearest
+      } else if(!moved){
+        moveTo(idxAt(trackX(e.clientX)), true);        // tap a segment → select it
+      }
+    }
+    segmented.addEventListener("pointerup", endSeg);
+    segmented.addEventListener("pointercancel", endSeg);
+
+    layout(); setActive(0);
+    window.addEventListener("resize", layout);
   }
 
   window.addEventListener("resize", setCanvasSize);
