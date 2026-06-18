@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <span>本站累计访问</span>
     <span id="visit-total" class="visit-num">12,850</span>
     <span class="visit-sep">·</span>
-    <span>访客</span>
+    <span>新增访客</span>
     <span id="vercount_value_site_uv" class="visit-num">0</span>
   </div>
   <span id="vercount_value_site_pv" style="display:none">0</span>
