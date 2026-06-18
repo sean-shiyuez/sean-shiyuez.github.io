@@ -165,6 +165,15 @@ document.addEventListener('DOMContentLoaded', function () {
   </script>
 </div>
 
-<div id="visitor-map" style="width:300px; height:300px; margin:1.5em auto;">
-  <script type="text/javascript" id="mmvst_globe" src="https://mapmyvisitors.com/globe.js?d=xecwh5A3XZ61ZTlM4f_AU-d07vKLls4C4lcEj8nDX4Q"></script>
+<div id="visitor-map">
+  <div class="visit-pill">
+    <span>本站累计访问</span>
+    <span class="visit-num">12,850</span>
+    <span class="visit-sep">+</span>
+    <span id="vercount_value_site_pv" class="visit-num">0</span>
+    <span class="visit-sep">·</span>
+    <span>访客</span>
+    <span id="vercount_value_site_uv" class="visit-num">0</span>
+  </div>
 </div>
+<script defer src="https://cn.vercount.one/js"></script>

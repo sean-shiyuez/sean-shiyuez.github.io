@@ -604,12 +604,31 @@ button:focus-visible {
   }
 }
 
-/* ---- Visitor map (MapMyVisitors globe) ---- */
+/* ---- Visitor counter (VerCount pill) ---- */
 #visitor-map {
-  margin: 1.5em auto 0;
+  margin: 2.25em auto 0.5em;
   text-align: center;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-
-  &:hover { opacity: 1; }
 }
+
+.visit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: border-color 0.2s ease, background 0.25s ease;
+
+  &:hover { border-color: var(--primary); }
+}
+
+.visit-num {
+  font-family: $monospace;
+  font-weight: 600;
+  color: var(--heading-1);
+}
+
+.visit-sep { color: var(--text-subtle); }
