@@ -168,12 +168,26 @@ document.addEventListener('DOMContentLoaded', function () {
 <div id="visitor-map">
   <div class="visit-pill">
     <span>本站累计访问</span>
-    <span class="visit-num">12,850</span>
-    <span class="visit-sep">+</span>
-    <span id="vercount_value_site_pv" class="visit-num">0</span>
+    <span id="visit-total" class="visit-num">12,850</span>
     <span class="visit-sep">·</span>
     <span>访客</span>
     <span id="vercount_value_site_uv" class="visit-num">0</span>
   </div>
+  <span id="vercount_value_site_pv" style="display:none">0</span>
 </div>
 <script defer src="https://cn.vercount.one/js"></script>
+<script>
+  (function () {
+    var BASE = 12850;                                   // seeded baseline
+    var src = document.getElementById('vercount_value_site_pv');  // VerCount writes the live PV here
+    var out = document.getElementById('visit-total');             // we render BASE + live PV here
+    if (!src || !out) return;
+    function sync() {
+      var n = parseInt((src.textContent || '').replace(/[^\d]/g, ''), 10);
+      out.textContent = (BASE + (isNaN(n) ? 0 : n)).toLocaleString('en-US');
+    }
+    new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
+    setTimeout(sync, 3000);   // fallback in case the value is set before the observer attaches
+    sync();
+  })();
+</script>
