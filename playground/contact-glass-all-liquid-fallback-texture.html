@@ -290,9 +290,10 @@
   .key-del:hover{color:#fff;}
   .key-del:active{transform:scale(.9);}
   /* ---- "05 pick a span": glass segmented control ---- */
+  /* track stays nearly transparent so the moving pill shows the CLEAN WebGL refraction
+     (a milky background here would wash the glass and read as frost) — just a thin rim */
   .segmented{position:relative;display:flex;height:52px;margin-top:14px;padding:5px;
-    border-radius:26px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);
-    box-shadow:inset 0 2px 6px rgba(12,10,46,0.28), inset 0 1px 1px rgba(255,255,255,0.10);
+    border-radius:26px;background:transparent;border:1px solid rgba(255,255,255,0.15);
     touch-action:none;user-select:none;-webkit-user-select:none;}
   .seg-opt{position:relative;z-index:2;flex:1;border:0;background:transparent;cursor:pointer;padding:0;
     font-family:inherit;font-size:15px;font-weight:400;letter-spacing:.02em;color:var(--ink-dim);
@@ -1830,6 +1831,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
   if(segmented && segPill && segOpts.length){
     const PAD = 5;                                  // matches .segmented padding / .seg-pill left
     const LAST = segOpts.length - 1;
+    const DRAG_SCALE = 1.18;                         // pill grows noticeably while grabbed/dragged
     let segW = 0, current = 0, curX = 0;            // step px, selected index, pill left px
     let dragging = false, grab = 0, downX = 0, moved = false;
 
@@ -1845,16 +1847,17 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
       needsDraw = true;
     }
 
-    function moveTo(i, bounce){                      // slide to option i (+ optional scale spring)
-      const fromX = curX, toX = i * segW;
+    function moveTo(i, bounce, fromScale){           // slide to option i (+ optional scale spring)
+      const fromX = curX, toX = i * segW, s0 = fromScale || 1;
+      const mid = Math.max(1.08, s0*0.95);           // springs/settles toward 1 with a slight bow
       current = i; curX = toX; setActive(i);
       const frames = bounce
-        ? [{transform:`translateX(${fromX}px) scale(1)`},
-           {transform:`translateX(${(fromX+toX)/2}px) scale(1.09)`, offset:.5},
+        ? [{transform:`translateX(${fromX}px) scale(${s0})`},
+           {transform:`translateX(${(fromX+toX)/2}px) scale(${mid})`, offset:.5},
            {transform:`translateX(${toX}px) scale(1)`}]
-        : [{transform:`translateX(${fromX}px) scale(1)`},
+        : [{transform:`translateX(${fromX}px) scale(${s0})`},
            {transform:`translateX(${toX}px) scale(1)`}];
-      const a = segPill.animate(frames, {duration:bounce?420:300, easing:"cubic-bezier(.34,1.3,.4,1)", fill:"forwards"});
+      const a = segPill.animate(frames, {duration:bounce?440:300, easing:"cubic-bezier(.34,1.3,.4,1)", fill:"forwards"});
       // commit the end transform so it persists if Chrome drops the finished fill (the live rect
       // sampling refracts the pill through the whole slide either way)
       a.onfinish = ()=>{ segPill.style.transform = `translateX(${toX}px)`; try{ a.cancel(); }catch(_){} };
@@ -1870,6 +1873,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
       if(dragging){
         grab = x - curX;                             // keep the grab offset so the pill doesn't jump
         try{ segmented.setPointerCapture(e.pointerId); }catch(_){}
+        segPill.style.transform = `translateX(${curX}px) scale(${DRAG_SCALE})`;   // pop bigger on grab
         brightTarget[SEG_INDEX] = 0.3; needsDraw = true;
       }
       e.preventDefault();
@@ -1879,7 +1883,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
       if(!dragging) return;
       const x = Math.max(0, Math.min(LAST*segW, trackX(e.clientX) - grab));
       curX = x;
-      segPill.style.transform = `translateX(${x}px) scale(1.05)`;   // slight lift while held
+      segPill.style.transform = `translateX(${x}px) scale(${DRAG_SCALE})`;   // stays enlarged while dragging
       needsDraw = true;
     });
     function endSeg(e){
@@ -1887,7 +1891,7 @@ bindSlider('vol',pct=>{document.getElementById('volLab').textContent=pct+'%';},'
         dragging = false;
         try{ segmented.releasePointerCapture(e.pointerId); }catch(_){}
         brightTarget[SEG_INDEX] = 0;
-        moveTo(Math.max(0, Math.min(LAST, Math.round(curX / segW))), true);   // snap to nearest
+        moveTo(Math.max(0, Math.min(LAST, Math.round(curX / segW))), true, DRAG_SCALE);   // snap, settling from the enlarged size
       } else if(!moved){
         moveTo(idxAt(trackX(e.clientX)), true);        // tap a segment → select it
       }
