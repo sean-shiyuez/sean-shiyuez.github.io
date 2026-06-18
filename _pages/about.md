@@ -165,6 +165,6 @@ document.addEventListener('DOMContentLoaded', function () {
   </script>
 </div>
 
-<div id="clustrmaps-container" style="width:300px; height:300px; margin:1.5em auto;">
-  <script type="text/javascript" id="clstr_globe" src="https://clustrmaps.com/globe.js?d=z0Nyer5y5RB7Bx81qxonh6Q6434L1R-VMtVMT5fG7sw"></script>
+<div id="visitor-map" style="width:300px; height:300px; margin:1.5em auto;">
+  <script type="text/javascript" id="mmvst_globe" src="https://mapmyvisitors.com/globe.js?d=xecwh5A3XZ61ZTlM4f_AU-d07vKLls4C4lcEj8nDX4Q"></script>
 </div>
