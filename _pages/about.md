@@ -166,5 +166,5 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
 <div id="visitor-map" style="width:300px; height:300px; margin:1.5em auto;">
-  <script type="text/javascript" id="mmvst_globe" src="https://mapmyvisitors.com/globe.js?d=xecwh5A3XZ61ZTlM4f_AU-d07vKLls4C4lcEj8nDX4Q"></script>
+ <script type="text/javascript" id="mmvst_globe" src="//mapmyvisitors.com/globe.js?d=xecwh5A3XZ61ZTlM4f_AU-d07vKLls4C4lcEj8nDX4Q"></script>
 </div>
