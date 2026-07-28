@@ -1,7 +1,7 @@
 
 # 📖 Education
+- *2021.08 - 2026.06*, Ph.D., School of Vehicle and Mobility, Tsinghua University, Beijing, China.
 - *2024.10 - 2025.09*, Visiting Scholar, Next Generation Mobility Systems Lab, University of Michigan, Ann Arbor, USA.
-- *2021.08 - Present*, PhD candidate, School of Vehicle and Mobility, Tsinghua University, Beijing, China.
 - *2017.08 - 2021.06*, Undergraduate, School of Traffic & Transportation Engineering, Central South University, Changsha, China.
 
 # 🧑‍🎨 Services

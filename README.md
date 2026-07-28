@@ -2,7 +2,7 @@
 
 <p align="center">
   <b><a href="https://sean-shiyuez.github.io">sean-shiyuez.github.io</a></b><br>
-  Personal academic website of <b>Shiyue Zhao (赵世越)</b> — PhD candidate, School of Vehicle and Mobility, Tsinghua University.
+  Personal academic website of <b>Shiyue Zhao (赵世越)</b> — Ph.D., School of Vehicle and Mobility, Tsinghua University.
 </p>
 
 <p align="center">
