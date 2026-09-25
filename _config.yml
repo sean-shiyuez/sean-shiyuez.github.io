@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Shiyue Zhao (赵世越)"
-description              : "I received my Ph.D. from Tsinghua University in June 2026 under Prof. Junzhi Zhang, and was a visiting scholar at the University of Michigan, Ann Arbor. My research focuses on decision-making for CAVs, driving VLA systems, wheeled robot decision-making and control, human-centered AI, and efficient RL algorithms."
+description              : "I am currently at Huawei, working on embodied intelligence. I received my Ph.D. from Tsinghua University in June 2026 and was a visiting scholar at the University of Michigan, Ann Arbor. My research background spans vision-language-action (VLA) systems, robot decision-making and control, and reinforcement learning."
 repository               : "sean-shiyuez/sean-shiyuez.github.io"
 google_scholar_stats_use_cdn : true
 
@@ -23,9 +23,9 @@ baidu_site_verification  : # code-ZxFK3f4pfb
 author:
   name             : "Shiyue Zhao | 赵世越"
   avatar           : "images/Photo_Sean.png"
-  bio              : "Ph.D., Tsinghua University"
+  bio              : "Huawei · Embodied Intelligence | Ph.D., Tsinghua University"
   location         : "Beijing, China"
-  employer         :
+  employer         : "Huawei"
   pubmed           : 
   googlescholar    : "https://scholar.google.com.hk/citations?user=3OsNp5wAAAAJ&hl"
   email            : "Stary132@163.com"

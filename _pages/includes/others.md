@@ -15,6 +15,6 @@ Reviewer for conferences:
    - Chinese Automation Congress (CAC)
    - IEEE International Conference on Unmanned Systems (ICUS)
 
-# 🤔 Team
-Currently, our team is actively promoting the research of intelligent chassis under the leadership of Professor Zhang Junzhi. If you want to be involved in this process or have any questions about my/the team's research, please contact us by [email](mailto:Stary132@163.com?subject=Academic%20Inquiry).
+# 🤝 Contact
+I welcome academic discussions on embodied intelligence, VLA systems, robotics, and reinforcement learning. Feel free to contact me by [email](mailto:Stary132@163.com?subject=Academic%20Inquiry).
 I usually reply to academic discussion emails within 24 hours.
