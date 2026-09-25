@@ -1,193 +1,69 @@
 ---
+layout: research
 permalink: /
-title: ""
-excerpt: ""
-author_profile: true
-redirect_from: 
+title: "Shiyue Zhao — Embodied Intelligence"
+excerpt: "Shiyue Zhao at Huawei. Research in embodied intelligence, with a background in VLA systems, robot decision-making and control, and reinforcement learning."
+author_profile: false
+redirect_from:
   - /about/
   - /about.html
 ---
-
-<!-- scroll progress bar -->
-<div id="scroll-progress"></div>
-
-<span class='anchor' id='about-me'></span>
-{% include_relative includes/intro.md %}
-
-<span class='anchor' id='news'></span>
-{% include_relative includes/news.md %}
-
-<span class='anchor' id='projects'></span>
-{% include_relative includes/projects.md %}
-
-<span class='anchor' id='publications'></span>
-{% include_relative includes/pub.md %}
-
-<div style="display:none">
-<span class='anchor' id='honors-and-awards'></span>
-{% include_relative includes/honors.md %}
-</div>
-
-<span class='anchor' id='education'></span>
-<span class='anchor' id='services'></span>
-{% include_relative includes/others.md %}
-
-<span class='anchor' id='playground'></span>
-{% include_relative includes/playground.md %}
-
-{% include internship-modal.html %}
-
-<!-- Honors modal -->
-<div id="honors-modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:var(--bg,#fff); border-radius:12px; padding:2.5rem 2.75rem; max-width:520px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.2); position:relative; text-align:center;">
-    <button onclick="document.getElementById('honors-modal-overlay').style.display='none'" style="position:absolute; top:1rem; right:1.25rem; background:none; border:none; font-size:1.4rem; color:#94a3b8; cursor:pointer; line-height:1;">×</button>
-    <p style="font-size:1.05rem; line-height:1.8; color:var(--text,#1e293b); margin:0 0 0.9rem;">荣誉只是纸上之名，真正的价值在于无私的爱在世界留下的微小改变。</p>
-    <p style="font-size:0.92rem; line-height:1.75; color:var(--text-muted,#64748b); margin:0; font-style:italic;">Honors are mere names on paper; their true value lies in the quiet changes my selfless love leaves in the world.</p>
+<section class="hero" id="home">
+  <div>
+    <p class="eyebrow">Huawei · Embodied intelligence</p>
+    <h1>Shiyue Zhao</h1>
+    <div class="chinese-name" lang="zh">赵世越</div>
+    <p class="lead">Learning to act in the physical world.</p>
+    <p class="bio">I am currently at <strong>Huawei</strong>, working on <strong>embodied intelligence</strong>. My research background connects vision-language-action systems, robot decision-making and control, and reinforcement learning.</p>
+    <p class="bio">Ph.D., Tsinghua University · Former visiting scholar, University of Michigan, Ann Arbor.</p>
+    <div class="links"><a class="button" href="#research">Explore my research ↓</a><a href="https://scholar.google.com.hk/citations?user=3OsNp5wAAAAJ&amp;hl=en">Google Scholar ↗</a><a href="https://github.com/sean-shiyuez">GitHub ↗</a><a href="mailto:Stary132@163.com">Email ↗</a></div>
   </div>
-</div>
-
-<!-- BibTeX copy toast -->
-<div id="cite-toast" style="position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(20px); background:#0f172a; color:#e2e8f0; padding:0.5rem 1.25rem; border-radius:8px; font-size:0.875rem; opacity:0; pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease; z-index:9999;">BibTeX copied!</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  /* ── Scroll progress bar ── */
-  var bar = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', function () {
-    var pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    bar.style.width = Math.min(pct, 100) + '%';
-  }, { passive: true });
-
-  /* ── Back-to-top button ── */
-  var btn = document.getElementById('back-to-top');
-  window.addEventListener('scroll', function () {
-    var show = window.scrollY > 400;
-    btn.style.opacity = show ? '1' : '0';
-    btn.style.pointerEvents = show ? 'auto' : 'none';
-  }, { passive: true });
-  btn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  /* ── Dark mode toggle ── */
-  var toggle = document.getElementById('theme-toggle');
-  var root = document.documentElement;
-  var stored = localStorage.getItem('theme');
-  if (stored) {
-    root.setAttribute('data-theme', stored);
-    toggle.textContent = stored === 'dark' ? '☀' : '🌙';
-  }
-  toggle.addEventListener('click', function () {
-    var current = root.getAttribute('data-theme');
-    var next = current === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    toggle.textContent = next === 'dark' ? '☀' : '🌙';
-  });
-
-  /* ── BibTeX copy ── */
-  var toast = document.getElementById('cite-toast');
-  document.querySelectorAll('.cite-btn').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      var key = this.dataset.bib;
-      var el = document.getElementById('bib-' + key);
-      if (!el) return;
-      navigator.clipboard.writeText(el.textContent.trim()).then(function () {
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateX(-50%) translateY(0)';
-        setTimeout(function () {
-          toast.style.opacity = '0';
-          toast.style.transform = 'translateX(-50%) translateY(20px)';
-        }, 1800);
-      });
-    });
-  });
-
-  /* ── Section entrance animation ── */
-  if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.page__content h1').forEach(function (h) {
-      h.classList.add('section-hidden');
-      observer.observe(h);
-    });
-  }
-
-  /* ── Honors modal ── */
-  document.querySelectorAll('a[href="#honors-modal"], a[href$="#honors-modal"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.getElementById('honors-modal-overlay').style.display = 'flex';
-    });
-  });
-  document.getElementById('honors-modal-overlay').addEventListener('click', function (e) {
-    if (e.target === this) this.style.display = 'none';
-  });
-
-  /* ── Internship modal ── */
-  document.querySelectorAll('a[href="#internship-modal"], a[href$="#internship-modal"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.getElementById('internship-modal-overlay').style.display = 'flex';
-    });
-  });
-  document.getElementById('internship-modal-overlay').addEventListener('click', function (e) {
-    if (e.target === this) this.style.display = 'none';
-  });
-
-  /* ── Esc closes modals ── */
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      document.getElementById('honors-modal-overlay').style.display = 'none';
-      document.getElementById('internship-modal-overlay').style.display = 'none';
-    }
-  });
-
-});
-</script>
-
-<div id="comments">
-  <script src="https://utteranc.es/client.js"
-          repo="sean-shiyuez/sean-shiyuez.github.io"
-          issue-term="pathname"
-          label="Welcome any Comment："
-          theme="github-light"
-          crossorigin="anonymous"
-          async>
-  </script>
-</div>
-
-<div id="visitor-map">
-  <div class="visit-pill">
-    <span>本站累计访问</span>
-    <span id="visit-total" class="visit-num">12,850</span>
-    <span class="visit-sep">·</span>
-    <span>新增访客</span>
-    <span id="vercount_value_site_uv" class="visit-num">0</span>
+  <figure class="portrait"><img src="{{ '/images/Photo_Sean.png' | relative_url }}" alt="Portrait of Shiyue Zhao" width="270" height="338"><figcaption>Research · Learning · Real-world systems</figcaption></figure>
+</section>
+<section class="section" id="research">
+  <div class="section-head"><h2>Research interests</h2><span>01 / Directions</span></div>
+  <p class="section-intro">My current focus is embodied intelligence, building on earlier work in autonomous driving, wheeled robots, and learning-based control.</p>
+  <div class="research-grid">
+    <article class="research-card"><span class="number">01 — CURRENT FOCUS</span><h3>Embodied intelligence</h3><p>Intelligent systems that connect perception and action through interaction with the physical world.</p></article>
+    <article class="research-card"><span class="number">02 — MODELS &amp; DATA</span><h3>Vision, language &amp; action</h3><p>VLA systems and multimodal driving data, connecting visual observations with decision-making and control.</p></article>
+    <article class="research-card"><span class="number">03 — LEARNING &amp; CONTROL</span><h3>Reliable robot behavior</h3><p>Reinforcement learning, safety-aware decisions, and control for wheeled robots and autonomous vehicles.</p></article>
   </div>
-  <span id="vercount_value_site_pv" style="display:none">0</span>
-</div>
-<script defer src="https://cn.vercount.one/js"></script>
-<script>
-  (function () {
-    var BASE = 12850;                                   // seeded baseline
-    var src = document.getElementById('vercount_value_site_pv');  // VerCount writes the live PV here
-    var out = document.getElementById('visit-total');             // we render BASE + live PV here
-    if (!src || !out) return;
-    function sync() {
-      var n = parseInt((src.textContent || '').replace(/[^\d]/g, ''), 10);
-      out.textContent = (BASE + (isNaN(n) ? 0 : n)).toLocaleString('en-US');
-    }
-    new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
-    setTimeout(sync, 3000);   // fallback in case the value is set before the observer attaches
-    sync();
-  })();
-</script>
+</section>
+<section class="section" id="selected-work">
+  <div class="section-head"><h2>Selected work</h2><span>02 / From methods to real vehicles</span></div>
+  <div class="featured">
+    <article class="feature"><span class="tag">Safety &amp; human–machine interaction · 2026</span><h3>Shared driving for collision avoidance</h3><p>Human–machine shared driving based on Hamilton–Jacobi reachability, published in Accident Analysis &amp; Prevention.</p><a href="https://drive.google.com/file/d/1zrZ0ZPJS5UX9MVdQ6cAzYre4s9EQJ_jt/view">Read the paper ↗</a></article>
+    <article class="feature"><span class="tag">Learning &amp; vehicle control · 2025</span><h3>Drift cornering in the real world</h3><p>Drift cornering control and real-vehicle deployment for electric vehicles, published in IEEE Transactions on Industrial Electronics.</p><div class="links"><a href="https://drive.google.com/file/d/1GrKSinggEeKKaEKbSS2YadCUwpVo8Nam/view">Read the paper ↗</a><a href="https://www.youtube.com/watch?v=5wp67FcpfL8">Watch experiments ↗</a></div></article>
+  </div>
+</section>
+<section class="section" id="projects">
+  <div class="section-head"><h2>Open source &amp; datasets</h2><span>03 / Resources for research</span></div>
+  <article class="dataset"><span class="tag">Featured dataset · Multimodal driving</span><h3>Extreme Driving Dataset</h3><p>Driving observations paired with rich chassis dynamics, including raw IMU and GPS heading, for limit-handling research and VLA model training. Six scenario categories span normal driving, complex traffic, critical situations, low light, rain, and snow.</p><div class="links"><a href="https://sean-shiyuez.github.io/extreme-driving-dataset-web/">Explore the project ↗</a><a href="https://huggingface.co/datasets/Stary108/Extreme_Driving_Conditions_Dataset">Dataset on Hugging Face ↗</a></div>
+  <div class="video-grid"><figure><video controls muted loop playsinline preload="none" aria-label="Complex traffic driving example"><source src="videos/Complex_Traffic_Driving1_h264.mp4" type="video/mp4"></video><figcaption>01 / Complex traffic</figcaption></figure><figure><video controls muted loop playsinline preload="none" aria-label="Critical driving example"><source src="videos/Critical_Driving2_h264.mp4" type="video/mp4"></video><figcaption>02 / Critical driving</figcaption></figure><figure><video controls muted loop playsinline preload="none" aria-label="Snow driving example"><source src="videos/snow_h264.mp4" type="video/mp4"></video><figcaption>03 / Snow driving</figcaption></figure></div></article>
+  <div class="project-grid"><article class="project-card"><span class="tag">Simulation</span><h3>Vehicle dynamics model</h3><p>A Python model with validated high-fidelity tire simulation for conventional and drift driving.</p><a href="https://github.com/sean-shiyuez/High-Accuracy-Vehicle-Dynamic-Model">View repository ↗</a></article><article class="project-card"><span class="tag">Reinforcement learning</span><h3>CarSim–Python co-simulation</h3><p>A Simulink bridge connecting CarSim and Python for vehicle reinforcement learning research.</p><a href="https://github.com/sean-shiyuez/Carsim_python_RL">View repository ↗</a></article><article class="project-card"><span class="tag">Visual perception</span><h3>Extreme Road Image Dataset</h3><p>Road surface images for research on tire–road friction coefficient estimation.</p><a href="https://github.com/sean-shiyuez/Extreme-Road-Image-Dataset">Explore dataset ↗</a></article></div>
+</section>
+<section class="section" id="news">
+  <div class="section-head"><h2>Research updates</h2><span>04 / News</span></div>
+  <p><strong>Current:</strong> I am at Huawei, working on embodied intelligence.</p>
+  <details><summary>Research news archive · 2024–2026</summary><div class="news-list">
+{% capture news %}{% include_relative includes/news.md %}{% endcapture %}{{ news | remove_first: '# 🔥 News' | markdownify }}
+  </div></details>
+</section>
+<section class="section" id="publications">
+  <div class="section-head"><h2>Publications</h2><span>05 / Journal &amp; conference papers</span></div>
+  <div class="publication-tools"><label for="publication-search">Find a paper</label><input id="publication-search" type="search" placeholder="Search title, author, venue, or year…"><span id="publication-count" aria-live="polite"></span></div>
+  <p id="no-papers" hidden>No matching papers. Try another title, author, or year.</p>
+  <div class="publication-list">
+{% capture publications %}{% include_relative includes/pub.md %}{% endcapture %}{{ publications | remove_first: '# 📝 Publications' | markdownify }}
+  </div>
+</section>
+<section class="section" id="background">
+  <div class="section-head"><h2>Background &amp; community</h2><span>06 / Academic journey</span></div>
+  <div class="background-grid"><div><h3>Experience &amp; education</h3><ol class="timeline"><li><time>Current</time><strong>Huawei</strong><span>Research in embodied intelligence</span></li><li><time>2021.08 — 2026.06</time><strong>Ph.D. · Tsinghua University</strong><span>School of Vehicle and Mobility<br>Advisor: <a href="https://www.svm.tsinghua.edu.cn/essay/74/1858.html">Prof. Junzhi Zhang</a></span></li><li><time>2024.10 — 2025.09</time><strong>Visiting Scholar · University of Michigan</strong><span>Next Generation Mobility Systems Lab, Ann Arbor<br>Host: <a href="https://cee.engin.umich.edu/people/masoud-neda/">Dr. Neda Masoud</a></span></li><li><time>2017.08 — 2021.06</time><strong>Bachelor of Engineering · Central South University</strong><span>School of Traffic and Transportation Engineering</span></li></ol><div class="services"><h3>Academic service</h3><h4>Journal reviewer</h4><ul><li>ISA Transactions</li><li>IEEE Transactions on Industrial Electronics</li><li>Proceedings of the Institution of Mechanical Engineers, Part D: Journal of Automobile Engineering</li><li>Scientific Reports</li></ul><h4>Conference reviewer</h4><ul><li>Chinese Automation Congress</li><li>IEEE International Conference on Unmanned Systems</li></ul></div></div><div class="honors"><h3>Honors &amp; awards</h3>
+{% capture honors %}{% include_relative includes/honors.md %}{% endcapture %}{{ honors | remove_first: '# 🎖 Honors and Awards' | markdownify }}
+  </div></div>
+</section>
+<section class="section" id="playground"><div class="section-head"><h2>Beyond the papers</h2><span>07 / Creative experiments</span></div><p>Small explorations in interactive graphics and generative art.</p>
+{% capture playground %}{% include_relative includes/playground.md %}{% endcapture %}{{ playground | remove_first: '# 🧪 AI Playground' | remove_first: 'Fun, interactive AI / generative-art experiments I built.' | markdownify }}
+</section>
+<section class="contact" id="contact"><div><p class="eyebrow">Get in touch</p><h2>Let’s exchange ideas.</h2><p>I welcome academic discussions on embodied intelligence, VLA systems, robotics, and reinforcement learning.</p></div><a class="button" href="mailto:Stary132@163.com">Stary132@163.com ↗</a></section>
